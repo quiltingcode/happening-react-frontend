@@ -1,0 +1,43 @@
+.App {
+    font-family: 'Montserrat', sans-serif;
+    background-color: #f8f8f8;
+    min-height: 100vh;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+a {
+    color: #6e5e93;
+    transition: color ease-in-out 0.3s;
+}
+
+a:hover {
+    text-decoration: none;
+}
+
+a:hover i {
+    color: #db628e;
+    transition: color ease-in-out 0.3s;
+}
+
+i {
+    color: #6e5e93;
+    font-size: 1.6rem;
+    padding: 7px;
+    vertical-align: middle;
+}
+
+i:hover {
+    cursor: pointer;
+    transition: color ease-in-out 0.3s;
+    color: #db628e;
+}
+
+#basic-nav-dropdown {
+    color: #6e5e93;
+    font-size: 1.6rem;
+    padding: 7px;
+    vertical-align: middle;
+}
