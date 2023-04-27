@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import Container from 'react-bootstrap/Container';
 import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
@@ -7,9 +7,24 @@ import logo from '../assets/logo-transparent.png';
 import styles from '../styles/NavBar.module.css';
 import { NavLink } from 'react-router-dom';
 import { Link } from "react-router-dom";
+import { CurrentUserContext } from '../App';
 
 
 const NavBar = () => {
+
+  const currentUser = useContext(CurrentUserContext)
+  const loggedInIcons = <>{currentUser?.username}</>
+  const loggedOutIcons = (
+    <>
+      <NavDropdown.Item as={Link} to="/signin">
+        <i className="fas fa-sign-in-alt"></i>Sign in
+      </NavDropdown.Item>
+      <NavDropdown.Item as={Link} to="/signup">
+        <i className="fas fa-user-plus"></i>Sign up
+      </NavDropdown.Item>
+    </>
+  );
+
   return (
     <Navbar className={styles.NavBar} expand="md" fixed="top">
       <Container>
@@ -71,23 +86,8 @@ const NavBar = () => {
               >
                   Profile      
               </NavDropdown.Item>
-              <NavDropdown.Item
-                as={Link}
-                to='/signin'
-              >
-                  <i className="fas fa-sign-in-alt"></i>Sign in
 
-              </NavDropdown.Item>
-
-              <NavDropdown.Item
-                as={Link}
-                to='/signup'
-              >
-
-                  <i className="fas fa-user-plus"></i>Sign up
-
-              </NavDropdown.Item>
-
+              {currentUser ? loggedInIcons : loggedOutIcons}
               <NavDropdown.Item>Logout</NavDropdown.Item>
               <NavDropdown.Divider />
             </NavDropdown>
