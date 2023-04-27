@@ -14,6 +14,7 @@ import Image from "react-bootstrap/Image";
 import axios from "axios";
 import { useHistory } from "react-router-dom/cjs/react-router-dom";
 import Alert from "react-bootstrap/Alert";
+import logo from "../../assets/logo3.png"
 
 const SignUpForm = () => {
 
@@ -49,6 +50,10 @@ const SignUpForm = () => {
     <Row className={styles.Row}>
       <Col className="my-auto py-2 p-md-2" md={6}>
         <Container className={`${appStyles.Content} p-4 `}>
+        <Image
+          src={logo}
+          className="mb-5"
+        />
           <h1 className={styles.Header}>sign up</h1>
 
           <Form onSubmit={handleSubmit}>
