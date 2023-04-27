@@ -1,0 +1,36 @@
+.Button {
+    font-size: 0.8rem;
+    align-self: center;
+    border-radius: 100px;
+    border-color: transparent;
+    padding: 4px 10px;
+    margin-left: 2px;
+    margin-right: 2px;
+    min-width: 75px;
+    text-align: center;
+    display:flex;
+    justify-content:center;
+
+  }
+
+  .Button:hover {
+    opacity: 0.8;
+    border-color: transparent;
+    cursor: pointer;
+  }
+
+  .Bright {
+    background-color: #db628e;
+    color: white;
+  }
+
+  .Bright:hover {
+    background-color: #ff6f6f;
+    color: #ffffff;
+  }
+
+  .Wide {
+    padding: 10px 50px;
+    width: 60%;
+    margin: auto;
+  }

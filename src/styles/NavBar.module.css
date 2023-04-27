@@ -10,3 +10,10 @@
 .Active i {
     color: #db628e;
 }
+
+#basic-nav-dropdown {
+    color: #6e5e93;
+    font-size: 1.6rem;
+    padding: 7px;
+    vertical-align: middle;
+}
