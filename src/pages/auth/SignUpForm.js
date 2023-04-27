@@ -44,7 +44,7 @@ const SignUpForm = () => {
     } catch(err){
         setErrors(err.response?.data)
     }
-};
+  };
 
   return (
     <Row className={styles.Row}>
