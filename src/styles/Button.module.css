@@ -19,13 +19,26 @@
     cursor: pointer;
   }
 
+  .Button:hover:active {
+    background-color: #2f4858 !important;
+  }
+  
+  .Button:active {
+    background-color: #ff6f6f!important;
+  }
+  
+  .Button:focus {
+    background-color: #db628e;
+    border-color: transparent;
+  }
+
   .Bright {
     background-color: #db628e;
     color: white;
   }
 
   .Bright:hover {
-    background-color: #ff6f6f;
+    background-color: #2f4858;
     color: #ffffff;
   }
 
