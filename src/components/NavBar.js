@@ -6,6 +6,7 @@ import NavDropdown from 'react-bootstrap/NavDropdown';
 import logo from '../assets/logo-transparent.png';
 import styles from '../styles/NavBar.module.css';
 import { NavLink } from 'react-router-dom';
+import { Link } from "react-router-dom";
 
 
 const NavBar = () => {
@@ -64,22 +65,27 @@ const NavBar = () => {
               }
               id="basic-nav-dropdown" 
             >
-              <NavDropdown.Item>
-                <NavLink to="/">
-                  Profile
-                </NavLink>
-                
+              <NavDropdown.Item
+                as={Link}
+                to='/profile'
+              >
+                  Profile      
               </NavDropdown.Item>
-              <NavDropdown.Item>
-                <NavLink to="/signin">
+              <NavDropdown.Item
+                as={Link}
+                to='/signin'
+              >
                   <i className="fas fa-sign-in-alt"></i>Sign in
-                </NavLink>
+
               </NavDropdown.Item>
 
-              <NavDropdown.Item>
-                <NavLink to="/signup">
+              <NavDropdown.Item
+                as={Link}
+                to='/signup'
+              >
+
                   <i className="fas fa-user-plus"></i>Sign up
-                </NavLink>
+
               </NavDropdown.Item>
 
               <NavDropdown.Item>Logout</NavDropdown.Item>
