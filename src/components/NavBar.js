@@ -9,12 +9,25 @@ import { Link } from "react-router-dom";
 import { useCurrentUser, useSetCurrentUser } from '../contexts/CurrentUserContext';
 import Avatar from './Avatar';
 import axios from 'axios';
+import { useEffect, useRef, useState } from 'react';
+import useClickOutsideToggle from '../hooks/useClickOutsideToggle';
 
 
 const NavBar = () => {
 
   const currentUser = useCurrentUser();
   const setCurrentUser = useSetCurrentUser();
+
+  const {expanded, setExpanded, ref} = useClickOutsideToggle();
+
+  // const [isOpen, setIsOpen] = useState(false);
+
+  // const onToggle = (nextShow, event, metadata) => {
+  //   const isClosingPermitted = metadata.source !== 'select';
+  //   const currentNextShow = nextShow ? true : !isClosingPermitted;
+  //   setIsOpen(currentNextShow);
+  // };
+
 
   const handleSignOut = async () => {
     try {
@@ -99,17 +112,27 @@ const NavBar = () => {
       <NavDropdown.Item 
         as={Link} 
         to="/signin"
+
       >
         <i className="fas fa-sign-in-alt"></i>Sign in
       </NavDropdown.Item>
-      <NavDropdown.Item as={Link} to="/signup">
+      <NavDropdown.Item 
+        as={Link} 
+        to="/signup"
+
+      >
         <i className="fas fa-user-plus"></i>Sign up
       </NavDropdown.Item>
     </>
   );
 
   return (
-    <Navbar className={styles.NavBar} expand="md" fixed="top">
+    <Navbar 
+      className={styles.NavBar} 
+      expand="md" 
+      fixed="top"
+      expanded={expanded}
+    >
       <Container>
         <NavLink to="/">
           <Navbar.Brand>
@@ -117,7 +140,12 @@ const NavBar = () => {
           </Navbar.Brand>
         </NavLink>
         {currentUser && addEventIcon}
-        <Navbar.Toggle aria-controls="basic-navbar-nav" />
+        <Navbar.Toggle 
+          // onToggle={onToggle} show={isOpen}
+          ref={ref}
+          onClick={() => setExpanded(!expanded)} 
+          aria-controls="basic-navbar-nav" 
+        />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="ml-auto text-right">
             <NavLink
@@ -135,6 +163,7 @@ const NavBar = () => {
                     <i className="fas fa-user-alt ml-5"></i>
                 </span>
               }
+
               id="basic-nav-dropdown" 
             >
               {currentUser ? loggedInDropdownIcons : loggedOutDropdownIcons}
