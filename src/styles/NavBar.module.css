@@ -17,3 +17,7 @@
     padding: 7px;
     vertical-align: middle;
 }
+
+.NavDropdown > li:focus {
+    background-color: yellow;
+}

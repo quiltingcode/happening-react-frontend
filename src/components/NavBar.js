@@ -7,16 +7,87 @@ import styles from '../styles/NavBar.module.css';
 import { NavLink } from 'react-router-dom';
 import { Link } from "react-router-dom";
 import { useCurrentUser } from '../contexts/CurrentUserContext';
+import Avatar from './Avatar';
 
 
 const NavBar = () => {
 
   const currentUser = useCurrentUser();
 
-  const loggedInIcons = <>{currentUser?.username}</>
-  const loggedOutIcons = (
+  const addEventIcon = (
+    <NavLink
+      exact
+      className={styles.NavLink}
+      activeClassName={styles.Active}
+      to="/events/create"
+    >
+      <i className="fas fa-plus"></i>Add Event
+    </NavLink>
+  );
+  const loggedInIcons = (
     <>
-      <NavDropdown.Item as={Link} to="/signin">
+      <NavLink
+        exact
+        className={styles.NavLink}
+        activeClassName={styles.Active}
+        to="/feed"
+      >
+        <i className="fas fa-stream"></i>Feed
+      </NavLink>
+
+      <NavLink
+        exact
+        className={styles.NavLink}
+        activeClassName={styles.Active}
+        to="/myevents"
+      >
+        <i className="fas fa-heart"></i>My Events
+      </NavLink>
+
+      <NavLink
+        exact
+        className={styles.NavLink}
+        activeClassName={styles.Active}
+        to="/reviews"
+        
+      >
+        <i className="fas fa-star"></i>Reviews
+      </NavLink>
+
+      
+    </>
+  );
+
+  const loggedInDropdownIcons = (
+    <>
+      <NavDropdown.Item 
+        as={Link} 
+        to={`/profiles/${currentUser?.profile_id}`}
+      >
+      <Avatar src={currentUser?.profile_image} text="Profile" height={40} />
+
+      </NavDropdown.Item>
+      <NavDropdown.Item 
+        as={Link} 
+        to="/" 
+        onClick={() => {}}>
+        <i className="fas fa-sign-out-alt"></i>Sign out
+      </NavDropdown.Item>
+    </>
+  )
+
+  const loggedOutIcons = (
+    <>    
+    
+    </>
+  );
+
+  const loggedOutDropdownIcons = (
+    <>
+      <NavDropdown.Item 
+        as={Link} 
+        to="/signin"
+      >
         <i className="fas fa-sign-in-alt"></i>Sign in
       </NavDropdown.Item>
       <NavDropdown.Item as={Link} to="/signup">
@@ -33,6 +104,7 @@ const NavBar = () => {
               <img src={logo} alt="logo" height="55"/>
           </Navbar.Brand>
         </NavLink>
+        {currentUser && addEventIcon}
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="ml-auto text-right">
@@ -44,34 +116,7 @@ const NavBar = () => {
             >
               <i className="fas fa-home"></i>Home
             </NavLink>
-
-            <NavLink
-              exact
-              className={styles.NavLink}
-              activeClassName={styles.Active}
-              to="/signin"
-            >
-              <i className="fas fa-home"></i>Feed
-            </NavLink>
-
-            <NavLink
-              exact
-              className={styles.NavLink}
-              activeClassName={styles.Active}
-              to="/signin"
-            >
-              <i className="fas fa-heart"></i>My Events
-            </NavLink>
-
-            <NavLink
-              exact
-              className={styles.NavLink}
-              activeClassName={styles.Active}
-              to="/signup"
-            >
-              <i className="fas fa-star"></i>Reviews
-            </NavLink>
-
+            {currentUser ? loggedInIcons : loggedOutIcons}
             <NavDropdown 
               title={
                 <span>
@@ -80,16 +125,7 @@ const NavBar = () => {
               }
               id="basic-nav-dropdown" 
             >
-              <NavDropdown.Item
-                as={Link}
-                to='/profile'
-              >
-                  Profile      
-              </NavDropdown.Item>
-
-              {currentUser ? loggedInIcons : loggedOutIcons}
-              <NavDropdown.Item>Logout</NavDropdown.Item>
-              <NavDropdown.Divider />
+              {currentUser ? loggedInDropdownIcons : loggedOutDropdownIcons}
             </NavDropdown>
           </Nav>
         </Navbar.Collapse>
