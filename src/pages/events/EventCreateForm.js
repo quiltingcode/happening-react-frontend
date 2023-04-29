@@ -24,12 +24,12 @@ function EventCreateForm() {
     
     
       <Button
-        className={`${btnStyles.Button} ${btnStyles.Blue}`}
+        className={`${btnStyles.Button} ${btnStyles.Form}`}
         onClick={() => {}}
       >
         cancel
       </Button>
-      <Button className={`${btnStyles.Button} ${btnStyles.Blue}`} type="submit">
+      <Button className={`${btnStyles.Button} ${btnStyles.Form}`} type="submit">
         create
       </Button>
     </div>
