@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
@@ -13,21 +13,26 @@ import appStyles from "../../App.module.css";
 import btnStyles from "../../styles/Button.module.css";
 import Asset from "../../components/Asset";
 import Image from "react-bootstrap/Image";
+import { useHistory } from "react-router-dom/cjs/react-router-dom";
+import { axiosReq } from "../../api/axiosDefaults";
+import { Alert } from "react-bootstrap";
 
 function EventCreateForm() {
 
   const [eventData, setEventData] = useState({
     title: '',
-    content: '',
-    date: '',
+    description: '',
+    event_date: '',
     category: '',
     tags: '',
     image: '',
   });
 
-  const { title, content, date, category, tags, image } = eventData;
+  const { title, description, event_date, category, tags, image } = eventData;
 
   const [errors, setErrors] = useState({});
+  const imageInput = useRef(null)
+  const history = useHistory();
 
   const handleChange = (event) => {
     setEventData({
@@ -46,6 +51,28 @@ function EventCreateForm() {
     }
   };
 
+  const handleSubmit = async (event) => {
+    event.preventDefault()
+    const formData = new FormData();
+
+    formData.append('title', title)
+    formData.append('description', description)
+    formData.append('event_date', event_date)
+    formData.append('category', category)
+    formData.append('tags', tags)
+    formData.append('image', imageInput.current.files[0])
+
+    try {
+      const { data } = await axiosReq.post('/events/', formData);
+      history.push(`/events/${data.id}`)
+    } catch (err) {
+      console.log(err)
+      if (err.response?.status !== 401){
+        setErrors(err.response?.data)
+      }
+    }
+  }
+
 
   const textFields = (
     <div className="text-center">
@@ -58,27 +85,42 @@ function EventCreateForm() {
           onChange={handleChange}
         />
       </Form.Group>
+      {errors?.title?.map((message, idx) => (
+        <Alert variant="warning" key={idx}>
+          {message}
+        </Alert>
+      ))}
 
       <Form.Group>
         <Form.Label>Event Description</Form.Label>
         <Form.Control 
           as="textarea" 
           rows={4} 
-          name="content"
-          value={content} 
+          name="description"
+          value={description} 
           onChange={handleChange}
         />
       </Form.Group>
+      {errors?.description?.map((message, idx) => (
+        <Alert variant="warning" key={idx}>
+          {message}
+        </Alert>
+      ))}
 
       <Form.Group>
         <Form.Label>Event Date</Form.Label>
         <Form.Control 
           type="date" 
-          name="date"
-          value={date}
+          name="event_date"
+          value={event_date}
           onChange={handleChange}
         />
       </Form.Group>
+      {errors?.event_data?.map((message, idx) => (
+        <Alert variant="warning" key={idx}>
+          {message}
+        </Alert>
+      ))}
 
       <Form.Group controlId="category">
         <Form.Label>Category</Form.Label>
@@ -96,6 +138,11 @@ function EventCreateForm() {
           <option>Education</option>
         </Form.Control>
       </Form.Group>
+      {errors?.category?.map((message, idx) => (
+        <Alert variant="warning" key={idx}>
+          {message}
+        </Alert>
+      ))}
 
       <Form.Group>
         <Form.Label>Tags</Form.Label>
@@ -106,10 +153,15 @@ function EventCreateForm() {
           onChange={handleChange}
         />
       </Form.Group>
+      {errors?.tags?.map((message, idx) => (
+        <Alert variant="warning" key={idx}>
+          {message}
+        </Alert>
+      ))}
 
       <Button
         className={`${btnStyles.Button} ${btnStyles.Form}`}
-        onClick={() => {}}
+        onClick={() => history.goBack()}
       >
         cancel
       </Button>
@@ -120,7 +172,7 @@ function EventCreateForm() {
   );
 
   return (
-    <Form>
+    <Form onSubmit={handleSubmit}>
       <Row>
         <Col className="py-2 p-0 p-md-2" md={7} lg={8}>
           <Container
@@ -154,8 +206,15 @@ function EventCreateForm() {
                   id="image-upload" 
                   accept="image/*"
                   onChange={handleChangeImage} 
+                  ref={imageInput}
                 />
             </Form.Group>
+            {errors?.image?.map((message, idx) => (
+              <Alert variant="warning" key={idx}>
+                {message}
+              </Alert>
+            ))}
+
             <div className="d-md-none">{textFields}</div>
           </Container>
         </Col>
