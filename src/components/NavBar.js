@@ -9,7 +9,6 @@ import { Link } from "react-router-dom";
 import { useCurrentUser, useSetCurrentUser } from '../contexts/CurrentUserContext';
 import Avatar from './Avatar';
 import axios from 'axios';
-import { useEffect, useRef, useState } from 'react';
 import useClickOutsideToggle from '../hooks/useClickOutsideToggle';
 
 
@@ -19,14 +18,6 @@ const NavBar = () => {
   const setCurrentUser = useSetCurrentUser();
 
   const {expanded, setExpanded, ref} = useClickOutsideToggle();
-
-  // const [isOpen, setIsOpen] = useState(false);
-
-  // const onToggle = (nextShow, event, metadata) => {
-  //   const isClosingPermitted = metadata.source !== 'select';
-  //   const currentNextShow = nextShow ? true : !isClosingPermitted;
-  //   setIsOpen(currentNextShow);
-  // };
 
 
   const handleSignOut = async () => {
@@ -132,6 +123,7 @@ const NavBar = () => {
       expand="md" 
       fixed="top"
       expanded={expanded}
+      collapseOnSelect
     >
       <Container>
         <NavLink to="/">
