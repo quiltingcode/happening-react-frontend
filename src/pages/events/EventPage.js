@@ -7,6 +7,7 @@ import Container from "react-bootstrap/Container";
 import appStyles from "../../App.module.css";
 import { useParams } from "react-router-dom/cjs/react-router-dom";
 import { axiosReq } from "../../api/axiosDefaults";
+import Event from "./Event";
 
 function EventPage() {
     const { id } = useParams();
@@ -32,14 +33,18 @@ function EventPage() {
   return (
     <Row className="h-100">
       <Col className="py-2 p-0 p-lg-2" lg={8}>
-        <p>Popular profiles for mobile</p>
-        <p>Post component</p>
+        <p>Popular profiles</p>
+        <div className="d-lg-none">
+          <p>Top events this month - mobile</p>
+        </div>
+        
+        <Event {...event.results[0]} setEvents={setEvent} eventPage />
         <Container className={appStyles.Content}>
           Comments
         </Container>
       </Col>
       <Col lg={4} className="d-none d-lg-block p-0 p-lg-2">
-        Popular profiles for desktop
+      Top events this month - desktop
       </Col>
     </Row>
   );
