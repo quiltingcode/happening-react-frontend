@@ -10,3 +10,15 @@
   h5 {
     margin: 0 0;
   }
+
+  .Smile {
+    color: #42567a;
+  }
+  
+  .Smile:hover {
+    color: #db628e;
+  }
+  
+  .SmileOutline:hover {
+    color: #db628e;
+  }

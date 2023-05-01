@@ -50,26 +50,59 @@ const Event = (props) => {
         <Card.Body>
             {title && event_date && <Card.Title className='text-center'>{title} - {event_date}</Card.Title> } 
             {description && <Card.Text>{description}</Card.Text>}
+            {tags}
             <div>
                 {is_owner ? (
+                    /* First check if the logged in user created the event */
                     <OverlayTrigger placement='top' overlay={<Tooltip>You can't be interested in your own event, sorry!</Tooltip>}>
-                        <i className="fa-thin fa-face-grin-wide"></i>
+                        <i className="fa-regular fa-eye"></i>
                     </OverlayTrigger>
+                    /* If yes, can't do anything. If no, check if they've already posted interested */
                 ) : interested_id ? (
+                    /* If already has interested_id, full face */
                     <span onClick={() => {}}>
-                        <i className={`fa-duotone fa-face-grin-wide ${styles.Interested}`} ></i>
+                        <i className={`fa-solid fa-eye ${styles.Smile}`}></i>
                     </span>
+                    /* If no interested_id, check if user logged in. if yes, empty face */
                 ) : currentUser ? (
                     <span onClick={() => {}}>
-                        <i className={`fa-duotone fa-face-grin-wide ${styles.NotInterested}`} ></i>
+                        <i className={`fa-regular fa-eye ${styles.SmileOutline}`}></i>
                     </span>
                 ) : (
+                    /* If not logged, message to log in, with emtpy face */
                     <OverlayTrigger placement='top' overlay={<Tooltip>Log in to show your interest!</Tooltip>}>
-                        <i className="fa-thin fa-face-grin-wide"></i>
+                        <i className="fa-regular fa-eye"></i>
                     </OverlayTrigger>
                     
                 )}
                 {interested_count}
+
+                {is_owner ? (
+                    /* First check if the logged in user created the event */
+                    <OverlayTrigger placement='top' overlay={<Tooltip>You can't go to your own event, sorry!</Tooltip>}>
+                        <i className="fa-regular fa-eye"></i>
+                    </OverlayTrigger>
+                    /* If yes, can't do anything. If no, check if they've already posted going */
+                ) : going_id ? (
+                    /* If already has going_id, full face */
+                    <span onClick={() => {}}>
+                        <i className={`fa-solid fa-eye ${styles.Calendar}`}></i>
+                    </span>
+                    /* If no going_id, check if user logged in. if yes, empty face */
+                ) : currentUser ? (
+                    <span onClick={() => {}}>
+                        <i className={`fa-regular fa-eye ${styles.CalendarOutline}`}></i>
+                    </span>
+                ) : (
+                    /* If not logged, message to log in, with emtpy face */
+                    <OverlayTrigger placement='top' overlay={<Tooltip>Log in to show you're going!</Tooltip>}>
+                        <i className="fa-regular fa-eye"></i>
+                    </OverlayTrigger>
+                    
+                )}
+                {going_count}
+          
+
                 
                 <Link to={`/events/${id}`}>
                     <i className='far fa-comments'></i>
