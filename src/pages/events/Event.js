@@ -48,6 +48,22 @@ const Event = (props) => {
         }
     };
 
+    const handleGoing = async () => {
+        try {
+            const { data } = await axiosRes.post('/going/', {event: id});
+            setEvents((prevEvents) => ({
+                ...prevEvents,
+                results: prevEvents.results.map((event) => {
+                    return event.id === id
+                    ? {...event, going_count: event.going_count + 1, going_id: data.id}
+                    : event;
+                })
+            }))
+        } catch (err) {
+            console.log(err);
+        }
+    };
+
     const handleNotInterested = async () => {
         try {
             await axiosRes.delete(`/interested/${interested_id}`);
@@ -56,6 +72,22 @@ const Event = (props) => {
                 results: prevEvents.results.map((event) => {
                     return event.id === id
                     ? {...event, interested_count: event.interested_count - 1, interested_id: null}
+                    : event;
+                })
+            }))
+        } catch (err) {
+            console.log(err)
+        }
+    }
+
+    const handleNotGoing = async () => {
+        try {
+            await axiosRes.delete(`/going/${going_id}`);
+            setEvents((prevEvents) => ({
+                ...prevEvents,
+                results: prevEvents.results.map((event) => {
+                    return event.id === id
+                    ? {...event, going_count: event.going_count - 1, going_id: null}
                     : event;
                 })
             }))
@@ -84,7 +116,7 @@ const Event = (props) => {
         <Card.Body>
             {title && event_date && <Card.Title className='text-center'>{title} - {event_date}</Card.Title> } 
             {description && <Card.Text>{description}</Card.Text>}
-            {tags && <Card.Text className={styles.Tags}><i class="fal fa-hashtag"></i>{tags}</Card.Text>}
+            {tags && <Card.Text className={styles.Tags}><i className="fal fa-hashtag"></i>{tags}</Card.Text>}
             <div>
                 {is_owner ? (
                     /* First check if the logged in user created the event */
@@ -109,7 +141,7 @@ const Event = (props) => {
                     </OverlayTrigger>
                     
                 )}
-                {interested_count}
+                <span className='mr-2'>{interested_count}</span>
 
                 {is_owner ? (
                     /* First check if the logged in user created the event */
@@ -119,12 +151,12 @@ const Event = (props) => {
                     /* If yes, can't do anything. If no, check if they've already posted going */
                 ) : going_id ? (
                     /* If already has going_id, full face */
-                    <span onClick={() => {}}>
+                    <span onClick={handleNotGoing}>
                         <i className={`fas fa-calendar-check ${styles.Calendar}`}></i>
                     </span>
                     /* If no going_id, check if user logged in. if yes, empty face */
                 ) : currentUser ? (
-                    <span onClick={() => {}}>
+                    <span onClick={handleGoing}>
                         <i className={`far fa-calendar-check ${styles.CalendarOutline}`}></i>
                     </span>
                 ) : (
@@ -134,8 +166,7 @@ const Event = (props) => {
                     </OverlayTrigger>
                     
                 )}
-                {going_count}
-
+                <span className='mr-2'>{going_count}</span>
                 
                 <Link to={`/events/${id}`}>
                     <i className='far fa-comments'></i>
