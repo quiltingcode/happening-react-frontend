@@ -4,6 +4,7 @@ import { useCurrentUser } from '../../contexts/CurrentUserContext';
 import { Card, Media, OverlayTrigger, Tooltip } from 'react-bootstrap';
 import { Link } from 'react-router-dom/cjs/react-router-dom';
 import Avatar from '../../components/Avatar';
+import { axiosRes } from '../../api/axiosDefaults';
 
 const Event = (props) => {
 
@@ -25,10 +26,27 @@ const Event = (props) => {
         image,
         updated_at,
         eventPage,
+        setEvents,
     } = props;
 
     const currentUser = useCurrentUser();
     const is_owner = currentUser?.username === owner
+
+    const handleInterested = async () => {
+        try {
+            const { data } = await axiosRes.post('/interested/', {event: id});
+            setEvents((prevEvents) => ({
+                ...prevEvents,
+                results: prevEvents.results.map((event) => {
+                    return event.id === id
+                    ? {...event, interested_count: event.interested_count + 1, interested_id: data.id}
+                    : event;
+                })
+            }))
+        } catch (err) {
+            console.log(err);
+        }
+    };
 
   return (
     <Card className={styles.Event}>
@@ -50,7 +68,7 @@ const Event = (props) => {
         <Card.Body>
             {title && event_date && <Card.Title className='text-center'>{title} - {event_date}</Card.Title> } 
             {description && <Card.Text>{description}</Card.Text>}
-            {tags && <Card.Text className={styles.Tags}>{tags}</Card.Text>}
+            {tags && <Card.Text className={styles.Tags}><i class="fal fa-hashtag"></i>{tags}</Card.Text>}
             <div>
                 {is_owner ? (
                     /* First check if the logged in user created the event */
@@ -65,7 +83,7 @@ const Event = (props) => {
                     </span>
                     /* If no interested_id, check if user logged in. if yes, empty face */
                 ) : currentUser ? (
-                    <span onClick={() => {}}>
+                    <span onClick={handleInterested}>
                         <i className={`fa-regular fa-eye ${styles.SmileOutline}`}></i>
                     </span>
                 ) : (
