@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom/cjs/react-router-dom';
 import Avatar from '../../components/Avatar';
 import { axiosRes } from '../../api/axiosDefaults';
 
+
 const Event = (props) => {
 
     const {
@@ -67,11 +68,29 @@ const Event = (props) => {
     const handleNotInterested = async () => {
         try {
             await axiosRes.delete(`/interested/${interested_id}`);
+
             setEvents((prevEvents) => ({
                 ...prevEvents,
                 results: prevEvents.results.map((event) => {
                     return event.id === id
                     ? {...event, interested_count: event.interested_count - 1, interested_id: null}
+                    : event;
+                })
+            }))
+        } catch (err) {
+            console.log(err)
+        }
+    }
+
+    const handleNotInterestedGoing = async () => {
+        try {
+            await axiosRes.delete(`/interested/${interested_id}`);
+            const {data} = await axiosRes.post('/going/', {event: id});
+            setEvents((prevEvents) => ({
+                ...prevEvents,
+                results: prevEvents.results.map((event) => {
+                    return event.id === data.id
+                    ? {...event, interested_count: event.interested_count - 1, interested_id: null, going_count: event.going_count + 1, going_id: data.id}
                     : event;
                 })
             }))
@@ -88,6 +107,23 @@ const Event = (props) => {
                 results: prevEvents.results.map((event) => {
                     return event.id === id
                     ? {...event, going_count: event.going_count - 1, going_id: null}
+                    : event;
+                })
+            }))
+        } catch (err) {
+            console.log(err)
+        }
+    }
+
+    const handleNotGoingInterested = async () => {
+        try {
+            await axiosRes.delete(`/going/${going_id}`);
+            const { data } = await axiosRes.post('/interested/', {event: id});
+            setEvents((prevEvents) => ({
+                ...prevEvents,
+                results: prevEvents.results.map((event) => {
+                    return event.id === data.id
+                    ? {...event, going_count: event.going_count - 1, going_id: null, interested_count: event.interested_count + 1, interested_id: data.id}
                     : event;
                 })
             }))
@@ -123,13 +159,18 @@ const Event = (props) => {
                     <OverlayTrigger placement='top' overlay={<Tooltip>You can't be interested in your own event, sorry!</Tooltip>}>
                         <i className="fa-regular fa-eye"></i>
                     </OverlayTrigger>
-                    /* If yes, can't do anything. If no, check if they've already posted interested */
+                    /* If yes, can't do anything. If no, check if they've already posted going */
+                ) : going_id ? (
+                    <span onClick={handleNotGoingInterested}>
+                    <i className={`fa-solid fa-eye ${styles.Smile}`}></i>
+                    </span>
+                    /* If yes, delete the going. If no, check if they've already posted interested */
                 ) : interested_id ? (
-                    /* If already has interested_id, full face */
+                    /* If already has interested_id, empty face - remove interest */
                     <span onClick={handleNotInterested}>
                         <i className={`fa-solid fa-eye ${styles.Smile}`}></i>
                     </span>
-                    /* If no interested_id, check if user logged in. if yes, empty face */
+                    /* If no interested_id, check if user logged in. if yes, fill face */
                 ) : currentUser ? (
                     <span onClick={handleInterested}>
                         <i className={`fa-regular fa-eye ${styles.SmileOutline}`}></i>
@@ -149,6 +190,10 @@ const Event = (props) => {
                         <i className="far fa-calendar-check"></i>
                     </OverlayTrigger>
                     /* If yes, can't do anything. If no, check if they've already posted going */
+                ) : interested_id ? (
+                    <span onClick={handleNotInterestedGoing}>
+                    <i className={`fas fa-calendar-check ${styles.Calendar}`}></i>
+                    </span>
                 ) : going_id ? (
                     /* If already has going_id, full face */
                     <span onClick={handleNotGoing}>
