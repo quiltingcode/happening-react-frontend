@@ -48,6 +48,22 @@ const Event = (props) => {
         }
     };
 
+    const handleNotInterested = async () => {
+        try {
+            await axiosRes.delete(`/interested/${interested_id}`);
+            setEvents((prevEvents) => ({
+                ...prevEvents,
+                results: prevEvents.results.map((event) => {
+                    return event.id === id
+                    ? {...event, interested_count: event.interested_count - 1, interested_id: null}
+                    : event;
+                })
+            }))
+        } catch (err) {
+            console.log(err)
+        }
+    }
+
   return (
     <Card className={styles.Event}>
         <Card.Body>
@@ -78,7 +94,7 @@ const Event = (props) => {
                     /* If yes, can't do anything. If no, check if they've already posted interested */
                 ) : interested_id ? (
                     /* If already has interested_id, full face */
-                    <span onClick={() => {}}>
+                    <span onClick={handleNotInterested}>
                         <i className={`fa-solid fa-eye ${styles.Smile}`}></i>
                     </span>
                     /* If no interested_id, check if user logged in. if yes, empty face */
