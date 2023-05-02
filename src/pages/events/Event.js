@@ -50,7 +50,7 @@ const Event = (props) => {
         <Card.Body>
             {title && event_date && <Card.Title className='text-center'>{title} - {event_date}</Card.Title> } 
             {description && <Card.Text>{description}</Card.Text>}
-            {tags}
+            {tags && <Card.Text className={styles.Tags}>{tags}</Card.Text>}
             <div>
                 {is_owner ? (
                     /* First check if the logged in user created the event */
@@ -80,28 +80,27 @@ const Event = (props) => {
                 {is_owner ? (
                     /* First check if the logged in user created the event */
                     <OverlayTrigger placement='top' overlay={<Tooltip>You can't go to your own event, sorry!</Tooltip>}>
-                        <i className="fa-regular fa-eye"></i>
+                        <i className="far fa-calendar-check"></i>
                     </OverlayTrigger>
                     /* If yes, can't do anything. If no, check if they've already posted going */
                 ) : going_id ? (
                     /* If already has going_id, full face */
                     <span onClick={() => {}}>
-                        <i className={`fa-solid fa-eye ${styles.Calendar}`}></i>
+                        <i className={`fas fa-calendar-check ${styles.Calendar}`}></i>
                     </span>
                     /* If no going_id, check if user logged in. if yes, empty face */
                 ) : currentUser ? (
                     <span onClick={() => {}}>
-                        <i className={`fa-regular fa-eye ${styles.CalendarOutline}`}></i>
+                        <i className={`far fa-calendar-check ${styles.CalendarOutline}`}></i>
                     </span>
                 ) : (
                     /* If not logged, message to log in, with emtpy face */
                     <OverlayTrigger placement='top' overlay={<Tooltip>Log in to show you're going!</Tooltip>}>
-                        <i className="fa-regular fa-eye"></i>
+                        <i className="far fa-calendar-check"></i>
                     </OverlayTrigger>
                     
                 )}
                 {going_count}
-          
 
                 
                 <Link to={`/events/${id}`}>

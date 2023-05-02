@@ -22,3 +22,9 @@
   .SmileOutline:hover {
     color: #db628e;
   }
+
+  .Tags {
+    font-weight: bold;
+    color: #a6609b;
+    font-size: smaller;
+  }
