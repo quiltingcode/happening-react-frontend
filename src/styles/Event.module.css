@@ -11,30 +11,6 @@
     margin: 0 0;
   }
 
-  .Smile {
-    color: #db628e;
-  }
-  
-  .Smile:hover {
-    color: #db628e;
-  }
-  
-  .SmileOutline:hover {
-    color: #db628e;
-  }
-
-  .Calendar {
-    color: #db628e;
-  }
-  
-  .Calendar:hover {
-    color: #db628e;
-  }
-  
-  .CalendarOutline:hover {
-    color: #db628e;
-  }
-
   .Tags {
     font-weight: bold;
     color: #a6609b;
