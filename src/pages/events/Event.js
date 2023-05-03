@@ -164,18 +164,18 @@ const Event = (props) => {
                     /* If yes, can't do anything. If no, check if they've already posted going */
                 ) : going_id ? (
                     <span onClick={handleNotGoingInterested}>
-                    <i className={`fa-solid fa-eye ${styles.Smile}`}></i>
+                    <i className={`fa-regular fa-eye ${styles}`}></i>
                     </span>
                     /* If yes, delete the going. If no, check if they've already posted interested */
                 ) : interested_id ? (
                     /* If already has interested_id, empty face - remove interest */
                     <span onClick={handleNotInterested}>
-                        <i className={`fa-solid fa-eye ${styles.Smile}`}></i>
+                        <i className={`fa-solid fa-eye ${styles}`}></i>
                     </span>
                     /* If no interested_id, check if user logged in. if yes, fill face */
                 ) : currentUser ? (
                     <span onClick={handleInterested}>
-                        <i className={`fa-regular fa-eye ${styles.SmileOutline}`}></i>
+                        <i className={`fa-regular fa-eye ${styles}`}></i>
                     </span>
                 ) : (
                     /* If not logged, message to log in, with emtpy face */
@@ -194,17 +194,17 @@ const Event = (props) => {
                     /* If yes, can't do anything. If no, check if they've already posted going */
                 ) : interested_id ? (
                     <span onClick={handleNotInterestedGoing}>
-                    <i className={`fas fa-calendar-check ${styles.Calendar}`}></i>
+                    <i className={`far fa-calendar-check ${styles}`}></i>
                     </span>
                 ) : going_id ? (
                     /* If already has going_id, full face */
                     <span onClick={handleNotGoing}>
-                        <i className={`fas fa-calendar-check ${styles.Calendar}`}></i>
+                        <i className={`fas fa-calendar-check ${styles}`}></i>
                     </span>
                     /* If no going_id, check if user logged in. if yes, empty face */
                 ) : currentUser ? (
                     <span onClick={handleGoing}>
-                        <i className={`far fa-calendar-check ${styles.CalendarOutline}`}></i>
+                        <i className={`far fa-calendar-check ${styles}`}></i>
                     </span>
                 ) : (
                     /* If not logged, message to log in, with emtpy face */
