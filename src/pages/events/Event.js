@@ -128,7 +128,6 @@ const Event = (props) => {
                 })
             }))
             handleInterested()
-            console.log('handleinterested called')
         } catch (err) {
             console.log(err)
         }
