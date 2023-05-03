@@ -85,15 +85,16 @@ const Event = (props) => {
     const handleNotInterestedGoing = async () => {
         try {
             await axiosRes.delete(`/interested/${interested_id}`);
-            const {data} = await axiosRes.post('/going/', {event: id});
+
             setEvents((prevEvents) => ({
                 ...prevEvents,
                 results: prevEvents.results.map((event) => {
-                    return event.id === data.id
-                    ? {...event, interested_count: event.interested_count - 1, interested_id: null, going_count: event.going_count + 1, going_id: data.id}
+                    return event.id === id
+                    ? {...event, interested_count: event.interested_count - 1, interested_id: null}
                     : event;
                 })
             }))
+            handleGoing();
         } catch (err) {
             console.log(err)
         }
@@ -118,15 +119,16 @@ const Event = (props) => {
     const handleNotGoingInterested = async () => {
         try {
             await axiosRes.delete(`/going/${going_id}`);
-            const { data } = await axiosRes.post('/interested/', {event: id});
             setEvents((prevEvents) => ({
                 ...prevEvents,
                 results: prevEvents.results.map((event) => {
-                    return event.id === data.id
-                    ? {...event, going_count: event.going_count - 1, going_id: null, interested_count: event.interested_count + 1, interested_id: data.id}
+                    return event.id === id
+                    ? {...event, going_count: event.going_count - 1, going_id: null}
                     : event;
                 })
             }))
+            handleInterested()
+            console.log('handleinterested called')
         } catch (err) {
             console.log(err)
         }
