@@ -6,7 +6,7 @@ import './api/axiosDefaults';
 import SignUpForm from './pages/auth/SignUpForm';
 import SignInForm from './pages/auth/SignInForm';
 import EventCreateForm from './pages/events/EventCreateForm';
-import EventPage from './pages/events/EventPage';
+import EventDetailPage from './pages/events/EventDetailPage';
 import EventsPage from './pages/events/EventsPage';
 import { useCurrentUser } from './contexts/CurrentUserContext';
 
@@ -64,7 +64,7 @@ function App() {
             path="/events/create"
             render={() => <EventCreateForm />}
           />
-          <Route exact path="/events/:id" render={() => <EventPage />} />
+          <Route exact path="/events/:id" render={() => <EventDetailPage />} />
           <Route render={() => <p>Page not found!</p>} />
         </Switch>
       </Container>

@@ -9,7 +9,7 @@ import { useParams } from "react-router-dom/cjs/react-router-dom";
 import { axiosReq } from "../../api/axiosDefaults";
 import Event from "./Event";
 
-function EventPage() {
+function EventDetailPage() {
     const { id } = useParams();
     const [event, setEvent] = useState({ results: [] });
 
@@ -38,7 +38,7 @@ function EventPage() {
           <p>Top events this month - mobile</p>
         </div>
         
-        <Event {...event.results[0]} setEvents={setEvent} eventPage />
+        <Event {...event.results[0]} setEvents={setEvent} eventDetailPage />
         <Container className={appStyles.Content}>
           Comments
         </Container>
@@ -50,4 +50,4 @@ function EventPage() {
   );
 }
 
-export default EventPage;
+export default EventDetailPage;
