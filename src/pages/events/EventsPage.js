@@ -33,7 +33,13 @@ function EventsPage({ message, filter="" }) {
     };
 
     setHasLoaded(false);
-    fetchEvents();
+    const timer = setTimeout(() => {
+      fetchEvents();
+    }, 1000)
+    return () => {
+      clearTimeout(timer)
+    }
+    
   }, [filter, search, pathname]);
   
   return (
