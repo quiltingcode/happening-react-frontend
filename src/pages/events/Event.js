@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom/cjs/react-router-dom';
 import Avatar from '../../components/Avatar';
 import { axiosRes } from '../../api/axiosDefaults';
 import { EditDeleteDropdown } from '../../components/EditDeleteDropdown';
-
+import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
 
 const Event = (props) => {
 
@@ -32,7 +32,12 @@ const Event = (props) => {
     } = props;
 
     const currentUser = useCurrentUser();
-    const is_owner = currentUser?.username === owner
+    const is_owner = currentUser?.username === owner;
+    const history = useHistory();
+
+    const handleEdit = async () => {
+        history.push(`/events/${id}/edit`)
+    }
 
     const handleInterested = async () => {
         try {
@@ -144,7 +149,7 @@ const Event = (props) => {
                 </Link>
                 <div className='d-flex align-items-center'>
                     <span>{updated_at}</span>
-                    {is_owner && eventPage && <EditDeleteDropdown /> }
+                    {is_owner && eventPage && <EditDeleteDropdown handleEdit={handleEdit} /> }
                 </div>
             </Media>
         </Card.Body>
