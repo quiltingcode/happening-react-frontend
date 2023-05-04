@@ -19,10 +19,12 @@ function EventsPage({ message, filter="" }) {
   const [hasLoaded, setHasLoaded] = useState(false);
   const { pathname } = useLocation();
 
+  const [search, setSearch] = useState("");
+
   useEffect(() => {
     const fetchEvents = async () => {
       try {
-        const { data } = await axiosReq.get(`/events/?${filter}`);
+        const { data } = await axiosReq.get(`/events/?${filter}search=${search}`);
         setEvents(data);
         setHasLoaded(true);
       } catch (err) {
@@ -32,12 +34,26 @@ function EventsPage({ message, filter="" }) {
 
     setHasLoaded(false);
     fetchEvents();
-  }, [filter, pathname]);
+  }, [filter, search, pathname]);
   
   return (
     <Row className="h-100">
       <Col className="py-2 p-0 p-lg-2" lg={8}>
       <p>Popular profiles</p>
+      <i className={`fas fa-search ${styles.SearchIcon}`} />
+      <Form 
+        className={styles.SearchBar}
+        onSubmit={(event) => event.preventDefault()}
+      >
+        <Form.Control
+          type="text"
+          className="mr-sm-2"
+          placeholder="Search events by title, profile or tags" 
+          value={search}
+          onChange={(event) => setSearch(event.target.value)}
+        />
+      </Form>
+
         <div className="d-lg-none">
           <p>Top events this month - mobile</p>
         </div>
