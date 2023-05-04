@@ -151,7 +151,7 @@ const Event = (props) => {
             <Card.Img src={image} alt={title} />
         </Link>
         <Card.Body>
-            {title && event_date && <Card.Title className='text-center'>{title} - {event_date}</Card.Title> } 
+            {title && event_date && <Card.Title className={`text-center ${styles.Title}`}>{title} - {event_date}</Card.Title> } 
             {description && <Card.Text>{description}</Card.Text>}
             {tags && <Card.Text className={styles.Tags}><i className="fal fa-hashtag"></i>{tags}</Card.Text>}
             <div>
@@ -163,18 +163,18 @@ const Event = (props) => {
                     /* If yes, can't do anything. If no, check if they've already posted going */
                 ) : going_id ? (
                     <span onClick={handleNotGoingInterested}>
-                    <i className={`fa-regular fa-eye ${styles}`}></i>
+                    <i className="fa-regular fa-eye"></i>
                     </span>
                     /* If yes, delete the going. If no, check if they've already posted interested */
                 ) : interested_id ? (
                     /* If already has interested_id, empty face - remove interest */
                     <span onClick={handleNotInterested}>
-                        <i className={`fa-solid fa-eye ${styles}`}></i>
+                        <i className="fa-solid fa-eye"></i>
                     </span>
                     /* If no interested_id, check if user logged in. if yes, fill face */
                 ) : currentUser ? (
                     <span onClick={handleInterested}>
-                        <i className={`fa-regular fa-eye ${styles}`}></i>
+                        <i className="fa-regular fa-eye"></i>
                     </span>
                 ) : (
                     /* If not logged, message to log in, with emtpy face */
@@ -193,17 +193,17 @@ const Event = (props) => {
                     /* If yes, can't do anything. If no, check if they've already posted going */
                 ) : interested_id ? (
                     <span onClick={handleNotInterestedGoing}>
-                    <i className={`far fa-calendar-check ${styles}`}></i>
+                    <i className="far fa-calendar-check"></i>
                     </span>
                 ) : going_id ? (
                     /* If already has going_id, full face */
                     <span onClick={handleNotGoing}>
-                        <i className={`fas fa-calendar-check ${styles}`}></i>
+                        <i className="fas fa-calendar-check"></i>
                     </span>
                     /* If no going_id, check if user logged in. if yes, empty face */
                 ) : currentUser ? (
                     <span onClick={handleGoing}>
-                        <i className={`far fa-calendar-check ${styles}`}></i>
+                        <i className="far fa-calendar-check"></i>
                     </span>
                 ) : (
                     /* If not logged, message to log in, with emtpy face */

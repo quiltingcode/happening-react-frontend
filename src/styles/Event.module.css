@@ -11,6 +11,10 @@
     margin: 0 0;
   }
 
+  .Title {
+    font-weight: bold;
+  }
+
   .Tags {
     font-weight: bold;
     color: #a6609b;
