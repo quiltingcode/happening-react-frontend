@@ -5,6 +5,7 @@ import { Card, Media, OverlayTrigger, Tooltip } from 'react-bootstrap';
 import { Link } from 'react-router-dom/cjs/react-router-dom';
 import Avatar from '../../components/Avatar';
 import { axiosRes } from '../../api/axiosDefaults';
+import { EditDeleteDropdown } from '../../components/EditDeleteDropdown';
 
 
 const Event = (props) => {
@@ -143,7 +144,7 @@ const Event = (props) => {
                 </Link>
                 <div className='d-flex align-items-center'>
                     <span>{updated_at}</span>
-                    {is_owner && eventPage && "..." }
+                    {is_owner && eventPage && <EditDeleteDropdown /> }
                 </div>
             </Media>
         </Card.Body>

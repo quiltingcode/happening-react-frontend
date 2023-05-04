@@ -38,7 +38,7 @@ function EventDetailPage() {
           <p>Top events this month - mobile</p>
         </div>
         
-        <Event {...event.results[0]} setEvents={setEvent} eventDetailPage />
+        <Event {...event.results[0]} setEvents={setEvent} eventPage />
         <Container className={appStyles.Content}>
           Comments
         </Container>
