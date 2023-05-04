@@ -43,7 +43,7 @@ function App() {
             render={() => (
               <EventsPage
                 message="Oh no! Try adjusting the search keyword or click to show you're interested or going to an event"
-                filter={`interested__owner__profile=${profile_id}&going__owner__profile=${profile_id}&ordering=-interested__created_at&ordering=-going__created_at&`}
+                filter={`interested__owner__profile=${profile_id}&ordering=-interested__created_at&`}
               />
             )}
           />
