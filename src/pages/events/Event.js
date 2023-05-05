@@ -1,7 +1,13 @@
 import React, { useState } from 'react'
 import styles from '../../styles/Event.module.css'
 import { useCurrentUser } from '../../contexts/CurrentUserContext';
-import { Alert, Card, Media, OverlayTrigger, Tooltip } from 'react-bootstrap';
+
+import Alert from 'react-bootstrap/Alert';
+import Card from 'react-bootstrap/Card';
+import Media from 'react-bootstrap/Media';
+import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
+import Tooltip from 'react-bootstrap/Tooltip';
+
 import { Link } from 'react-router-dom/cjs/react-router-dom';
 import Avatar from '../../components/Avatar';
 import { axiosRes } from '../../api/axiosDefaults';
@@ -39,50 +45,9 @@ const Event = (props) => {
     const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
+    const [showAlert, setShowAlert] = useState(false)
+    const [confirmEventMessage, setConfirmEventMessage] = useState(null);
 
-    // const [type, setType] = useState(null);
-    // const [displayConfirmationModal, setDisplayConfirmationModal] = useState(false);
-    // const [deleteMessage, setDeleteMessage] = useState(null);
-    // const [confirmEventMessage, setConfirmEventMessage] = useState(null);
-    // const [confirmCommentMessage, setConfirmCommentMessage] = useState(null);
-
-    // Handle the displaying of the modal based on type and id
-    // const showDeleteModal = (type, id) => {
-    //     setType(type);
-    //     setConfirmEventMessage(null);
-    //     setConfirmCommentMessage(null);
-    //     if (type === "event") {
-    //     setDeleteMessage(`Are you sure you want to delete the event '${title}'?`);
-    //     } else if (type === "comment") {
-    //     setDeleteMessage(`Are you sure you want to delete the comment '${Comment.find((x) => x.id === id).name}'?`);
-    //     }
-    
-    //     setDisplayConfirmationModal(true);
-    // };
-
-     // Hide the modal
-    // const hideConfirmationModal = () => {
-    //     setDisplayConfirmationModal(false);
-    // };
-
-    // Handle the actual deletion of the item
-    // const submitDelete =  async (type, id) => {
-    //     try {
-    //         if (type === "event") {
-    //             await axiosRes.delete(`/events/${id}/`)
-    //             history.goBack()
-    //             setConfirmEventMessage(`The event '${title}' was deleted successfully.`);
-    //             } else if (type === "comment") {
-    //             setConfirmCommentMessage(`The comment '${title}' was deleted successfully.`);
-    //             await axiosRes.delete(`/comments/${id}/`)
-    //             history.goBack()
-    //             }
-    //             setDisplayConfirmationModal(false);
-    //     } catch (err) {
-    //         console.log(err)
-    //     }
-        
-    // };
 
     const handleEdit = async () => {
         history.push(`/events/${id}/edit`)
@@ -92,8 +57,11 @@ const Event = (props) => {
         try{
             await axiosRes.delete(`/events/${id}/`)
             history.goBack()
+            setShowAlert(true)
+            setConfirmEventMessage(`The event '${title}' was deleted successfully.`);
+            console.log(confirmEventMessage)
         } catch(err){
-            // console.log(err)
+            console.log(err)
         }
     }
 
@@ -200,9 +168,13 @@ const Event = (props) => {
 
   return (
     <>
+    {confirmEventMessage && 
+        <Alert variant="success">{confirmEventMessage}</Alert>
+    }
+        
         <Card className={styles.Event}>
             <Card.Body>
-            {/* {confirmEventMessage && <Alert variant="success">{confirmEventMessage}</Alert>} */}
+            
                 <Media className='align-items-center justify-content-between'>
                     <Link to={`/profiles/${profile_id}`}>
                         <Avatar src={profile_image} height={55} />
@@ -213,9 +185,6 @@ const Event = (props) => {
                         {is_owner && eventPage && <EditDeleteDropdown 
                             handleEdit={handleEdit} 
                             handleShow={handleShow}
-                            // showDeleteModal={showDeleteModal} 
-                            // hideConfirmationModal={hideConfirmationModal} 
-                            // submitDelete={submitDelete}
                         /> 
                         }
                     </div>
@@ -295,7 +264,7 @@ const Event = (props) => {
                 </div>
             </Card.Body>
         </Card>
-        <DeleteConfirmationModal showModal={show} handleClose = {handleClose} handleDelete = {handleDelete} title={title} eventId={id} />
+        <DeleteConfirmationModal showModal={show} handleClose = {handleClose} handleDelete = {handleDelete} title={title} />
     </>
     
     

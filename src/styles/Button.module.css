@@ -59,3 +59,23 @@
     background-color: #db628e;
     color: white;
   }
+
+  .Modal {
+    background-color: #798897;
+    color: white;
+  }
+
+  .Modal:hover {
+    background-color:#6e5e93;
+    color: white;
+  }
+
+  .Delete {
+    background-color: #ff6f6f;
+    color: white;
+  }
+
+  .Delete:hover {
+    background-color: #db628e;
+    color: white;
+  }
