@@ -56,7 +56,7 @@ function EventsPage({ message, filter="" }) {
         <Form.Control
           type="text"
           className="mr-sm-2"
-          placeholder="Search events by title, profile or tags" 
+          placeholder="Search events by title, profile, event date or tags" 
           value={search}
           onChange={(event) => setSearch(event.target.value)}
         />
