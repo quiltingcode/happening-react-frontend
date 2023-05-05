@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
@@ -6,18 +6,17 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Container from "react-bootstrap/Container";
 
-import Upload from "../../assets/upload.jpg";
-
 import styles from "../../styles/EventCreateEditForm.module.css";
 import appStyles from "../../App.module.css";
 import btnStyles from "../../styles/Button.module.css";
-import Asset from "../../components/Asset";
+
 import Image from "react-bootstrap/Image";
 import { useHistory } from "react-router-dom/cjs/react-router-dom";
 import { axiosReq } from "../../api/axiosDefaults";
 import { Alert } from "react-bootstrap";
+import { useParams } from "react-router-dom/cjs/react-router-dom.min";
 
-function EventCreateForm() {
+function EventEditForm() {
 
   const [eventData, setEventData] = useState({
     title: '',
@@ -33,6 +32,28 @@ function EventCreateForm() {
   const [errors, setErrors] = useState({});
   const imageInput = useRef(null)
   const history = useHistory();
+  const { id } = useParams();
+
+  useEffect(() => {
+    const handleMount = async () => {
+        try {
+            const { data } = await axiosReq.get(`/events/${id}/`);
+            const {title, description, event_date, category, tags, image, is_owner} = data;
+
+            is_owner ? setEventData({
+              title, 
+              description, 
+              event_date, 
+              category, 
+              tags, 
+              image}) : history.push('/')
+        } catch (err) {
+            console.log(err);
+        }
+    };
+
+    handleMount();
+  }, [history, id]);
 
   const handleChange = (event) => {
     setEventData({
@@ -60,11 +81,14 @@ function EventCreateForm() {
     formData.append('event_date', event_date)
     formData.append('category', category)
     formData.append('tags', tags)
-    formData.append('image', imageInput.current.files[0])
+
+    if (imageInput?.current?.files[0]) {
+      formData.append("image", imageInput.current.files[0]);
+    }
 
     try {
-      const { data } = await axiosReq.post('/events/', formData);
-      history.push(`/events/${data.id}`)
+      await axiosReq.put(`/events/${id}/`, formData);
+      history.push(`/events/${id}`)
     } catch (err) {
       console.log(err)
       if (err.response?.status !== 401){
@@ -163,10 +187,10 @@ function EventCreateForm() {
         className={`${btnStyles.Button} ${btnStyles.Form}`}
         onClick={() => history.goBack()}
       >
-        cancel
+        Cancel
       </Button>
       <Button className={`${btnStyles.Button} ${btnStyles.Form}`} type="submit">
-        create
+        Save
       </Button>
     </div>
   );
@@ -179,35 +203,24 @@ function EventCreateForm() {
             className={`${appStyles.Content} ${styles.Container} d-flex flex-column justify-content-center`}
           >
             <Form.Group className="text-center">
-                {image ? (
-                  <>
-                    <figure>
-                      <Image className={appStyles.Image} src={image} rounded />
-                    </figure>
-                    <div>
-                      <Form.Label 
-                        className={`${btnStyles.Button} ${btnStyles.Form} btn`}
-                        htmlFor="image-upload"
-                      >
-                        Change the image
-                      </Form.Label>
-                    </div>
-                  </>
-                ) : (
-                  <Form.Label
-                  className="d-flex justify-content-center"
+              <figure>
+                <Image className={appStyles.Image} src={image} rounded />
+              </figure>
+              <div>
+                <Form.Label
+                  className={`${btnStyles.Button} ${btnStyles.Form} btn`}
                   htmlFor="image-upload"
                 >
-                  <Asset src={Upload} message="Click to upload an image" />
+                  Change the image
                 </Form.Label>
-                )}
-                
-                <Form.File 
-                  id="image-upload" 
-                  accept="image/*"
-                  onChange={handleChangeImage} 
-                  ref={imageInput}
-                />
+              </div>
+
+              <Form.File
+                id="image-upload"
+                accept="image/*"
+                onChange={handleChangeImage}
+                ref={imageInput}
+              />
             </Form.Group>
             {errors?.image?.map((message, idx) => (
               <Alert variant="warning" key={idx}>
@@ -226,4 +239,4 @@ function EventCreateForm() {
   );
 }
 
-export default EventCreateForm;
+export default EventEditForm;
