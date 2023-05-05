@@ -1,12 +1,13 @@
-import React from 'react'
+import React, { useState } from 'react'
 import styles from '../../styles/Event.module.css'
 import { useCurrentUser } from '../../contexts/CurrentUserContext';
-import { Card, Media, OverlayTrigger, Tooltip } from 'react-bootstrap';
+import { Alert, Card, Media, OverlayTrigger, Tooltip } from 'react-bootstrap';
 import { Link } from 'react-router-dom/cjs/react-router-dom';
 import Avatar from '../../components/Avatar';
 import { axiosRes } from '../../api/axiosDefaults';
 import { EditDeleteDropdown } from '../../components/EditDeleteDropdown';
 import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
+import DeleteConfirmationModal from '../../components/DeleteConfirmationModal';
 
 const Event = (props) => {
 
@@ -35,9 +36,67 @@ const Event = (props) => {
     const is_owner = currentUser?.username === owner;
     const history = useHistory();
 
+    const [show, setShow] = useState(false);
+    const handleClose = () => setShow(false);
+    const handleShow = () => setShow(true);
+
+    // const [type, setType] = useState(null);
+    // const [displayConfirmationModal, setDisplayConfirmationModal] = useState(false);
+    // const [deleteMessage, setDeleteMessage] = useState(null);
+    // const [confirmEventMessage, setConfirmEventMessage] = useState(null);
+    // const [confirmCommentMessage, setConfirmCommentMessage] = useState(null);
+
+    // Handle the displaying of the modal based on type and id
+    // const showDeleteModal = (type, id) => {
+    //     setType(type);
+    //     setConfirmEventMessage(null);
+    //     setConfirmCommentMessage(null);
+    //     if (type === "event") {
+    //     setDeleteMessage(`Are you sure you want to delete the event '${title}'?`);
+    //     } else if (type === "comment") {
+    //     setDeleteMessage(`Are you sure you want to delete the comment '${Comment.find((x) => x.id === id).name}'?`);
+    //     }
+    
+    //     setDisplayConfirmationModal(true);
+    // };
+
+     // Hide the modal
+    // const hideConfirmationModal = () => {
+    //     setDisplayConfirmationModal(false);
+    // };
+
+    // Handle the actual deletion of the item
+    // const submitDelete =  async (type, id) => {
+    //     try {
+    //         if (type === "event") {
+    //             await axiosRes.delete(`/events/${id}/`)
+    //             history.goBack()
+    //             setConfirmEventMessage(`The event '${title}' was deleted successfully.`);
+    //             } else if (type === "comment") {
+    //             setConfirmCommentMessage(`The comment '${title}' was deleted successfully.`);
+    //             await axiosRes.delete(`/comments/${id}/`)
+    //             history.goBack()
+    //             }
+    //             setDisplayConfirmationModal(false);
+    //     } catch (err) {
+    //         console.log(err)
+    //     }
+        
+    // };
+
     const handleEdit = async () => {
         history.push(`/events/${id}/edit`)
     }
+
+    const handleDelete = async () => {
+        try{
+            await axiosRes.delete(`/events/${id}/`)
+            history.goBack()
+        } catch(err){
+            // console.log(err)
+        }
+    }
+
 
     const handleInterested = async () => {
         try {
@@ -140,93 +199,106 @@ const Event = (props) => {
     }
 
   return (
-    <Card className={styles.Event}>
-        <Card.Body>
-            <Media className='align-items-center justify-content-between'>
-                <Link to={`/profiles/${profile_id}`}>
-                    <Avatar src={profile_image} height={55} />
-                    {owner}
-                </Link>
-                <div className='d-flex align-items-center'>
-                    <span>{updated_at}</span>
-                    {is_owner && eventPage && <EditDeleteDropdown handleEdit={handleEdit} /> }
-                </div>
-            </Media>
-        </Card.Body>
-        <Link to={`/events/${id}`}>
-            <Card.Img src={image} alt={title} />
-        </Link>
-        <Card.Body>
-            {title && event_date && <Card.Title className={`text-center ${styles.Title}`}>{title} - {event_date}</Card.Title> } 
-            {description && <Card.Text>{description}</Card.Text>}
-            {tags && <Card.Text className={styles.Tags}><i className="fal fa-hashtag"></i>{tags}</Card.Text>}
-            <div>
-                {is_owner ? (
-                    /* First check if the logged in user created the event */
-                    <OverlayTrigger placement='top' overlay={<Tooltip>You can't be interested in your own event, sorry!</Tooltip>}>
+    <>
+        <Card className={styles.Event}>
+            <Card.Body>
+            {/* {confirmEventMessage && <Alert variant="success">{confirmEventMessage}</Alert>} */}
+                <Media className='align-items-center justify-content-between'>
+                    <Link to={`/profiles/${profile_id}`}>
+                        <Avatar src={profile_image} height={55} />
+                        {owner}
+                    </Link>
+                    <div className='d-flex align-items-center'>
+                        <span>{updated_at}</span>
+                        {is_owner && eventPage && <EditDeleteDropdown 
+                            handleEdit={handleEdit} 
+                            handleShow={handleShow}
+                            // showDeleteModal={showDeleteModal} 
+                            // hideConfirmationModal={hideConfirmationModal} 
+                            // submitDelete={submitDelete}
+                        /> 
+                        }
+                    </div>
+                </Media>
+            </Card.Body>
+            <Link to={`/events/${id}`}>
+                <Card.Img src={image} alt={title} />
+            </Link>
+            <Card.Body>
+                {title && event_date && <Card.Title className={`text-center ${styles.Title}`}>{title} - {event_date}</Card.Title> } 
+                {description && <Card.Text>{description}</Card.Text>}
+                {tags && <Card.Text className={styles.Tags}><i className="fal fa-hashtag"></i>{tags}</Card.Text>}
+                <div>
+                    {is_owner ? (
+                        /* First check if the logged in user created the event */
+                        <OverlayTrigger placement='top' overlay={<Tooltip>You can't be interested in your own event, sorry!</Tooltip>}>
+                            <i className="fa-regular fa-eye"></i>
+                        </OverlayTrigger>
+                        /* If yes, can't do anything. If no, check if they've already posted going */
+                    ) : going_id ? (
+                        <span onClick={handleNotGoingInterested}>
                         <i className="fa-regular fa-eye"></i>
-                    </OverlayTrigger>
-                    /* If yes, can't do anything. If no, check if they've already posted going */
-                ) : going_id ? (
-                    <span onClick={handleNotGoingInterested}>
-                    <i className="fa-regular fa-eye"></i>
-                    </span>
-                    /* If yes, delete the going. If no, check if they've already posted interested */
-                ) : interested_id ? (
-                    /* If already has interested_id, empty face - remove interest */
-                    <span onClick={handleNotInterested}>
-                        <i className="fa-solid fa-eye"></i>
-                    </span>
-                    /* If no interested_id, check if user logged in. if yes, fill face */
-                ) : currentUser ? (
-                    <span onClick={handleInterested}>
-                        <i className="fa-regular fa-eye"></i>
-                    </span>
-                ) : (
-                    /* If not logged, message to log in, with emtpy face */
-                    <OverlayTrigger placement='top' overlay={<Tooltip>Log in to show your interest!</Tooltip>}>
-                        <i className="fa-regular fa-eye"></i>
-                    </OverlayTrigger>
-                    
-                )}
-                <span className='mr-2'>{interested_count}</span>
+                        </span>
+                        /* If yes, delete the going. If no, check if they've already posted interested */
+                    ) : interested_id ? (
+                        /* If already has interested_id, empty face - remove interest */
+                        <span onClick={handleNotInterested}>
+                            <i className="fa-solid fa-eye"></i>
+                        </span>
+                        /* If no interested_id, check if user logged in. if yes, fill face */
+                    ) : currentUser ? (
+                        <span onClick={handleInterested}>
+                            <i className="fa-regular fa-eye"></i>
+                        </span>
+                    ) : (
+                        /* If not logged, message to log in, with emtpy face */
+                        <OverlayTrigger placement='top' overlay={<Tooltip>Log in to show your interest!</Tooltip>}>
+                            <i className="fa-regular fa-eye"></i>
+                        </OverlayTrigger>
+                        
+                    )}
+                    <span className='mr-2'>{interested_count}</span>
 
-                {is_owner ? (
-                    /* First check if the logged in user created the event */
-                    <OverlayTrigger placement='top' overlay={<Tooltip>You can't go to your own event, sorry!</Tooltip>}>
+                    {is_owner ? (
+                        /* First check if the logged in user created the event */
+                        <OverlayTrigger placement='top' overlay={<Tooltip>You can't go to your own event, sorry!</Tooltip>}>
+                            <i className="far fa-calendar-check"></i>
+                        </OverlayTrigger>
+                        /* If yes, can't do anything. If no, check if they've already posted going */
+                    ) : interested_id ? (
+                        <span onClick={handleNotInterestedGoing}>
                         <i className="far fa-calendar-check"></i>
-                    </OverlayTrigger>
-                    /* If yes, can't do anything. If no, check if they've already posted going */
-                ) : interested_id ? (
-                    <span onClick={handleNotInterestedGoing}>
-                    <i className="far fa-calendar-check"></i>
-                    </span>
-                ) : going_id ? (
-                    /* If already has going_id, full face */
-                    <span onClick={handleNotGoing}>
-                        <i className="fas fa-calendar-check"></i>
-                    </span>
-                    /* If no going_id, check if user logged in. if yes, empty face */
-                ) : currentUser ? (
-                    <span onClick={handleGoing}>
-                        <i className="far fa-calendar-check"></i>
-                    </span>
-                ) : (
-                    /* If not logged, message to log in, with emtpy face */
-                    <OverlayTrigger placement='top' overlay={<Tooltip>Log in to show you're going!</Tooltip>}>
-                        <i className="far fa-calendar-check"></i>
-                    </OverlayTrigger>
+                        </span>
+                    ) : going_id ? (
+                        /* If already has going_id, full face */
+                        <span onClick={handleNotGoing}>
+                            <i className="fas fa-calendar-check"></i>
+                        </span>
+                        /* If no going_id, check if user logged in. if yes, empty face */
+                    ) : currentUser ? (
+                        <span onClick={handleGoing}>
+                            <i className="far fa-calendar-check"></i>
+                        </span>
+                    ) : (
+                        /* If not logged, message to log in, with emtpy face */
+                        <OverlayTrigger placement='top' overlay={<Tooltip>Log in to show you're going!</Tooltip>}>
+                            <i className="far fa-calendar-check"></i>
+                        </OverlayTrigger>
+                        
+                    )}
+                    <span className='mr-2'>{going_count}</span>
                     
-                )}
-                <span className='mr-2'>{going_count}</span>
-                
-                <Link to={`/events/${id}`}>
-                    <i className='far fa-comments'></i>
-                </Link>
-                {comments_count}
-            </div>
-        </Card.Body>
-    </Card>
+                    <Link to={`/events/${id}`}>
+                        <i className='far fa-comments'></i>
+                    </Link>
+                    {comments_count}
+                </div>
+            </Card.Body>
+        </Card>
+        <DeleteConfirmationModal showModal={show} handleClose = {handleClose} handleDelete = {handleDelete} title={title} eventId={id} />
+    </>
+    
+    
   )
 }
 
