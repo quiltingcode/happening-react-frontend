@@ -1,0 +1,15 @@
+.Username {
+    font-weight: bold;
+    color: #A6609B;
+    margin-right: 8px;
+}
+
+.Date {
+    font-weight: lighter;
+    color: #db628e;
+}
+
+.Comment {
+    font-weight: bold;
+    color: black;
+}
