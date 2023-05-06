@@ -7,6 +7,7 @@ import { useCurrentUser } from '../../contexts/CurrentUserContext';
 import { EditDeleteDropdown } from '../../components/EditDeleteDropdown';
 import { axiosRes } from '../../api/axiosDefaults';
 import DeleteConfirmationModal from '../../components/DeleteConfirmationModal';
+import CommentEditForm from "./CommentEditForm";
 
 const Comment = (props) => {
 
@@ -23,6 +24,8 @@ const Comment = (props) => {
 
     const currentUser = useCurrentUser();
     const is_owner = currentUser?.username === owner;
+
+    const [showEditForm, setShowEditForm] = useState(false);
 
     const [show, setShow] = useState(false);
     const [message, setMessage] = useState("");
@@ -58,23 +61,40 @@ const Comment = (props) => {
 
   return (
     <div>
-        <hr />
-        <Media>
-            <Link to={`/profiles/${profile_id}`}>
-                <Avatar src={profile_image} height={45} />
-            </Link>
-            <Media.Body>
-                <span className={styles.Username}>{owner}</span>
-                <span className={styles.Date}>{updated_at}</span>
-                <p className={styles.Comment}>{content}</p>
-            </Media.Body>
-            {is_owner && (
-                <EditDeleteDropdown handleEdit={() => {}} handleShow={handleShow} />
-            )}
-        </Media>
-        <DeleteConfirmationModal showModal={show} handleClose = {handleClose} handleCommentDelete = {handleCommentDelete} type={type} message={message} />
+      <hr />
+      <Media>
+        <Link to={`/profiles/${profile_id}`}>
+          <Avatar src={profile_image} height={45} />
+        </Link>
+        <Media.Body>
+          <span className={styles.Username}>{owner}</span>
+          <span className={styles.Date}>{updated_at}</span>
+          {showEditForm ? (
+            <CommentEditForm
+                id={id}
+                profile_id={profile_id}
+                content={content}
+                profileImage={profile_image}
+                setComments={setComments}
+                setShowEditForm={setShowEditForm}
+            />
+          ) : ( 
+            <p>{content}</p>
+          )}
+        </Media.Body>
+        {is_owner && !showEditForm && (
+          <EditDeleteDropdown handleEdit={() => setShowEditForm(true)} handleShow={handleShow} />
+        )}
+      </Media>
+      <DeleteConfirmationModal
+        showModal={show}
+        handleClose={handleClose}
+        handleCommentDelete={handleCommentDelete}
+        type={type}
+        message={message}
+      />
     </div>
-  )
+  );
 }
 
 export default Comment
