@@ -68,7 +68,12 @@ function EventDetailPage() {
           )}
           {comments.results.length ? (
             comments.results.map(comment => (
-              <Comment key={comment.id} {...comment} />
+              <Comment 
+                key={comment.id} 
+                {...comment}
+                setEvent={setEvent}
+                setComments={setComments}
+              />
             ))
           ) : currentUser ? (
             <span>No comments yet, be the first to comment!</span>
@@ -80,6 +85,7 @@ function EventDetailPage() {
       <Col lg={4} className="d-none d-lg-block p-0 p-lg-2">
         Top events this month - desktop
       </Col>
+      
     </Row>
   );
 }

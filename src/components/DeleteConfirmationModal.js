@@ -1,4 +1,4 @@
-import React from 'react'
+
 import Modal from "react-bootstrap/Modal";
 import Button from 'react-bootstrap/Button';
 import btnStyles from "../styles/Button.module.css";
@@ -8,9 +8,12 @@ const DeleteConfirmationModal = (props) => {
   const {
     showModal,
     handleClose,
-    title,
-    handleDelete,
+    handleEventDelete,
+    handleCommentDelete,
+    type,
+    message,
   } = props
+
 
   return (
 
@@ -18,14 +21,28 @@ const DeleteConfirmationModal = (props) => {
     <Modal.Header closeButton>
       <Modal.Title>Are you sure?</Modal.Title>
     </Modal.Header>
-    <Modal.Body>{`Do you really want to delete ${title}? Sounds like an amazing event.`}</Modal.Body>
+    <Modal.Body>{message}</Modal.Body>
     <Modal.Footer>
-      <Button className={`${btnStyles.Button} ${btnStyles.Modal}`} onClick={handleClose}>
-        Cancel
-      </Button>
-      <Button className={`${btnStyles.Button} ${btnStyles.Delete}`} onClick = {handleDelete}>
-        Confirm Deletion
-      </Button>
+      {type === "event" && 
+        <>
+          <Button className={`${btnStyles.Button} ${btnStyles.Modal}`} onClick={handleClose}>
+            Cancel
+          </Button>
+          <Button className={`${btnStyles.Button} ${btnStyles.Delete}`} onClick = {handleEventDelete}>
+            Confirm Deletion
+          </Button>
+        </>
+      }
+      {type === "comment" && 
+        <>
+          <Button className={`${btnStyles.Button} ${btnStyles.Modal}`} onClick={handleClose}>
+            Cancel
+          </Button>
+          <Button className={`${btnStyles.Button} ${btnStyles.Delete}`} onClick = {handleCommentDelete}>
+            Confirm Deletion
+          </Button>
+        </>
+      }
     </Modal.Footer>
   </Modal>
     )

@@ -43,8 +43,16 @@ const Event = (props) => {
     const history = useHistory();
 
     const [show, setShow] = useState(false);
+    const [message, setMessage] = useState("");
+    const [type, setType] = useState("")
+    const handleShow = () => {
+        setShow(true);
+        setMessage(`Are you sure you want to delete ${title}? It could be an amazing event...`);
+        setType("event");
+    };
+
     const handleClose = () => setShow(false);
-    const handleShow = () => setShow(true);
+
     const [showAlert, setShowAlert] = useState(false)
     const [confirmEventMessage, setConfirmEventMessage] = useState(null);
 
@@ -53,7 +61,7 @@ const Event = (props) => {
         history.push(`/events/${id}/edit`)
     }
 
-    const handleDelete = async () => {
+    const handleEventDelete = async () => {
         try{
             await axiosRes.delete(`/events/${id}/`)
             history.goBack()
@@ -264,7 +272,7 @@ const Event = (props) => {
                 </div>
             </Card.Body>
         </Card>
-        <DeleteConfirmationModal showModal={show} handleClose = {handleClose} handleDelete = {handleDelete} title={title} />
+        <DeleteConfirmationModal showModal={show} handleClose = {handleClose} handleEventDelete = {handleEventDelete} type={type} message={message} />
     </>
     
     
