@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react'
 import styles from "../../styles/Comment.module.css";
 import Media from 'react-bootstrap/Media';
 import { Link } from 'react-router-dom/cjs/react-router-dom';
@@ -19,13 +19,21 @@ const Comment = (props) => {
         id,
         setEvent,
         setComments,
-        handleShow,
-        show,
-        handleClose,
     } = props;
 
     const currentUser = useCurrentUser();
     const is_owner = currentUser?.username === owner;
+
+    const [show, setShow] = useState(false);
+    const [message, setMessage] = useState("");
+    const [type, setType] = useState("")
+    const handleShow = () => {
+        setShow(true);
+        setMessage(`Are you sure you want to delete this comment?`);
+        setType("comment");
+    };
+
+    const handleClose = () => setShow(false);
 
     const handleCommentDelete = async () => {
         try {
@@ -64,7 +72,7 @@ const Comment = (props) => {
                 <EditDeleteDropdown handleEdit={() => {}} handleShow={handleShow} />
             )}
         </Media>
-        <DeleteConfirmationModal showModal={show} handleClose = {handleClose} handleCommentDelete = {handleCommentDelete} type="comment" />
+        <DeleteConfirmationModal showModal={show} handleClose = {handleClose} handleCommentDelete = {handleCommentDelete} type={type} message={message} />
     </div>
   )
 }

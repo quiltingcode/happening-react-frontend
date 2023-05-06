@@ -30,7 +30,6 @@ const Event = (props) => {
         title,
         description,
         event_date,
-        category,
         tags,
         image,
         updated_at,
@@ -53,8 +52,8 @@ const Event = (props) => {
 
     const handleClose = () => setShow(false);
 
-    const [showAlert, setShowAlert] = useState(false)
-    const [confirmEventMessage, setConfirmEventMessage] = useState(null);
+    // const [showAlert, setShowAlert] = useState(false)
+    // const [confirmEventMessage, setConfirmEventMessage] = useState(null);
 
 
     const handleEdit = async () => {
@@ -65,9 +64,9 @@ const Event = (props) => {
         try{
             await axiosRes.delete(`/events/${id}/`)
             history.goBack()
-            setShowAlert(true)
-            setConfirmEventMessage(`The event '${title}' was deleted successfully.`);
-            console.log(confirmEventMessage)
+            // setShowAlert(true)
+            // setConfirmEventMessage(`The event '${title}' was deleted successfully.`);
+
         } catch(err){
             console.log(err)
         }
@@ -176,10 +175,10 @@ const Event = (props) => {
 
   return (
     <>
-    {confirmEventMessage && 
+    {/* {confirmEventMessage && 
         <Alert variant="success">{confirmEventMessage}</Alert>
     }
-        
+         */}
         <Card className={styles.Event}>
             <Card.Body>
             
