@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import Form from "react-bootstrap/Form";
 import InputGroup from "react-bootstrap/InputGroup";
 
-import styles from "../../styles/CommentCreateEditForm.module.css";
+import styles from "../../styles/CommentForm.module.css";
 import btnStyles from "../../styles/Button.module.css"
 import Avatar from "../../components/Avatar";
 import { axiosRes } from "../../api/axiosDefaults";
@@ -17,8 +17,8 @@ function CommentCreateForm(props) {
     setContent(event.target.value);
   };
 
-  const handleSubmit = async (event) => {
-    event.preventDefault();
+  const handleSubmit = async (e) => {
+    e.preventDefault();
     try {
       const { data } = await axiosRes.post("/comments/", {
         content,
@@ -28,7 +28,7 @@ function CommentCreateForm(props) {
         ...prevComments,
         results: [data, ...prevComments.results],
       }));
-      setPost((prevPost) => ({
+      setEvent((prevPost) => ({
         results: [
           {
             ...prevPost.results[0],

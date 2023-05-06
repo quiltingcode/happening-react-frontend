@@ -8,10 +8,16 @@ import appStyles from "../../App.module.css";
 import { useParams } from "react-router-dom/cjs/react-router-dom";
 import { axiosReq } from "../../api/axiosDefaults";
 import Event from "./Event";
+import CommentCreateForm from "../comments/CommentCreateForm";
+import { useCurrentUser } from "../../contexts/CurrentUserContext";
 
 function EventDetailPage() {
     const { id } = useParams();
     const [event, setEvent] = useState({ results: [] });
+
+    const currentUser = useCurrentUser();
+    const profile_image = currentUser?.profile_image;
+    const [comments, setComments] = useState({ results: [] });
 
     useEffect(() => {
         const handleMount = async () => {
@@ -37,14 +43,33 @@ function EventDetailPage() {
         <div className="d-lg-none">
           <p>Top events this month - mobile</p>
         </div>
-        
+
         <Event {...event.results[0]} setEvents={setEvent} eventPage />
         <Container className={appStyles.Content}>
-          Comments
+          {currentUser ? (
+            <CommentCreateForm
+              profile_id={currentUser.profile_id}
+              profileImage={profile_image}
+              event={id}
+              setEvent={setEvent}
+              setComments={setComments}
+            />
+          ) : comments.results.length ? (
+            "Comments"
+          ) : (
+            <>
+              <div>
+                <i className='far fa-comments'></i>
+                <span className="ml-3">
+                  Log in to post a comment...
+                </span>
+              </div>
+            </>
+          )}
         </Container>
       </Col>
       <Col lg={4} className="d-none d-lg-block p-0 p-lg-2">
-      Top events this month - desktop
+        Top events this month - desktop
       </Col>
     </Row>
   );
