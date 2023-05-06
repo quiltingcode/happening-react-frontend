@@ -22,13 +22,14 @@ function EventDetailPage() {
     useEffect(() => {
         const handleMount = async () => {
           try {
-            const [{ data: event }] = await Promise.all([
+            const [{ data: event }, {data: comments}] = await Promise.all([
               axiosReq.get(`/events/${id}`),
+              axiosReq.get(`/comments/?event=${id}`)
             ]);
             setEvent({ results: [event] });
-            console.log(event)
+            setComments(comments)
           } catch (err) {
-            // console.log(err);
+            console.log(err);
           }
         };
     
@@ -54,17 +55,26 @@ function EventDetailPage() {
               setEvent={setEvent}
               setComments={setComments}
             />
-          ) : comments.results.length ? (
-            "Comments"
           ) : (
             <>
-              <div>
+              <div className="mb-3">
                 <i className='far fa-comments'></i>
                 <span className="ml-3">
                   Log in to post a comment...
                 </span>
               </div>
             </>
+          )}
+          {comments.results.length ? (
+            comments.results.map(comment => (
+              <p key={comment.id}>
+                {comment.owner}: {comment.content}
+              </p>
+            ))
+          ) : currentUser ? (
+            <span>No comments yet, be the first to comment!</span>
+          ) : (
+            <span>No comments...yet</span>
           )}
         </Container>
       </Col>
