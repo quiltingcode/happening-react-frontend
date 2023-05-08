@@ -50,6 +50,9 @@ function EventsPage({ message, filter="" }) {
     <Row className="h-100">
       <Col className="py-2 p-0 p-lg-2" lg={8}>
       <PopularProfiles />
+
+      <PopularEvents mobile />
+
       <i className={`fas fa-search ${styles.SearchIcon}`} />
       <Form 
         className={styles.SearchBar}
@@ -64,9 +67,7 @@ function EventsPage({ message, filter="" }) {
         />
       </Form>
 
-        <div className="d-lg-none">
-          <p>Top events this month - mobile</p>
-        </div>
+        
         {hasLoaded ? (
           <>
           {events.results.length ? (

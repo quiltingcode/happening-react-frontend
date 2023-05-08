@@ -33,11 +33,15 @@ const PopularProfiles = () => {
     }, [currentUser]);
 
   return (
-    <Container className={appStyles.Content}>
+    <Container className={`${appStyles.Content} mb-3`}>
         {popularProfiles.results.length ? (
-            popularProfiles.results.map(profile => (
-                <p key={profile.id}>{profile.owner}</p>
-            ))
+            <>
+                <h4 className='text-center'>Follow these Popular Profiles</h4>
+                {popularProfiles.results.slice(0,5).map((profile) => (
+                    <p key={profile.id}>{profile.owner}</p>
+                ))}
+            </>
+            
         ) : (
             <Asset spinner />
         )}
