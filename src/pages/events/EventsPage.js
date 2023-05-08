@@ -14,6 +14,7 @@ import Event from "./Event";
 import Asset from "../../components/Asset";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { fetchMoreData } from "../../utils/Utils";
+import PopularProfiles from "../profiles/PopularProfiles";
 
 function EventsPage({ message, filter="" }) {
 
@@ -47,7 +48,7 @@ function EventsPage({ message, filter="" }) {
   return (
     <Row className="h-100">
       <Col className="py-2 p-0 p-lg-2" lg={8}>
-      <p>Popular profiles</p>
+      <PopularProfiles />
       <i className={`fas fa-search ${styles.SearchIcon}`} />
       <Form 
         className={styles.SearchBar}

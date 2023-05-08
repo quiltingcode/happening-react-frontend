@@ -2,7 +2,6 @@ import React, { useState } from 'react'
 import styles from '../../styles/Event.module.css'
 import { useCurrentUser } from '../../contexts/CurrentUserContext';
 
-import Alert from 'react-bootstrap/Alert';
 import Card from 'react-bootstrap/Card';
 import Media from 'react-bootstrap/Media';
 import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
