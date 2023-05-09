@@ -1,0 +1,10 @@
+.WordBreak {
+    word-break: break-all;
+}
+
+.Profiles {
+    display: inline-block;
+    flex-direction: column;
+    text-align: center;
+    margin: auto;
+}

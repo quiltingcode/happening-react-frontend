@@ -4,6 +4,7 @@ import Container from 'react-bootstrap/Container';
 import { axiosReq } from '../../api/axiosDefaults';
 import { useCurrentUser } from '../../contexts/CurrentUserContext';
 import Asset from '../../components/Asset';
+import Profile from './Profile';
 
 const PopularProfiles = () => {
 
@@ -38,7 +39,10 @@ const PopularProfiles = () => {
             <>
                 <h4 className='text-center'>Follow these Popular Profiles</h4>
                 {popularProfiles.results.slice(0,5).map((profile) => (
-                    <p key={profile.id}>{profile.owner}</p>
+                    <Container className='d-inline justify-content-center align-items-center'>
+                        <Profile key={profile.id} profile={profile} mobile />
+                    </Container>
+                    
                 ))}
             </>
             
