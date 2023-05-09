@@ -47,7 +47,9 @@ const PopularEvents = ({ mobile }) => {
                         key={event.id} 
                         className={`${styles.Card} mr-2`}
                     >
-                        {event.title}
+                        <Link to={`/events/${event.id}`} className={styles.Link}>
+                            {event.title}
+                        </Link>
                     </Card> 
                     ))}
                 </div>
