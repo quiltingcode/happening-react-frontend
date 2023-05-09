@@ -7,7 +7,7 @@ import { useProfileData } from '../../contexts/ProfileDataContext';
 
 const PopularProfiles = () => {
 
-    const { popularProfiles } = useProfileData;
+    const { popularProfiles } = useProfileData();
 
   return (
     <Container className={`${appStyles.Content} mb-3`}>

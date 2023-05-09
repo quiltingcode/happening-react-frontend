@@ -1,5 +1,5 @@
 import React from "react";
-import { Button, DropdownButton } from "react-bootstrap";
+import DropdownButton from "react-bootstrap/DropdownButton";
 import Dropdown from "react-bootstrap/Dropdown";
 
 
@@ -21,7 +21,7 @@ const Filter = React.forwardRef(({ onClick }, ref ) => (
     
     return (
       <>
-        <Dropdown className="ml-auto mb-2" drop="center">
+        <Dropdown className="ml-auto mb-2" drop="right">
           <Dropdown.Toggle as={Filter}>Select Category</Dropdown.Toggle>  
 
           <Dropdown.Menu
