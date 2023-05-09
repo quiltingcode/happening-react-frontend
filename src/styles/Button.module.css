@@ -79,3 +79,27 @@
     background-color: #db628e;
     color: white;
   }
+
+.Follow {
+  background-color: #2f4858;
+  color: white;
+  font-size: 0.6rem;
+  min-width: 50px;
+  padding: 2px;
+}
+
+.Follow:hover {
+  background-color: #42567a;
+}
+
+.Unfollow {
+  background-color: #42567a;
+  color: white;
+  font-size: 0.6rem;
+  min-width: 50px;
+  padding: 2px;
+}
+
+.Unfollow:hover {
+  background-color: #2f4858;
+}
