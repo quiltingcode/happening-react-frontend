@@ -6,6 +6,7 @@ import Container from 'react-bootstrap/Container';
 import Asset from '../../components/Asset';
 import { Card } from 'react-bootstrap';
 import styles from "../../styles/PopularEvents.module.css"
+import { Link } from 'react-router-dom/cjs/react-router-dom.min';
 
 const PopularEvents = ({ mobile }) => {
 
@@ -45,12 +46,22 @@ const PopularEvents = ({ mobile }) => {
                     <Card 
                         key={event.id} 
                         className={`${styles.Card} mr-2`}
-                    >{event.title}</Card> 
+                    >
+                        {event.title}
+                    </Card> 
                     ))}
                 </div>
             ) : (
                 topEvents.results.map((event) => (
-                    <p key={event.id}>{event.title} - {event.event_date}</p>
+                    <div key={event.id}>
+                        <Link to={`/events/${event.id}`}>
+                            <strong>{event.title}</strong>
+                        </Link>
+                        <p>
+                            {event.event_date}
+                        </p>
+                        <hr />
+                    </div>
                 ))
             )}
                 

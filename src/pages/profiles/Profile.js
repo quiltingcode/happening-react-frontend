@@ -22,7 +22,9 @@ const Profile = (props) => {
             <Avatar src={profile_pic} height={55} />
           </Link>
         </div>
-        <div className={`mx-2 ${styles.WordBreak}`}>{owner}</div>
+        <div className={`mx-2 ${styles.WordBreak}`}>
+            <strong>{owner}</strong>
+            </div>
         <div>follow</div>
       </div>
 
