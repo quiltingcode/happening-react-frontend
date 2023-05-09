@@ -9,7 +9,7 @@ import Button from 'react-bootstrap/Button';
 
 const Profile = (props) => {
 
-    const {profile, mobile} = props;
+    const {profile} = props;
     const {id, following_id, profile_pic, owner} = profile;
 
     const currentUser = useCurrentUser();
@@ -42,7 +42,7 @@ const Profile = (props) => {
                     >
                         follow
                     </Button>
-                )
+                ) 
             )}
         </div>
       </div>
