@@ -16,6 +16,7 @@ import InfiniteScroll from "react-infinite-scroll-component";
 import { fetchMoreData } from "../../utils/Utils";
 import PopularProfiles from "../profiles/PopularProfiles";
 import PopularEvents from "./PopularEvents";
+import { CategoryFilter } from "../../components/CategoryFilter";
 
 function EventsPage({ message, filter="" }) {
 
@@ -49,53 +50,50 @@ function EventsPage({ message, filter="" }) {
   return (
     <Row className="h-100">
       <Col className="py-2 p-0 p-lg-2" lg={8}>
-      <PopularProfiles />
+        <PopularProfiles />
 
-      <PopularEvents mobile />
+        <PopularEvents mobile />
 
-      <i className={`fas fa-search ${styles.SearchIcon}`} />
-      <Form 
-        className={styles.SearchBar}
-        onSubmit={(event) => event.preventDefault()}
-      >
-        <Form.Control
-          type="text"
-          className="mr-sm-2"
-          placeholder="Search events by title, profile, event date or tags" 
-          value={search}
-          onChange={(event) => setSearch(event.target.value)}
-        />
-      </Form>
+      
+        <i className={`fas fa-search ${styles.SearchIcon}`} />
+        <Form
+          className={styles.SearchBar}
+          onSubmit={(event) => event.preventDefault()}
+        >
+          <Form.Control
+            type="text"
+            className="mr-sm-2"
+            placeholder="Search events by title, profile, event date or tags"
+            value={search}
+            onChange={(event) => setSearch(event.target.value)}
+          />
+        </Form>
 
-        
+        <CategoryFilter />
+    
         {hasLoaded ? (
           <>
-          {events.results.length ? (
-            <InfiniteScroll 
-              children={
-                events.results.map(event => (
+            {events.results.length ? (
+              <InfiniteScroll
+                children={events.results.map((event) => (
                   <Event key={event.id} {...event} setEvents={setEvents} />
-                ))
-              }
-              dataLength={events.results.length}
-              loader={<Asset spinner />}
-              hasMore={!!events.next}
-              next={() => fetchMoreData(events, setEvents)}
-            />
-            
-          ) : (
-            <Container className={appStyles.Content}>
-              <Asset src={NoResults} message={message} />
-            </Container>
-          )}
+                ))}
+                dataLength={events.results.length}
+                loader={<Asset spinner />}
+                hasMore={!!events.next}
+                next={() => fetchMoreData(events, setEvents)}
+              />
+            ) : (
+              <Container className={appStyles.Content}>
+                <Asset src={NoResults} message={message} />
+              </Container>
+            )}
           </>
         ) : (
           <Container className={appStyles.Content}>
             <Asset spinner />
           </Container>
-        )
-      
-      }
+        )}
       </Col>
       <Col md={4} className="d-none d-lg-block p-0 p-lg-2">
         <PopularEvents />
