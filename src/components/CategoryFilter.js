@@ -21,7 +21,7 @@ const Filter = React.forwardRef(({ onClick }, ref ) => (
     
     return (
       <>
-        <Dropdown className="ml-auto" drop="right">
+        <Dropdown className="ml-auto mb-2" drop="center">
           <Dropdown.Toggle as={Filter}>Select Category</Dropdown.Toggle>  
 
           <Dropdown.Menu
@@ -32,13 +32,13 @@ const Filter = React.forwardRef(({ onClick }, ref ) => (
               onClick={() => {}}
               aria-label="category 1"
             >
-              <i className="fas fa-pencil" />
+              Category 1
             </Dropdown.Item>
             <Dropdown.Item
               onClick={() => {}}
               aria-label="category 2"
             >
-              <i className="far fa-trash-alt" />
+              Category 2
             </Dropdown.Item>
           </Dropdown.Menu>
         </Dropdown>
