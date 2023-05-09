@@ -33,11 +33,12 @@ const PopularEvents = ({ mobile }) => {
         handleMount();
     }, [currentUser]);
 
+
   return (
     <Container className={`${appStyles.Content} ${mobile && 'd-lg-none text-center mb-3'}`}>
         {topEvents.results.length ? (
             <>
-            <h4 className='text-center'>Top Events This Month</h4>
+            <h4 className='text-center mb-4'>Top Events This Month</h4>
             {mobile ? (
                 <div className='d-flex'>
                     {topEvents.results.slice(0,5).map((event) => (
@@ -49,7 +50,7 @@ const PopularEvents = ({ mobile }) => {
                 </div>
             ) : (
                 topEvents.results.map((event) => (
-                    <p key={event.id}>{event.title}</p>
+                    <p key={event.id}>{event.title} - {event.event_date}</p>
                 ))
             )}
                 
