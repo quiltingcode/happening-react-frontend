@@ -54,23 +54,33 @@ function EventsPage({ message, filter="" }) {
 
         <PopularEvents mobile />
 
-      
-        <i className={`fas fa-search ${styles.SearchIcon}`} />
-        <Form
-          className={styles.SearchBar}
-          onSubmit={(event) => event.preventDefault()}
-        >
-          <Form.Control
-            type="text"
-            className="mr-sm-2"
-            placeholder="Search events by title, profile, event date or tags"
-            value={search}
-            onChange={(event) => setSearch(event.target.value)}
-          />
-        </Form>
+        <Container>
+          <i className={`fas fa-search ${styles.SearchIcon}`} />
+          <Form
+            className={styles.SearchBar}
+            onSubmit={(event) => event.preventDefault()}
+          >
+            <Form.Control
+              size="sm"
+              type="text"
+              className="mr-sm-2"
+              placeholder="Search events by title, profile, event date or tags"
+              value={search}
+              onChange={(event) => setSearch(event.target.value)}
+            />
 
-        <CategoryFilter />
-    
+            <Form.Control size="sm" as="select" placeholder="Choose...">
+              <option>Filter by category...</option>
+              <option>Sport</option>
+              <option>Music</option>
+              <option>Culture</option>
+              <option>Family</option>
+              <option>Kids</option>
+              <option>Education</option>
+            </Form.Control>
+          </Form>
+        </Container>
+
         {hasLoaded ? (
           <>
             {events.results.length ? (

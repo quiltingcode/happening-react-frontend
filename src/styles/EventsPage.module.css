@@ -1,8 +1,23 @@
+.SearchBar {
+  display: flex;
+  flex-direction: row;
+}
+
 .SearchBar input {
     border-radius: 20px;
     color: #2f4858;
     padding-left: 40px;
     margin-bottom: 16px;
+    margin-right: 20px;
+    width: 75%;
+  }
+
+  .SearchBar select {
+    color: #2f4858;
+    padding-left: 40px;
+    margin-bottom: 16px;
+    width: 25%;
+    float: right;
   }
   
   .SearchIcon {
