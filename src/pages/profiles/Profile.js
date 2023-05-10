@@ -16,37 +16,33 @@ const Profile = (props) => {
     const is_owner = currentUser?.username === owner;
 
   return (
-
-      <div className={styles.Profiles}>
-        <div>
-          <Link className="align-self-center" to={`/profiles/${id}`}>
-            <Avatar src={profile_pic} height={55} />
-          </Link>
-        </div>
-        <div className={`mx-2 ${styles.WordBreak}`}>
-            {owner}
-        </div>
-        <div className="mx-2">
-            {currentUser && !is_owner && (
-                following_id ? (
-                    <Button 
-                        className={`${btnStyles.Button} ${btnStyles.Unfollow}`}
-                        onClick={() => {}}
-                    >
-                        unfollow
-                    </Button>
-                ) : (
-                    <Button 
-                        className={`${btnStyles.Button} ${btnStyles.Follow}`}
-                        onClick={() => {}}
-                    >
-                        follow
-                    </Button>
-                ) 
-            )}
-        </div>
+    <div className={styles.Profiles}>
+      <div>
+        <Link className="align-self-center" to={`/profiles/${id}`}>
+          <Avatar src={profile_pic} height={55} />
+        </Link>
       </div>
-
+      <div className={`mx-2 ${styles.WordBreak}`}>{owner}</div>
+      <div className="mx-2">
+        {currentUser &&
+          !is_owner &&
+          (following_id ? (
+            <Button
+              className={`${btnStyles.Button} ${btnStyles.Unfollow}`}
+              onClick={() => {}}
+            >
+              unfollow
+            </Button>
+          ) : (
+            <Button
+              className={`${btnStyles.Button} ${btnStyles.Follow}`}
+              onClick={() => {}}
+            >
+              follow
+            </Button>
+          ))}
+      </div>
+    </div>
   );
 }
 

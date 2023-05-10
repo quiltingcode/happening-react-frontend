@@ -16,7 +16,7 @@ import InfiniteScroll from "react-infinite-scroll-component";
 import { fetchMoreData } from "../../utils/Utils";
 import PopularProfiles from "../profiles/PopularProfiles";
 import PopularEvents from "./PopularEvents";
-import { CategoryFilter } from "../../components/CategoryFilter";
+
 
 function EventsPage({ message, filter="" }) {
 
