@@ -1,6 +1,6 @@
 import { useContext, useEffect, useState } from "react";
 import { createContext } from "react";
-import { axiosReq } from "../api/axiosDefaults";
+import { axiosReq, axiosRes } from "../api/axiosDefaults";
 import { useCurrentUser } from "./CurrentUserContext";
 
 
@@ -17,6 +17,16 @@ export const ProfileDataProvider = ({ children }) => {
     });
 
     const currentUser = useCurrentUser();
+
+    const handleFollow = async (clickedProfile) => {
+        try {
+            const {data} = await axiosRes.post(`/followers/`, {
+                followed: clickedProfile.id
+            })
+        } catch (err) {
+            console.log(err)
+        }
+    }
 
     useEffect(() => {
         const handleMount = async () => {
@@ -37,7 +47,7 @@ export const ProfileDataProvider = ({ children }) => {
 
     return (
         <ProfileDataContext.Provider value={profileData}>
-            <SetProfileDataContext.Provider value={setProfileData}>
+            <SetProfileDataContext.Provider value={{setProfileData, handleFollow}}>
                 {children}
             </SetProfileDataContext.Provider>
         </ProfileDataContext.Provider>
