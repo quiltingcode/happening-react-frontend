@@ -23,9 +23,13 @@ import { useProfileData } from "../../contexts/ProfileDataContext";
 import InfiniteScroll from "react-infinite-scroll-component";
 import Event from "../events/Event";
 import { fetchMoreData } from "../../utils/Utils";
+import { ProfileEditDropdown } from "../../components/EditDeleteDropdown";
+import ChangeUsernameModal from "./ChangeUsernameModal";
+
 
 
 function ProfilePage() {
+
   const [hasLoaded, setHasLoaded] = useState(false);
   const currentUser = useCurrentUser();
   const {id} = useParams();
@@ -35,6 +39,14 @@ function ProfilePage() {
   const is_owner = currentUser?.username === profile?.owner;
 
   const [profileEvents, setProfileEvents] = useState({results: []});
+
+  const [show, setShow] = useState(false);
+
+  const handleShow = () => {
+      setShow(true);
+  };
+
+  const handleClose = () => setShow(false);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -58,6 +70,7 @@ function ProfilePage() {
 
   const mainProfile = (
     <>
+      {profile?.is_owner && <ProfileEditDropdown id={profile?.id} handleShow={handleShow} />}
       <Row noGutters className="px-3 text-center">
         <Col lg={3} className="text-lg-left">
           <Image
@@ -171,7 +184,10 @@ function ProfilePage() {
         <PopularEvents />
         
       </Col>
-      
+      <ChangeUsernameModal 
+        showModal={show}
+        handleClose={handleClose}
+      />
     </Row>
   );
 }
