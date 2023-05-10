@@ -14,6 +14,8 @@ import Comment from "../comments/Comment";
 import Asset from "../../components/Asset";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { fetchMoreData } from "../../utils/Utils";
+import PopularProfiles from "../profiles/PopularProfiles";
+import PopularEvents from "./PopularEvents";
 
 function EventDetailPage() {
     const { id } = useParams();
@@ -44,9 +46,9 @@ function EventDetailPage() {
   return (
     <Row className="h-100">
       <Col className="py-2 p-0 p-lg-2" lg={8}>
-        <p>Popular profiles</p>
+        <PopularProfiles />
         <div className="d-lg-none">
-          <p>Top events this month - mobile</p>
+          <PopularEvents mobile />
         </div>
 
         <Event {...event.results[0]} setEvents={setEvent} eventPage />
@@ -62,31 +64,26 @@ function EventDetailPage() {
           ) : (
             <>
               <div className="mb-3">
-                <i className='far fa-comments'></i>
-                <span className="ml-3">
-                  Log in to post a comment...
-                </span>
+                <i className="far fa-comments"></i>
+                <span className="ml-3">Log in to post a comment...</span>
               </div>
             </>
           )}
           {comments.results.length ? (
-            <InfiniteScroll 
-              children={
-                comments.results.map(comment => (
-                  <Comment 
-                    key={comment.id} 
-                    {...comment}
-                    setEvent={setEvent}
-                    setComments={setComments}
-                  />
-                ))
-              }
+            <InfiniteScroll
+              children={comments.results.map((comment) => (
+                <Comment
+                  key={comment.id}
+                  {...comment}
+                  setEvent={setEvent}
+                  setComments={setComments}
+                />
+              ))}
               dataLength={comments.results.length}
               loader={<Asset spinner />}
               hasMore={!!comments.next}
               next={() => fetchMoreData(comments, setComments)}
             />
-           
           ) : currentUser ? (
             <span>No comments yet, be the first to comment!</span>
           ) : (
@@ -95,9 +92,8 @@ function EventDetailPage() {
         </Container>
       </Col>
       <Col lg={4} className="d-none d-lg-block p-0 p-lg-2">
-        Top events this month - desktop
+        <PopularEvents />
       </Col>
-      
     </Row>
   );
 }
