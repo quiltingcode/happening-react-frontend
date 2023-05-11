@@ -193,7 +193,7 @@ const ProfileEditForm = () => {
             type="text"  
             value={facebook_link}
             onChange={handleChange}
-            name="facebook_url"
+            name="facebook_link"
           />
         </Form.Group>
         {errors?.facebook_link?.map((message, idx) => (

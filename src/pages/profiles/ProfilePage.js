@@ -128,14 +128,21 @@ function ProfilePage() {
       <Row>
         <Col className="p-3" sm={8} lg={6}>
           <Container className={appStyles.Content}>
-            <h5>Bio</h5>
-            {profile?.bio}
+            <h5 className="text-center p-2">About Me</h5>
+            <Col className="p-1">Name:</Col>
+            {profile?.name && <Col className="p-2"><strong>{profile.name}</strong></Col>}
+            <Col className="p-1">Bio:</Col>
+            {profile?.bio && <Col className="p-2"><strong>{profile.bio}</strong></Col>}
           </Container>
         </Col>
         <Col className="p-3" sm={8} lg={6}>
           <Container className={appStyles.Content}>
-            <h5>Contact Details</h5>
-            {profile?.bio}
+            <h5 className="text-center p-2">Contact Details</h5>
+            {profile?.phone_number && <Col className="p-1"><i class="fas fa-phone-alt"></i> {profile.phone_number}</Col>}
+            {profile?.email && <Col className="p-1"><i class="fas fa-at"></i> {profile.email}</Col>}
+            {profile?.website && <Col className="p-1"><i class="fas fa-globe"></i> {profile.website}</Col>}
+            {profile?.facebook_link && <Col className="p-1"><i class="fab fa-facebook"></i> {profile.facebook_link}</Col>}
+            {profile?.instagram_link && <Col className="p-1"><i class="fab fa-instagram"></i> {profile.instagram_link}</Col>}
           </Container>
         </Col>
       </Row>
