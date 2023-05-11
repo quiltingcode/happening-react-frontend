@@ -37,6 +37,7 @@ const ProfileEditForm = () => {
   });
   const { 
     name, 
+    owner,
     bio, 
     profile_pic, 
     website, 
@@ -54,7 +55,8 @@ const ProfileEditForm = () => {
         try {
           const { data } = await axiosReq.get(`/profiles/${id}/`);
           const { 
-            name, 
+            name,
+            owner, 
             bio, 
             profile_pic, 
             website, 
@@ -65,6 +67,7 @@ const ProfileEditForm = () => {
           setProfileData(
             { 
                 name, 
+                owner,
                 bio, 
                 profile_pic, 
                 website, 
@@ -123,79 +126,183 @@ const ProfileEditForm = () => {
   const textFields = (
     <>
       <Form.Group>
-        <Form.Label>Bio</Form.Label>
+        <Form.Label>Name or Company Name:</Form.Label>
         <Form.Control
-          as="textarea"
-          value={bio}
+          type="text"
+          value={name}
           onChange={handleChange}
-          name="content"
-          rows={7}
+          name="name"
         />
       </Form.Group>
-
-      {errors?.content?.map((message, idx) => (
+      {errors?.name?.map((message, idx) => (
         <Alert variant="warning" key={idx}>
           {message}
         </Alert>
       ))}
+
+      <Form.Group>
+        <Form.Label>Bio:</Form.Label>
+        <Form.Control
+          as="textarea"
+          value={bio}
+          onChange={handleChange}
+          name="bio"
+          rows={4}
+        />
+      </Form.Group>
+      {errors?.bio?.map((message, idx) => (
+        <Alert variant="warning" key={idx}>
+          {message}
+        </Alert>
+      ))}
+
+      <Form.Group>
+        <Form.Label>Website URL:</Form.Label>
+        <Form.Control
+          type="text"
+          value={website}
+          onChange={handleChange}
+          name="website"
+        />
+      </Form.Group>
+      {errors?.website?.map((message, idx) => (
+        <Alert variant="warning" key={idx}>
+          {message}
+        </Alert>
+      ))}
+
+      <Form.Row>
+        <Form.Group as={Col}>
+          <Form.Label>Instagram URL:</Form.Label>
+          <Form.Control 
+            type="text" 
+            value={instagram_link}
+            onChange={handleChange}
+            name="instagram_link"
+          />
+        </Form.Group>
+        {errors?.instagram_link?.map((message, idx) => (
+        <Alert variant="warning" key={idx}>
+          {message}
+        </Alert>
+      ))}
+
+        <Form.Group as={Col}>
+          <Form.Label>Facebook URL:</Form.Label>
+          <Form.Control 
+            type="text"  
+            value={facebook_link}
+            onChange={handleChange}
+            name="facebook_url"
+          />
+        </Form.Group>
+        {errors?.facebook_link?.map((message, idx) => (
+        <Alert variant="warning" key={idx}>
+          {message}
+        </Alert>
+      ))}
+      </Form.Row>
+
+      <Form.Row>
+        <Form.Group as={Col}>
+          <Form.Label>Phone Number:</Form.Label>
+          <Form.Control 
+            type="text" 
+            value={phone_number}
+            onChange={handleChange}
+            name="phone_number"
+          />
+        </Form.Group>
+        {errors?.phone_number?.map((message, idx) => (
+        <Alert variant="warning" key={idx}>
+          {message}
+        </Alert>
+      ))}
+
+        <Form.Group as={Col}>
+          <Form.Label>Email Address:</Form.Label>
+          <Form.Control 
+            type="email"  
+            value={email}
+            onChange={handleChange}
+            name="email"
+          />
+        </Form.Group>
+        {errors?.email?.map((message, idx) => (
+        <Alert variant="warning" key={idx}>
+          {message}
+        </Alert>
+      ))}
+      </Form.Row>
+
       <Button
-        className={`${btnStyles.Button} ${btnStyles.Blue}`}
+        className={`${btnStyles.Button} ${btnStyles.Form}`}
         onClick={() => history.goBack()}
       >
-        cancel
+        Cancel
       </Button>
-      <Button className={`${btnStyles.Button} ${btnStyles.Blue}`} type="submit">
-        save
+      <Button className={`${btnStyles.Button} ${btnStyles.Form}`} type="submit">
+        Save
       </Button>
     </>
   );
 
   return (
-    <Form onSubmit={handleSubmit}>
-      <Row>
-        <Col className="py-2 p-0 p-md-2 text-center" md={7} lg={6}>
-          <Container className={appStyles.Content}>
-            <Form.Group>
-              {profile_pic && (
-                <figure>
-                  <Image src={profile_pic} fluid />
-                </figure>
-              )}
-              {errors?.profile_pic?.map((message, idx) => (
-                <Alert variant="warning" key={idx}>
-                  {message}
-                </Alert>
-              ))}
-              <div>
-                <Form.Label
-                  className={`${btnStyles.Button} ${btnStyles.Blue} btn my-auto`}
-                  htmlFor="image-upload"
-                >
-                  Change the image
-                </Form.Label>
-              </div>
-              <Form.File
-                id="image-upload"
-                ref={imageFile}
-                accept="image/*"
-                onChange={(e) => {
-                  if (e.target.files.length) {
-                    setProfileData({
-                      ...profileData,
-                      profile_pic: URL.createObjectURL(e.target.files[0]),
-                    });
-                  }
-                }}
-              />
-            </Form.Group>
-            <div className="d-md-none">{textFields}</div>
-          </Container>
-        </Col>
-        <Col md={5} lg={6} className="d-none d-md-block p-0 p-md-2 text-center">
-          <Container className={appStyles.Content}>{textFields}</Container>
-        </Col>
-      </Row>
-    </Form>
+    <>
+      <Container className={`${appStyles.Content} mt-3`}>
+        <h2 className="text-center">Edit {owner}'s Profile</h2>
+      </Container>
+        <Form onSubmit={handleSubmit}>
+          <Row>
+            <Col className="py-2 p-0 p-md-2 text-center" md={7} lg={4}>
+              <Container className={appStyles.Content}>
+                <Form.Group>
+                  {profile_pic && (
+                    <figure>
+                      <Image src={profile_pic} fluid />
+                    </figure>
+                  )}
+                  {errors?.profile_pic?.map((message, idx) => (
+                    <Alert variant="warning" key={idx}>
+                      {message}
+                    </Alert>
+                  ))}
+                  <div>
+                    <Form.Label
+                      className={`${btnStyles.Button} ${btnStyles.Form} btn my-auto`}
+                      htmlFor="image-upload"
+                    >
+                      Change profile Image
+                    </Form.Label>
+                  </div>
+                  <Form.File
+                    id="image-upload"
+                    ref={imageFile}
+                    accept="image/*"
+                    onChange={(e) => {
+                      if (e.target.files.length) {
+                        setProfileData({
+                          ...profileData,
+                          profile_pic: URL.createObjectURL(e.target.files[0]),
+                        });
+                      }
+                    }}
+                  />
+                </Form.Group>
+                <div className="d-md-none">{textFields}</div>
+              </Container>
+            </Col>
+            <Col
+              md={5}
+              lg={8}
+              className="d-none d-md-block p-0 p-md-2 text-center"
+            >
+              <Container className={appStyles.Content}>{textFields}</Container>
+            </Col>
+          </Row>
+        </Form>
+      
+    </>
   );
 };
 
