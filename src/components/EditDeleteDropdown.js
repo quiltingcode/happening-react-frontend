@@ -49,7 +49,7 @@ const ThreeDots = React.forwardRef(({ onClick }, ref ) => (
     );
   };
 
-  export function ProfileEditDropdown({ id, handleShow }) {
+  export function ProfileEditDropdown({ id, handleShow, handlePasswordModalShow }) {
     const history = useHistory();
     return (
       <Dropdown className={`ml-auto px-3 ${styles.Absolute}`} drop="left">
@@ -59,21 +59,23 @@ const ThreeDots = React.forwardRef(({ onClick }, ref ) => (
             onClick={() => history.push(`/profiles/${id}/edit`)}
             aria-label="edit-profile"
           >
-            <i className="fas fa-pencil" /> edit profile
+            <i className="fas fa-pencil" /> Edit profile
           </Dropdown.Item>
+
           <Dropdown.Item
             onClick={handleShow}
             aria-label="edit-username"
           >
             <i className="far fa-id-card" />
-            change username
+            Change username
           </Dropdown.Item>
+
           <Dropdown.Item
-            onClick={handleShow}
+            onClick={handlePasswordModalShow}
             aria-label="edit-password"
           >
             <i className="fas fa-key" />
-            change password
+            Change password
           </Dropdown.Item>
         </Dropdown.Menu>
       </Dropdown>

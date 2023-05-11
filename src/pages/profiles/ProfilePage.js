@@ -25,6 +25,7 @@ import Event from "../events/Event";
 import { fetchMoreData } from "../../utils/Utils";
 import { ProfileEditDropdown } from "../../components/EditDeleteDropdown";
 import ChangeUsernameModal from "./ChangeUsernameModal";
+import ChangePasswordModal from "./ChangePasswordModal";
 
 
 
@@ -41,12 +42,16 @@ function ProfilePage() {
   const [profileEvents, setProfileEvents] = useState({results: []});
 
   const [show, setShow] = useState(false);
-
   const handleShow = () => {
       setShow(true);
   };
-
   const handleClose = () => setShow(false);
+
+  const [showPasswordModal, setShowPasswordModal] = useState(false);
+  const handlePasswordModalShow = () => {
+    setShowPasswordModal(true);
+  };
+  const handleClosePasswordModal = () => setShowPasswordModal(false);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -70,7 +75,13 @@ function ProfilePage() {
 
   const mainProfile = (
     <>
-      {profile?.is_owner && <ProfileEditDropdown id={profile?.id} handleShow={handleShow} />}
+      {profile?.is_owner && 
+        <ProfileEditDropdown 
+          id={profile?.id} 
+          handleShow={handleShow} 
+          handlePasswordModalShow={handlePasswordModalShow} 
+        />
+      }
       <Row noGutters className="px-3 text-center">
         <Col lg={3} className="text-lg-left">
           <Image
@@ -188,6 +199,11 @@ function ProfilePage() {
         showModal={show}
         handleClose={handleClose}
       />
+      <ChangePasswordModal 
+        showPasswordModal={showPasswordModal}
+        handleClosePasswordModal={handleClosePasswordModal}
+      />
+
     </Row>
   );
 }

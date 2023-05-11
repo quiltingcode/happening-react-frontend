@@ -6,6 +6,7 @@ import Col from "react-bootstrap/Col";
 import Form from "react-bootstrap/Form";
 import Row from "react-bootstrap/Row";
 import Modal from "react-bootstrap/Modal";
+import ModalFooter from "react-bootstrap/ModalFooter";
 
 import { useHistory, useParams } from "react-router-dom";
 import { axiosRes } from "../../api/axiosDefaults";
@@ -15,8 +16,7 @@ import {
 } from "../../contexts/CurrentUserContext";
 
 import btnStyles from "../../styles/Button.module.css";
-import appStyles from "../../App.module.css";
-import { ModalFooter } from "react-bootstrap";
+
 
 const ChangeUsernameModal = (props) => {
 
