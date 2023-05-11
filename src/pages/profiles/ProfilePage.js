@@ -27,8 +27,6 @@ import { ProfileEditDropdown } from "../../components/EditDeleteDropdown";
 import ChangeUsernameModal from "./ChangeUsernameModal";
 import ChangePasswordModal from "./ChangePasswordModal";
 
-
-
 function ProfilePage() {
 
   const [hasLoaded, setHasLoaded] = useState(false);
