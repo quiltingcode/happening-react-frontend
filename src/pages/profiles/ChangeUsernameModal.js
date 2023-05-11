@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 
 import Alert from "react-bootstrap/Alert";
 import Button from "react-bootstrap/Button";
@@ -8,12 +8,9 @@ import Row from "react-bootstrap/Row";
 import Modal from "react-bootstrap/Modal";
 import ModalFooter from "react-bootstrap/ModalFooter";
 
-import { useHistory, useParams } from "react-router-dom";
+import { useHistory} from "react-router-dom";
 import { axiosRes } from "../../api/axiosDefaults";
-import {
-  useCurrentUser,
-  useSetCurrentUser,
-} from "../../contexts/CurrentUserContext";
+import { useSetCurrentUser } from "../../contexts/CurrentUserContext";
 
 import btnStyles from "../../styles/Button.module.css";
 
@@ -29,9 +26,6 @@ const ChangeUsernameModal = (props) => {
   const [errors, setErrors] = useState({});
 
   const history = useHistory();
-  const { id } = useParams();
-
-  const currentUser = useCurrentUser();
   const setCurrentUser = useSetCurrentUser();
 
   const handleSubmit = async (event) => {

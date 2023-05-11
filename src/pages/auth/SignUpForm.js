@@ -15,8 +15,11 @@ import axios from "axios";
 import { useHistory } from "react-router-dom/cjs/react-router-dom";
 import Alert from "react-bootstrap/Alert";
 import logo from "../../assets/logo3.png"
+import { useRedirect } from "../../hooks/UseRedirect";
 
 const SignUpForm = () => {
+
+  useRedirect('loggedIn');
 
   const [signUpData, setSignUpData] = useState({
     username: '',
