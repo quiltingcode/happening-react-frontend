@@ -12,6 +12,7 @@ import { useCurrentUser } from './contexts/CurrentUserContext';
 import EventEditForm from './pages/events/EventEditForm';
 import ProfilePage from './pages/profiles/ProfilePage';
 import ProfileEditForm from './pages/profiles/ProfileEditForm';
+import ReviewsPage from './pages/reviews/ReviewsPage';
 
 function App() {
 
@@ -54,7 +55,7 @@ function App() {
             exact
             path="/reviews"
             render={() => (
-              <EventsPage 
+              <ReviewsPage
                 message="Oh no! Try adjusting the search keyword or add a review." 
                 filter={`&ordering=-event_date`}
               />
