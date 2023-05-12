@@ -89,7 +89,7 @@ function ProfilePage() {
           />
         </Col>
         <Col lg={9}>
-          <h3 className="my-2">{profile?.owner}</h3>
+          <h3 className="my-2">{profile?.owner}'s Profile</h3>
           <Row className="justify-content-center no-gutters">
             <Col xs={5} className="my-2">
               <div>{profile?.events_count}</div>
@@ -131,7 +131,7 @@ function ProfilePage() {
       <Row className="justify-content-center no-gutters">
         <Col className="p-3" sm={8} lg={6}>
           <Container className={appStyles.Content}>
-            <h5 className="text-center p-2">About Me</h5>
+            <h5 className="text-center p-2">About {profile.owner}</h5>
 
             {profile?.name && (
               <>
