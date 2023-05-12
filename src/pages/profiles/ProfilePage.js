@@ -131,13 +131,13 @@ function ProfilePage() {
       <Row className="justify-content-center no-gutters">
         <Col className="p-3" sm={8} lg={6}>
           <Container className={appStyles.Content}>
-            <h5 className="text-center p-2">About {profile.owner}</h5>
+            <h5 className="text-center p-2">About {profile?.owner}</h5>
 
             {profile?.name && (
               <>
                 <Col className="p-1">Name:</Col>
                 <Col className="p-2">
-                  <strong>{profile.name}</strong>
+                  <strong>{profile?.name}</strong>
                 </Col>
               </>
             )}
@@ -146,7 +146,7 @@ function ProfilePage() {
               <>
                 <Col className="p-1">Bio:</Col>
                 <Col className="p-2">
-                  <strong>{profile.bio}</strong>
+                  <strong>{profile?.bio}</strong>
                 </Col>
               </>
             )}
@@ -157,27 +157,27 @@ function ProfilePage() {
             <h5 className="text-center p-2">Contact Details</h5>
             {profile?.phone_number && (
               <Col className="p-1">
-                <i class="fas fa-phone-alt"></i> {profile.phone_number}
+                <i className="fas fa-phone-alt"></i> {profile?.phone_number}
               </Col>
             )}
             {profile?.email && (
               <Col className="p-1">
-                <i class="fas fa-at"></i> {profile.email}
+                <i className="fas fa-at"></i> {profile?.email}
               </Col>
             )}
             {profile?.website && (
               <Col className="p-1">
-                <i class="fas fa-globe"></i> {profile.website}
+                <i className="fas fa-globe"></i> {profile?.website}
               </Col>
             )}
             {profile?.facebook_link && (
               <Col className="p-1">
-                <i class="fab fa-facebook"></i> {profile.facebook_link}
+                <i className="fab fa-facebook"></i> {profile?.facebook_link}
               </Col>
             )}
             {profile?.instagram_link && (
               <Col className="p-1">
-                <i class="fab fa-instagram"></i> {profile.instagram_link}
+                <i className="fab fa-instagram"></i> {profile?.instagram_link}
               </Col>
             )}
           </Container>
