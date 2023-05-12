@@ -89,11 +89,11 @@
 }
 
 .Follow:hover {
-  background-color: #42567a;
+  background-color: #6e5e93;
 }
 
 .Unfollow {
-  background-color: #42567a;
+  background-color: #6e5e93;
   color: white;
   font-size: 0.6rem;
   min-width: 50px;
@@ -101,5 +101,25 @@
 }
 
 .Unfollow:hover {
+  background-color: #2f4858;
+}
+
+.FollowMe {
+  background-color: #2f4858;
+  color: white;
+  font-size: 1rem;
+}
+
+.FollowMe:hover {
+  background-color: #6e5e93;
+}
+
+.UnfollowMe {
+  background-color: #6e5e93;
+  color: white;
+  font-size: 1rem;
+}
+
+.UnfollowMe:hover {
   background-color: #2f4858;
 }

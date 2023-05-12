@@ -73,13 +73,13 @@ function ProfilePage() {
 
   const mainProfile = (
     <>
-      {profile?.is_owner && 
-        <ProfileEditDropdown 
-          id={profile?.id} 
-          handleShow={handleShow} 
-          handlePasswordModalShow={handlePasswordModalShow} 
+      {profile?.is_owner && (
+        <ProfileEditDropdown
+          id={profile?.id}
+          handleShow={handleShow}
+          handlePasswordModalShow={handlePasswordModalShow}
         />
-      }
+      )}
       <Row noGutters className="px-3 text-center">
         <Col lg={3} className="text-lg-left">
           <Image
@@ -88,7 +88,7 @@ function ProfilePage() {
             src={profile?.profile_pic}
           />
         </Col>
-        <Col lg={6}>
+        <Col lg={9}>
           <h3 className="my-2">{profile?.owner}</h3>
           <Row className="justify-content-center no-gutters">
             <Col xs={5} className="my-2">
@@ -105,44 +105,81 @@ function ProfilePage() {
             </Col>
           </Row>
         </Col>
-        <Col lg={3} className="text-lg-right">
+        
+      </Row>
+      <Row className="justify-content-center no-gutters my-3">
+        <div className="text-align-center">
           {currentUser &&
             !is_owner &&
             (profile?.following_id ? (
               <Button
-                className={`${btnStyles.Button} ${btnStyles.Unfollow}`}
+                className={`${btnStyles.Button} ${btnStyles.UnfollowMe}`}
                 onClick={() => handleUnfollow(profile)}
               >
-                unfollow
+                Unfollow
               </Button>
             ) : (
               <Button
-                className={`${btnStyles.Button} ${btnStyles.Follow}`}
+                className={`${btnStyles.Button} btn-lg ${btnStyles.FollowMe}`}
                 onClick={() => handleFollow(profile)}
               >
-                follow
+                Follow
               </Button>
             ))}
-        </Col>
+        </div>
       </Row>
-      <Row>
+      <Row className="justify-content-center no-gutters">
         <Col className="p-3" sm={8} lg={6}>
           <Container className={appStyles.Content}>
             <h5 className="text-center p-2">About Me</h5>
-            <Col className="p-1">Name:</Col>
-            {profile?.name && <Col className="p-2"><strong>{profile.name}</strong></Col>}
-            <Col className="p-1">Bio:</Col>
-            {profile?.bio && <Col className="p-2"><strong>{profile.bio}</strong></Col>}
+
+            {profile?.name && (
+              <>
+                <Col className="p-1">Name:</Col>
+                <Col className="p-2">
+                  <strong>{profile.name}</strong>
+                </Col>
+              </>
+            )}
+
+            {profile?.bio && (
+              <>
+                <Col className="p-1">Bio:</Col>
+                <Col className="p-2">
+                  <strong>{profile.bio}</strong>
+                </Col>
+              </>
+            )}
           </Container>
         </Col>
         <Col className="p-3" sm={8} lg={6}>
           <Container className={appStyles.Content}>
             <h5 className="text-center p-2">Contact Details</h5>
-            {profile?.phone_number && <Col className="p-1"><i class="fas fa-phone-alt"></i> {profile.phone_number}</Col>}
-            {profile?.email && <Col className="p-1"><i class="fas fa-at"></i> {profile.email}</Col>}
-            {profile?.website && <Col className="p-1"><i class="fas fa-globe"></i> {profile.website}</Col>}
-            {profile?.facebook_link && <Col className="p-1"><i class="fab fa-facebook"></i> {profile.facebook_link}</Col>}
-            {profile?.instagram_link && <Col className="p-1"><i class="fab fa-instagram"></i> {profile.instagram_link}</Col>}
+            {profile?.phone_number && (
+              <Col className="p-1">
+                <i class="fas fa-phone-alt"></i> {profile.phone_number}
+              </Col>
+            )}
+            {profile?.email && (
+              <Col className="p-1">
+                <i class="fas fa-at"></i> {profile.email}
+              </Col>
+            )}
+            {profile?.website && (
+              <Col className="p-1">
+                <i class="fas fa-globe"></i> {profile.website}
+              </Col>
+            )}
+            {profile?.facebook_link && (
+              <Col className="p-1">
+                <i class="fab fa-facebook"></i> {profile.facebook_link}
+              </Col>
+            )}
+            {profile?.instagram_link && (
+              <Col className="p-1">
+                <i class="fab fa-instagram"></i> {profile.instagram_link}
+              </Col>
+            )}
           </Container>
         </Col>
       </Row>
