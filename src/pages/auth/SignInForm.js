@@ -17,6 +17,7 @@ import logo from "../../assets/logo3.png"
 import axios from "axios";
 import { useSetCurrentUser } from "../../contexts/CurrentUserContext";
 import { useRedirect } from "../../hooks/UseRedirect";
+import { setTokenTimestamp } from "../../utils/Utils";
 
 
 function SignInForm() {
@@ -44,7 +45,8 @@ function SignInForm() {
         event.preventDefault();
         try {
             const {data} = await axios.post('dj-rest-auth/login/', signInData)
-            setCurrentUser(data.user)
+            setCurrentUser(data.user);
+            setTokenTimestamp(data);
             history.goBack();
         } catch(err){
             setErrors(err.response?.data)
