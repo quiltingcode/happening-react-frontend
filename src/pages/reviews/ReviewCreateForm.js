@@ -9,14 +9,14 @@ import btnStyles from "../../styles/Button.module.css"
 import Avatar from "../../components/Avatar";
 import { axiosRes } from "../../api/axiosDefaults";
 
+
 function ReviewCreateForm(props) {
   const { event, setEvent, setReviewComments, profileImage, profile_id } = props;
   const [review, setReview] = useState("");
 
-  const [rating, setRating] = useState(0)
 
   const handleChange = (event) => {
-    setContent(event.target.value);
+    setReview(event.target.value);
   };
 
   const handleSubmit = async (e) => {
@@ -24,6 +24,7 @@ function ReviewCreateForm(props) {
     try {
       const { data } = await axiosRes.post("/reviews/", {
         review,
+        rating,
         event,
       });
       setReviewComments((prevComments) => ({
@@ -49,11 +50,11 @@ function ReviewCreateForm(props) {
       <Form.Group>
         <InputGroup>
           <Link to={`/profiles/${profile_id}`}>
-            <Avatar src={profileImage} />
+            <Avatar src={profileImage} height={35} />
           </Link>
           <Form.Control
             className={styles.Form}
-            placeholder="my comment..."
+            placeholder="reviews..."
             as="textarea"
             value={review}
             onChange={handleChange}
@@ -61,6 +62,7 @@ function ReviewCreateForm(props) {
           />
         </InputGroup>
       </Form.Group>
+      "StarRating"
       <button
         className={`${btnStyles.Button} ${btnStyles.Form} btn d-block ml-auto`}
         disabled={!review.trim()}

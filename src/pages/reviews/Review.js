@@ -12,6 +12,7 @@ import DeleteConfirmationModal from '../../components/DeleteConfirmationModal';
 import { Col, Container, Row } from 'react-bootstrap';
 import ReviewCreateForm from './ReviewCreateForm';
 
+
 const Review = (props) => {
 
     const {
@@ -30,6 +31,7 @@ const Review = (props) => {
     const currentUser = useCurrentUser();
     const is_owner = currentUser?.username === owner;
     const history = useHistory();
+    const [reviewComments, setReviewComments] = useState({results: []});
 
     const [show, setShow] = useState(false);
     const [message, setMessage] = useState("");
@@ -89,50 +91,25 @@ const Review = (props) => {
               <div>
                 <span className="d-inline-column">Average Star Rating </span>
                 <span className={`d-inline-column ${styles.Title}`}>
-                  ({review_count}){" "}
+                  ({review_count})
                 </span>
               </div>
             </Col>
           </Row>
       </Container>
 
-      <Container className={appStyles.Content}>
+      <Container className={` my-2 ${appStyles.Content}`}>
           {currentUser ? (
             <ReviewCreateForm
               profile_id={currentUser.profile_id}
               profileImage={profile_image}
               event={id}
-              setEvent={setEvent}
+              setEvents={setEvents}
               setReviewComments={setReviewComments}
             />
-          ) : (
-            <>
-              <div className="mb-3">
-                <i className="far fa-comments"></i>
-                <span className="ml-3">Log in to post a comment...</span>
-              </div>
-            </>
-          )}
-          {comments.results.length ? (
-            <InfiniteScroll
-              children={comments.results.map((comment) => (
-                <Comment
-                  key={comment.id}
-                  {...comment}
-                  setEvent={setEvent}
-                  setComments={setComments}
-                />
-              ))}
-              dataLength={comments.results.length}
-              loader={<Asset spinner />}
-              hasMore={!!comments.next}
-              next={() => fetchMoreData(comments, setComments)}
-            />
-          ) : currentUser ? (
-            <span>No comments yet, be the first to comment!</span>
-          ) : (
-            <span>No comments...yet</span>
-          )}
+          ) : reviewComments.results.length ? (
+            "ReviewComments"
+          ) : null}
         </Container>
 
       <DeleteConfirmationModal
