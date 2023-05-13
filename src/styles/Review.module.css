@@ -1,0 +1,16 @@
+.Review {
+    background-color: #ffffff;
+    border: 1px solid #dadadf;
+    border-radius: 2px;
+    margin-bottom: 16px;
+
+  }
+
+.Title {
+    font-weight: bold;
+}
+
+.Date {
+    font-weight: lighter;
+    color: #A6609B;
+}

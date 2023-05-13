@@ -1,10 +1,9 @@
 import React, { useState } from 'react'
-import styles from '../../styles/Event.module.css'
+import styles from '../../styles/Review.module.css'
+import appStyles from "../../App.module.css";
 import { useCurrentUser } from '../../contexts/CurrentUserContext';
 
 import Card from 'react-bootstrap/Card';
-import Media from 'react-bootstrap/Media';
-
 
 import { Link } from 'react-router-dom/cjs/react-router-dom';
 import Avatar from '../../components/Avatar';
@@ -12,6 +11,7 @@ import { axiosRes } from '../../api/axiosDefaults';
 import { EditDeleteDropdown } from '../../components/EditDeleteDropdown';
 import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
 import DeleteConfirmationModal from '../../components/DeleteConfirmationModal';
+import { Col, Container, Row } from 'react-bootstrap';
 
 const Review = (props) => {
 
@@ -22,6 +22,8 @@ const Review = (props) => {
         profile_image,
         title,
         event_date,
+        review_count,
+        average_rating,
         eventPage,
         setEvents,
     } = props;
@@ -49,9 +51,9 @@ const Review = (props) => {
         history.push(`/events/${id}/edit`)
     }
 
-    const handleEventDelete = async () => {
+    const handleReviewDelete = async () => {
         try{
-            await axiosRes.delete(`/events/${id}/`)
+            await axiosRes.delete(`/reviews/${id}/`)
             history.goBack()
             // setShowAlert(true)
             // setConfirmEventMessage(`The event '${title}' was deleted successfully.`);
@@ -64,26 +66,46 @@ const Review = (props) => {
 
   return (
     <>
-        <Card className={styles.Event}>
-            <Card.Body>
-                <Media className='align-items-center justify-content-between'>
-                    <Link to={`/profiles/${profile_id}`}>
-                        <Avatar src={profile_image} height={55} />
-                    </Link>
-                </Media>
-            </Card.Body>
-            <Link to={`/events/${id}`}>
-                <Card.Body>
-                    {title && event_date && <Card.Title className={`text-center ${styles.Title}`}>{title} - {event_date}</Card.Title> } 
-                </Card.Body>
-            </Link>
-            
-        </Card>
-        <DeleteConfirmationModal showModal={show} handleClose = {handleClose} handleEventDelete = {handleEventDelete} type={type} message={message} />
+      <Container className={`${styles.Review} ${appStyles.Content}`}>
+          <Row noGutters className="px-3 text-center">
+            <Col lg={2} className="text-lg-left">
+              <div>
+                <Link to={`/profiles/${profile_id}`}>
+                  <Avatar src={profile_image} height={55} />
+                </Link>
+              </div>
+            </Col>
+
+            <Col lg={4}>
+              <Link to={`/events/${id}`}>
+                <span className={`d-inline-column ${styles.Title}`}>
+                  {title}{" "}
+                </span>
+              </Link>
+
+              <span className={`${styles.Date}`}>{event_date}</span>
+            </Col>
+
+            <Col lg={4}>
+              <div>
+                <span className="d-inline-column">Star Rating Component </span>
+                <span className={`d-inline-column ${styles.Title}`}>
+                  ({review_count}){" "}
+                </span>
+              </div>
+            </Col>
+          </Row>
+      </Container>
+
+      <DeleteConfirmationModal
+        showModal={show}
+        handleClose={handleClose}
+        handleEventDelete={handleReviewDelete}
+        type={type}
+        message={message}
+      />
     </>
-    
-    
-  )
+  );
 }
 
 export default Review
