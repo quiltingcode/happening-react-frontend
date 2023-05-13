@@ -3,8 +3,6 @@ import styles from '../../styles/Review.module.css'
 import appStyles from "../../App.module.css";
 import { useCurrentUser } from '../../contexts/CurrentUserContext';
 
-import Card from 'react-bootstrap/Card';
-
 import { Link } from 'react-router-dom/cjs/react-router-dom';
 import Avatar from '../../components/Avatar';
 import { axiosRes } from '../../api/axiosDefaults';
@@ -12,6 +10,7 @@ import { EditDeleteDropdown } from '../../components/EditDeleteDropdown';
 import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
 import DeleteConfirmationModal from '../../components/DeleteConfirmationModal';
 import { Col, Container, Row } from 'react-bootstrap';
+import ReviewCreateForm from './ReviewCreateForm';
 
 const Review = (props) => {
 
@@ -88,7 +87,7 @@ const Review = (props) => {
 
             <Col lg={4}>
               <div>
-                <span className="d-inline-column">Star Rating Component </span>
+                <span className="d-inline-column">Average Star Rating </span>
                 <span className={`d-inline-column ${styles.Title}`}>
                   ({review_count}){" "}
                 </span>
@@ -96,6 +95,45 @@ const Review = (props) => {
             </Col>
           </Row>
       </Container>
+
+      <Container className={appStyles.Content}>
+          {currentUser ? (
+            <ReviewCreateForm
+              profile_id={currentUser.profile_id}
+              profileImage={profile_image}
+              event={id}
+              setEvent={setEvent}
+              setReviewComments={setReviewComments}
+            />
+          ) : (
+            <>
+              <div className="mb-3">
+                <i className="far fa-comments"></i>
+                <span className="ml-3">Log in to post a comment...</span>
+              </div>
+            </>
+          )}
+          {comments.results.length ? (
+            <InfiniteScroll
+              children={comments.results.map((comment) => (
+                <Comment
+                  key={comment.id}
+                  {...comment}
+                  setEvent={setEvent}
+                  setComments={setComments}
+                />
+              ))}
+              dataLength={comments.results.length}
+              loader={<Asset spinner />}
+              hasMore={!!comments.next}
+              next={() => fetchMoreData(comments, setComments)}
+            />
+          ) : currentUser ? (
+            <span>No comments yet, be the first to comment!</span>
+          ) : (
+            <span>No comments...yet</span>
+          )}
+        </Container>
 
       <DeleteConfirmationModal
         showModal={show}
