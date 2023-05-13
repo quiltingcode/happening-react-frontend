@@ -57,7 +57,7 @@ function App() {
             render={() => (
               <ReviewsPage
                 message="Oh no! Try adjusting the search keyword or add a review." 
-                filter={`&ordering=-event_date`}
+                filter={`?ordering=-event_date`}
               />
             )}
           />

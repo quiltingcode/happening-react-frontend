@@ -29,7 +29,7 @@ function ReviewsPage({ message, filter="" }) {
   useEffect(() => {
     const fetchEvents = async () => {
       try {
-        const { data } = await axiosReq.get(`/events/?${filter}search=${search}`);
+        const { data } = await axiosReq.get(`/events/${filter}&search=${search}`);
         setEvents(data);
         setHasLoaded(true);
       } catch (err) {

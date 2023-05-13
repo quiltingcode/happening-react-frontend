@@ -20,17 +20,8 @@ const Review = (props) => {
         owner, 
         profile_id,
         profile_image,
-        comments_count,
-        interested_count,
-        going_count,
-        interested_id,
-        going_id,
         title,
-        description,
         event_date,
-        tags,
-        image,
-        updated_at,
         eventPage,
         setEvents,
     } = props;
@@ -44,14 +35,14 @@ const Review = (props) => {
     const [type, setType] = useState("")
     const handleShow = () => {
         setShow(true);
-        setMessage(`Are you sure you want to delete ${title}? It could be an amazing event...`);
-        setType("event");
+        setMessage(`Are you sure you want to delete ${title}? All reviews are really appreciated...`);
+        setType("review");
     };
 
     const handleClose = () => setShow(false);
 
     // const [showAlert, setShowAlert] = useState(false)
-    // const [confirmEventMessage, setConfirmEventMessage] = useState(null);
+    // const [confirmReviewMessage, setConfirmReviewMessage] = useState(null);
 
 
     const handleEdit = async () => {
