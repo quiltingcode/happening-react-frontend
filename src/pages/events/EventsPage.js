@@ -25,11 +25,12 @@ function EventsPage({ message, filter="" }) {
   const { pathname } = useLocation();
 
   const [search, setSearch] = useState("");
+  const [category, setCategory] = useState("");
 
   useEffect(() => {
     const fetchEvents = async () => {
       try {
-        const { data } = await axiosReq.get(`/events/?${filter}search=${search}`);
+        const { data } = await axiosReq.get(`/events/?${filter}search=${search}&category=${category}`);
         setEvents(data);
         setHasLoaded(true);
       } catch (err) {
@@ -45,7 +46,7 @@ function EventsPage({ message, filter="" }) {
       clearTimeout(timer)
     }
     
-  }, [filter, search, pathname]);
+  }, [filter, search, pathname, category]);
   
   return (
     <Row className="h-100">
@@ -69,7 +70,13 @@ function EventsPage({ message, filter="" }) {
               onChange={(event) => setSearch(event.target.value)}
             />
 
-            <Form.Control size="sm" as="select" placeholder="Choose...">
+            <Form.Control 
+              size="sm" 
+              as="select" 
+              placeholder="Choose..."
+              value={category}
+              onChange={(event) => setCategory(event.target.value)}
+            >
               <option>Filter by category...</option>
               <option>Sport</option>
               <option>Music</option>
