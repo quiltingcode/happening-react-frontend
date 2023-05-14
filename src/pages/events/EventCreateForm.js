@@ -81,10 +81,10 @@ function EventCreateForm() {
     <div className="text-center">
       <Form.Group>
         <Form.Label>Event Title</Form.Label>
-        <Form.Control 
-          type="text" 
+        <Form.Control
+          type="text"
           name="title"
-          value={title} 
+          value={title}
           onChange={handleChange}
         />
       </Form.Group>
@@ -96,11 +96,11 @@ function EventCreateForm() {
 
       <Form.Group>
         <Form.Label>Event Description</Form.Label>
-        <Form.Control 
-          as="textarea" 
-          rows={4} 
+        <Form.Control
+          as="textarea"
+          rows={4}
           name="description"
-          value={description} 
+          value={description}
           onChange={handleChange}
         />
       </Form.Group>
@@ -112,8 +112,8 @@ function EventCreateForm() {
 
       <Form.Group>
         <Form.Label>Event Date</Form.Label>
-        <Form.Control 
-          type="date" 
+        <Form.Control
+          type="date"
           name="event_date"
           value={event_date}
           onChange={handleChange}
@@ -127,7 +127,7 @@ function EventCreateForm() {
 
       <Form.Group controlId="category">
         <Form.Label>Category</Form.Label>
-        <Form.Control 
+        <Form.Control
           as="select"
           name="category"
           value={category}
@@ -149,8 +149,8 @@ function EventCreateForm() {
 
       <Form.Group>
         <Form.Label>Tags</Form.Label>
-        <Form.Control 
-          type="text" 
+        <Form.Control
+          type="text"
           name="tags"
           value={tags}
           onChange={handleChange}
@@ -171,6 +171,11 @@ function EventCreateForm() {
       <Button className={`${btnStyles.Button} ${btnStyles.Form}`} type="submit">
         create
       </Button>
+      {errors.non_field_errors?.map((message, idx) => (
+        <Alert variant="warning" className="mt-3" key={idx}>
+          {message}{" "}
+        </Alert>
+      ))}
     </div>
   );
 

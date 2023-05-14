@@ -2,7 +2,7 @@ import React, { useState } from "react";
 
 import Form from "react-bootstrap/Form";
 
-import btnStyles from "../../styles/Button.module.css"
+import btnStyles from "../../styles/Button.module.css";
 
 import { axiosRes } from "../../api/axiosDefaults";
 import { useHistory } from "react-router-dom/cjs/react-router-dom";
@@ -10,8 +10,14 @@ import { Rating } from "react-simple-star-rating";
 import { Alert, Button, Col, Modal, Row } from "react-bootstrap";
 
 function ReviewCreateForm(props) {
-  const { event, setEvent, setReviewComments, setEvents, id, title, showModal,
-    handleCloseCreateForm } = props;
+  const {
+
+    setReviewComments,
+    setEvents,
+    id,
+    showModal,
+    handleCloseCreateForm,
+  } = props;
 
   const [review, setReview] = useState("");
   const [rating, setRating] = useState(0);
@@ -24,7 +30,7 @@ function ReviewCreateForm(props) {
 
   const handleRating = (rate) => {
     setRating(rate / 20);
-    console.log(rating)
+    console.log(rating);
   };
 
   const handleSubmit = async (e) => {
@@ -34,10 +40,10 @@ function ReviewCreateForm(props) {
     formData.append("event", id);
     formData.append("rating", rating);
     formData.append("review", review);
-    console.log(formData)
+    console.log(formData);
     try {
       const { data } = await axiosRes.post("/reviews/", formData);
-      history.goBack();
+      history.push(`/reviews`);
       setReviewComments((prevComments) => ({
         ...prevComments,
         results: [data, ...prevComments.results],
@@ -45,12 +51,13 @@ function ReviewCreateForm(props) {
       setEvents((prevEvents) => ({
         ...prevEvents,
         results: prevEvents.results.map((event) => {
-            return event.id === id
-            ? {...event, review_count: event.review_count + 1}
+          return event.id === id
+            ? { ...event, review_count: event.review_count + 1 }
             : event;
-        })
-    }))
+        }),
+      }));
       setReview("");
+      handleCloseCreateForm();
     } catch (err) {
       if (err.response?.status !== 401) {
         setErrors(err.response?.data);
@@ -61,7 +68,7 @@ function ReviewCreateForm(props) {
   return (
     <Modal show={showModal} onHide={handleCloseCreateForm}>
       <Modal.Header closeButton>
-        <Modal.Title>Write a Review {title}</Modal.Title>
+        <Modal.Title>Write a Review</Modal.Title>
       </Modal.Header>
       <Modal.Body>
         <Row>
@@ -97,6 +104,11 @@ function ReviewCreateForm(props) {
               >
                 Post
               </Button>
+              {errors.non_field_errors?.map((message, idx) => (
+                <Alert variant="warning" className="mt-3" key={idx}>
+                  {message}{" "}
+                </Alert>
+              ))}
             </Form>
           </Col>
         </Row>
