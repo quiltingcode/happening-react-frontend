@@ -123,3 +123,21 @@
 .UnfollowMe:hover {
   background-color: #2f4858;
 }
+
+.ReviewCountToggle {
+  background-color: transparent;
+  color: #db628e;
+  border-color: transparent;
+}
+
+.ReviewCountToggle:focus {
+  background-color: transparent;
+  color: #db628e;
+  border-color: transparent;
+}
+
+.ReviewCountToggle:hover {
+  background-color: transparent;
+  color: #2f4858;
+  border-color: transparent;
+}

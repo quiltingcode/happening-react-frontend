@@ -101,15 +101,24 @@ const Review = (props) => {
           <Col lg={4}>
             <div>
               <span className="d-inline-column">{average_rating}</span>
-              <Button
-                onClick={() => {
-                  setDisplayReviewComments(!displayReviewComments);
-                }}
+              <OverlayTrigger
+                placement="top"
+                overlay={
+                  <Tooltip>Click to read the reviews</Tooltip>
+                }
               >
-                <span className={`d-inline-column ${styles.Title}`}>
-                  ({review_count})
-                </span>
-              </Button>
+                <Button 
+                  className={btnStyles.ReviewCountToggle}
+                  onClick={() => {
+                    setDisplayReviewComments(!displayReviewComments);
+                  }}
+                >
+                  <span className={`d-inline-column ${styles.Title}`}>
+                    ({review_count})
+                  </span>
+                </Button>
+              </OverlayTrigger>
+              
             </div>
           </Col>
           <Col lg={2}>
