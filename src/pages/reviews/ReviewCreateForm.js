@@ -1,76 +1,107 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
 
 import Form from "react-bootstrap/Form";
-import InputGroup from "react-bootstrap/InputGroup";
 
-import styles from "../../styles/CommentForm.module.css";
 import btnStyles from "../../styles/Button.module.css"
-import Avatar from "../../components/Avatar";
-import { axiosRes } from "../../api/axiosDefaults";
 
+import { axiosRes } from "../../api/axiosDefaults";
+import { useHistory } from "react-router-dom/cjs/react-router-dom";
+import { Rating } from "react-simple-star-rating";
+import { Alert, Button, Col, Modal, Row } from "react-bootstrap";
 
 function ReviewCreateForm(props) {
-  const { event, setEvent, setReviewComments, profileImage, profile_id } = props;
-  const [review, setReview] = useState("");
+  const { event, setEvent, setReviewComments, setEvents, id, title, showModal,
+    handleCloseCreateForm } = props;
 
+  const [review, setReview] = useState("");
+  const [rating, setRating] = useState(0);
+  const [errors, setErrors] = useState({});
+  const history = useHistory();
 
   const handleChange = (event) => {
     setReview(event.target.value);
   };
 
+  const handleRating = (rate) => {
+    setRating(rate / 20);
+    console.log(rating)
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
+    const formData = new FormData();
+
+    formData.append("event", id);
+    formData.append("rating", rating);
+    formData.append("review", review);
+    console.log(formData)
     try {
-      const { data } = await axiosRes.post("/reviews/", {
-        review,
-        rating,
-        event,
-      });
+      const { data } = await axiosRes.post("/reviews/", formData);
+      history.goBack();
       setReviewComments((prevComments) => ({
         ...prevComments,
         results: [data, ...prevComments.results],
       }));
-      setEvent((prevPost) => ({
-        results: [
-          {
-            ...prevPost.results[0],
-            review_count: prevPost.results[0].review_count + 1,
-          },
-        ],
-      }));
+      setEvents((prevEvents) => ({
+        ...prevEvents,
+        results: prevEvents.results.map((event) => {
+            return event.id === id
+            ? {...event, review_count: event.review_count + 1}
+            : event;
+        })
+    }))
       setReview("");
     } catch (err) {
-      console.log(err);
+      if (err.response?.status !== 401) {
+        setErrors(err.response?.data);
+      }
     }
   };
 
   return (
-    <Form className="mt-2" onSubmit={handleSubmit}>
-      <Form.Group>
-        <InputGroup>
-          <Link to={`/profiles/${profile_id}`}>
-            <Avatar src={profileImage} height={35} />
-          </Link>
-          <Form.Control
-            className={styles.Form}
-            placeholder="reviews..."
-            as="textarea"
-            value={review}
-            onChange={handleChange}
-            rows={2}
-          />
-        </InputGroup>
-      </Form.Group>
-      "StarRating"
-      <button
-        className={`${btnStyles.Button} ${btnStyles.Form} btn d-block ml-auto`}
-        disabled={!review.trim()}
-        type="submit"
-      >
-        post
-      </button>
-    </Form>
+    <Modal show={showModal} onHide={handleCloseCreateForm}>
+      <Modal.Header closeButton>
+        <Modal.Title>Write a Review {title}</Modal.Title>
+      </Modal.Header>
+      <Modal.Body>
+        <Row>
+          <Col className="py-2 mx-auto text-center" md={6}>
+            <Form className="mt-2 text-center" onSubmit={handleSubmit}>
+              <Form.Group>
+                <Rating onClick={handleRating} />
+              </Form.Group>
+              {errors?.rating?.map((message, idx) => (
+                <Alert variant="warning" key={idx}>
+                  {message}
+                </Alert>
+              ))}
+              <Form.Group>
+                <Form.Label>Review</Form.Label>
+                <Form.Control
+                  as="textarea"
+                  rows={2}
+                  placeholder="Type your review here..."
+                  name="review"
+                  value={review}
+                  onChange={handleChange}
+                />
+              </Form.Group>
+              {errors?.review?.map((message, idx) => (
+                <Alert variant="warning" key={idx}>
+                  {message}
+                </Alert>
+              ))}
+              <Button
+                className={`${btnStyles.Button} ${btnStyles.Form} btn d-block ml-auto`}
+                type="submit"
+              >
+                Post
+              </Button>
+            </Form>
+          </Col>
+        </Row>
+      </Modal.Body>
+    </Modal>
   );
 }
 

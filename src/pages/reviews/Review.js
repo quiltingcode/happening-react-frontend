@@ -6,10 +6,8 @@ import { useCurrentUser } from '../../contexts/CurrentUserContext';
 import { Link } from 'react-router-dom/cjs/react-router-dom';
 import Avatar from '../../components/Avatar';
 import { axiosRes } from '../../api/axiosDefaults';
-import { EditDeleteDropdown } from '../../components/EditDeleteDropdown';
 import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
-import DeleteConfirmationModal from '../../components/DeleteConfirmationModal';
-import { Col, Container, Row } from 'react-bootstrap';
+import { Button, Col, Container, Row } from 'react-bootstrap';
 import ReviewCreateForm from './ReviewCreateForm';
 
 
@@ -33,16 +31,11 @@ const Review = (props) => {
     const history = useHistory();
     const [reviewComments, setReviewComments] = useState({results: []});
 
-    const [show, setShow] = useState(false);
-    const [message, setMessage] = useState("");
-    const [type, setType] = useState("")
-    const handleShow = () => {
-        setShow(true);
-        setMessage(`Are you sure you want to delete ${title}? All reviews are really appreciated...`);
-        setType("review");
+    const [showCreateForm, setShowCreateForm] = useState(false);
+    const handleShowCreateForm = () => {
+        setShowCreateForm(true);
     };
-
-    const handleClose = () => setShow(false);
+    const handleCloseCreateForm = () => setShowCreateForm(false);
 
     // const [showAlert, setShowAlert] = useState(false)
     // const [confirmReviewMessage, setConfirmReviewMessage] = useState(null);
@@ -89,11 +82,17 @@ const Review = (props) => {
 
             <Col lg={4}>
               <div>
-                <span className="d-inline-column">Average Star Rating </span>
+                <span className="d-inline-column">{average_rating}</span>
                 <span className={`d-inline-column ${styles.Title}`}>
                   ({review_count})
                 </span>
               </div>
+            </Col>
+            <Col lg={2}>
+              <Button onClick={handleShowCreateForm}>
+                Post a Review
+              </Button>
+              
             </Col>
           </Row>
       </Container>
@@ -111,14 +110,11 @@ const Review = (props) => {
             "ReviewComments"
           ) : null}
         </Container>
-
-      <DeleteConfirmationModal
-        showModal={show}
-        handleClose={handleClose}
-        handleEventDelete={handleReviewDelete}
-        type={type}
-        message={message}
-      />
+            <ReviewCreateForm 
+              id={id} 
+              showModal={showCreateForm} 
+              handleCloseCreateForm={handleCloseCreateForm} 
+            />
     </>
   );
 }

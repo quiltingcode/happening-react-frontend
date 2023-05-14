@@ -64,7 +64,7 @@ function EventCreateForm() {
     formData.append('category', category)
     formData.append('tags', tags)
     formData.append('image', imageInput.current.files[0])
-
+    console.log(formData)
     try {
       const { data } = await axiosReq.post('/events/', formData);
       history.push(`/events/${data.id}`)

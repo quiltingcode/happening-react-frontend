@@ -13,6 +13,7 @@ import EventEditForm from './pages/events/EventEditForm';
 import ProfilePage from './pages/profiles/ProfilePage';
 import ProfileEditForm from './pages/profiles/ProfileEditForm';
 import ReviewsPage from './pages/reviews/ReviewsPage';
+import ReviewCreateForm from './pages/reviews/ReviewCreateForm';
 
 function App() {
 
