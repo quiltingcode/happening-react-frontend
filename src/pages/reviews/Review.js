@@ -12,9 +12,14 @@ import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
 import { Button, Col, Container, OverlayTrigger, Row, Tooltip } from 'react-bootstrap';
 import ReviewCreateForm from './ReviewCreateForm';
 import ReviewComment from './ReviewComment';
+import { useRedirect } from '../../hooks/UseRedirect';
+import StarRating from '../../components/StarRating';
+
 
 
 const Review = (props) => {
+
+  useRedirect('loggedOut')
 
     const {
         id,
@@ -54,13 +59,13 @@ const Review = (props) => {
     const handleMount = async () => {
       try {
         const { results: comments } = await axiosReq.get(`/reviews/?event=${id}`)
-        setReviewComments(!reviewComments);
+        setReviewComments(reviewComments);
       } catch (err) {
         console.log(err)
       }
     }
     handleMount();
-  }, [id])
+  }, [id, reviewComments])
 
     const handleReviewDelete = async () => {
         try{
@@ -100,7 +105,8 @@ const Review = (props) => {
 
           <Col lg={4}>
             <div>
-              <span className="d-inline-column">{average_rating}</span>
+              <StarRating average_rating={average_rating} />
+              
               <OverlayTrigger
                 placement="top"
                 overlay={
@@ -118,6 +124,7 @@ const Review = (props) => {
                   </span>
                 </Button>
               </OverlayTrigger>
+              
               
             </div>
           </Col>
