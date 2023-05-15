@@ -7,7 +7,7 @@ const StarRating = (props) => {
 
   return (
     <div>
-        {average_rating == '5' && (
+        {average_rating === 5 && (
                 <span className="d-inline-column">
                   <i className={`fa-solid fa-star ${styles.Star}`}></i>
                   <i className={`fa-solid fa-star ${styles.Star}`}></i>
@@ -16,7 +16,7 @@ const StarRating = (props) => {
                   <i className={`fa-solid fa-star ${styles.Star}`}></i>
                 </span>
               ) }
-              {average_rating == '4' && (
+              {average_rating === 4 && (
                 <span className="d-inline-column">
                   <i className={`fa-solid fa-star ${styles.Star}`}></i>
                   <i className={`fa-solid fa-star ${styles.Star}`}></i>
@@ -24,21 +24,21 @@ const StarRating = (props) => {
                   <i className={`fa-solid fa-star ${styles.Star}`}></i>
                 </span>
               ) }
-              {average_rating == '3' && (
+              {average_rating === 3 && (
                 <span className="d-inline-column">
                   <i className={`fa-solid fa-star ${styles.Star}`}></i>
                   <i className={`fa-solid fa-star ${styles.Star}`}></i>
                   <i className={`fa-solid fa-star ${styles.Star}`}></i>
                 </span>
               ) }
-              {average_rating == '2' && (
+              {average_rating === 2 && (
                 <span className="d-inline-column">
                   <i className={`fa-solid fa-star ${styles.Star}`}></i>
                   <i className={`fa-solid fa-star ${styles.Star}`}></i>
 
                 </span>
               ) }
-              {average_rating == '1' && (
+              {average_rating === 1 && (
                 <span className="d-inline-column">
                   <i className={`fa-solid fa-star ${styles.Star}`}></i>
                 </span>
