@@ -55,17 +55,23 @@ const Review = (props) => {
 
   const [reviewComments, setReviewComments] = useState({ results: [] });
 
-  useEffect(() => {
-    const handleMount = async () => {
-      try {
-        const { results: comments } = await axiosReq.get(`/reviews/?event=${id}`)
-        setReviewComments(reviewComments);
-      } catch (err) {
-        console.log(err)
-      }
-    }
-    handleMount();
-  }, [id, reviewComments])
+  
+    useEffect(() => {
+      const handleMount = async () => {
+        try {
+          const {data: reviewComments} = await (
+            axiosReq.get(`/reviews/?event=${id}`)
+          );
+
+          setReviewComments(reviewComments)
+        } catch (err) {
+          console.log(err);
+        }
+      };
+
+      handleMount();
+    }, [id]);
+
 
     const handleReviewDelete = async () => {
         try{
@@ -160,16 +166,23 @@ const Review = (props) => {
           </Col>
         </Row>
       </Container>
-        {displayReviewComments && <ReviewComment id={id} />}
+        {displayReviewComments &&
+            <Container>
+              {reviewComments.results.length ?(
+                reviewComments.results.map((review) => (
+                  <p key={review.id}>{review.owner}:{review.review}</p>
+                ))
+              ) : (<span>no reviews....yet</span> ) }
+            </Container>
+         }
       <ReviewCreateForm
         id={id}
         showModal={showCreateForm}
         handleCloseCreateForm={handleCloseCreateForm}
-        profile_id={currentUser.profile_id}
-        profileImage={profile_image}
+        
         event={id}
         setEvents={setEvents}
-        // setReviewComments={setReviewComments}
+        setReviewComments={setReviewComments}
       />
     </>
   );

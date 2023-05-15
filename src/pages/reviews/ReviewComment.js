@@ -5,14 +5,12 @@ import appStyles from "../../App.module.css";
 const ReviewComment = (props) => {
 
 
- const { id } = props;
+ const { id, reviewComments } = props;
     
 
   return (
     <div>
-        <Container className={` my-2 ${appStyles.Content}`}>
-            Reviews
-        </Container>
+        
     </div>
   )
 }
