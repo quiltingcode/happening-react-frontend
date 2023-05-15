@@ -13,7 +13,7 @@ import { Button, Col, Container, OverlayTrigger, Row, Tooltip } from 'react-boot
 import ReviewCreateForm from './ReviewCreateForm';
 import ReviewComment from './ReviewComment';
 import { useRedirect } from '../../hooks/UseRedirect';
-import StarRating from '../../components/StarRating';
+import { Rating } from "react-simple-star-rating";
 
 
 
@@ -31,7 +31,6 @@ const Review = (props) => {
         review_id,
         review_count,
         average_rating,
-        eventPage,
         setEvents,
     } = props;
 
@@ -111,7 +110,10 @@ const Review = (props) => {
 
           <Col lg={4}>
             <div>
-              <StarRating average_rating={average_rating} />
+              <span className='mb-3'>
+                <Rating readonly initialValue={average_rating} size={25} />
+              </span>
+              
               
               <OverlayTrigger
                 placement="top"
@@ -165,12 +167,12 @@ const Review = (props) => {
             )}
           </Col>
         </Row>
-      </Container>
+      </Container >
         {displayReviewComments &&
-            <Container>
+            <Container className={`${appStyles.Content} mb-3`}>
               {reviewComments.results.length ?(
                 reviewComments.results.map((review) => (
-                  <p key={review.id}>{review.owner}:{review.review}</p>
+                  <ReviewComment key={review.id} {...review} />
                 ))
               ) : (<span>no reviews....yet</span> ) }
             </Container>
