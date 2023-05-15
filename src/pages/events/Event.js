@@ -13,6 +13,7 @@ import { axiosRes } from '../../api/axiosDefaults';
 import { EditDeleteDropdown } from '../../components/EditDeleteDropdown';
 import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
 import DeleteConfirmationModal from '../../components/DeleteConfirmationModal';
+import DateFormatter from '../../utils/DateFormatter';
 
 const Event = (props) => {
 
@@ -200,7 +201,7 @@ const Event = (props) => {
                 <Card.Img src={image} alt={title} />
             </Link>
             <Card.Body>
-                {title && event_date && <Card.Title className={`text-center ${styles.Title}`}>{title} - {event_date}</Card.Title> } 
+                {title && event_date && <Card.Title className={`text-center ${styles.Title}`}>{title} - <DateFormatter event_date={event_date} /></Card.Title> } 
                 {description && <Card.Text>{description}</Card.Text>}
                 {tags && <Card.Text className={styles.Tags}><i className="fal fa-hashtag"></i>{tags}</Card.Text>}
                 <div>
