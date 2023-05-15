@@ -14,6 +14,7 @@ import ReviewCreateForm from './ReviewCreateForm';
 import ReviewComment from './ReviewComment';
 import { useRedirect } from '../../hooks/UseRedirect';
 import { Rating } from "react-simple-star-rating";
+import DateFormatter from "../../utils/DateFormatter";
 
 
 
@@ -83,9 +84,10 @@ const Review = (props) => {
             console.log(err)
         }
     }
-
+    
 
   return (
+    
     <>
       <Container className={`${styles.Review} ${appStyles.Content}`}>
         <Row noGutters className="px-3 text-center">
@@ -105,7 +107,9 @@ const Review = (props) => {
               </span>
             </Link>
 
-            <span className={`${styles.Date}`}>{event_date}</span>
+            <span className={`${styles.Date}`}>
+              <DateFormatter event_date={event_date} />
+            </span>
           </Col>
 
           <Col lg={4}>
@@ -187,6 +191,7 @@ const Review = (props) => {
         setReviewComments={setReviewComments}
       />
     </>
+    
   );
 }
 
