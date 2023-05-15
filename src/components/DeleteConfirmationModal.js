@@ -10,6 +10,7 @@ const DeleteConfirmationModal = (props) => {
     handleClose,
     handleEventDelete,
     handleCommentDelete,
+    handleReviewDelete,
     type,
     message,
   } = props
@@ -39,6 +40,16 @@ const DeleteConfirmationModal = (props) => {
             Cancel
           </Button>
           <Button className={`${btnStyles.Button} ${btnStyles.Delete}`} onClick = {handleCommentDelete}>
+            Confirm Deletion
+          </Button>
+        </>
+      }
+      {type === "review" && 
+        <>
+          <Button className={`${btnStyles.Button} ${btnStyles.Modal}`} onClick={handleClose}>
+            Cancel
+          </Button>
+          <Button className={`${btnStyles.Button} ${btnStyles.Delete}`} onClick = {handleReviewDelete}>
             Confirm Deletion
           </Button>
         </>

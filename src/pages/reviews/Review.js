@@ -7,8 +7,7 @@ import { useCurrentUser } from '../../contexts/CurrentUserContext';
 
 import { Link } from 'react-router-dom/cjs/react-router-dom';
 import Avatar from '../../components/Avatar';
-import { axiosReq, axiosRes } from '../../api/axiosDefaults';
-import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
+import { axiosReq } from '../../api/axiosDefaults';
 import { Button, Col, Container, OverlayTrigger, Row, Tooltip } from 'react-bootstrap';
 import ReviewCreateForm from './ReviewCreateForm';
 import ReviewComment from './ReviewComment';
@@ -35,7 +34,7 @@ const Review = (props) => {
 
     const currentUser = useCurrentUser();
     const is_owner = currentUser?.username === owner;
-    const history = useHistory();
+
    
 
     const [showCreateForm, setShowCreateForm] = useState(false);
@@ -47,8 +46,6 @@ const Review = (props) => {
     const [displayReviewComments, setDisplayReviewComments] = useState(false);
     
 
-    // const [showAlert, setShowAlert] = useState(false)
-    // const [confirmReviewMessage, setConfirmReviewMessage] = useState(null);
 
 
   const [reviewComments, setReviewComments] = useState({ results: [] });
@@ -70,18 +67,6 @@ const Review = (props) => {
       handleMount();
     }, [id]);
 
-
-    const handleReviewDelete = async () => {
-        try{
-            await axiosRes.delete(`/reviews/${id}/`)
-            history.goBack()
-            // setShowAlert(true)
-            // setConfirmEventMessage(`The event '${title}' was deleted successfully.`);
-
-        } catch(err){
-            console.log(err)
-        }
-    }
     
 
   return (
@@ -174,7 +159,12 @@ const Review = (props) => {
             <Container className={`${appStyles.Content} mb-3`}>
               {reviewComments.results.length ?(
                 reviewComments.results.map((review) => (
-                  <ReviewComment key={review.id} {...review} />
+                  <ReviewComment 
+                    key={review.id} 
+                    {...review} 
+                    setEvents={setEvents}
+                    setReviewComments={setReviewComments}
+                  />
                 ))
               ) : (<span>no reviews....yet</span> ) }
             </Container>

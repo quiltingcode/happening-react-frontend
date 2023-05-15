@@ -1,22 +1,63 @@
-import React from 'react'
+import React, { useState } from 'react'
 
 import styles from "../../styles/Comment.module.css";
 import { Link } from 'react-router-dom/cjs/react-router-dom.min';
 import Avatar from '../../components/Avatar';
-import { Media } from 'react-bootstrap';
+import Media from 'react-bootstrap/Media';
 import { Rating } from "react-simple-star-rating";
+import { useCurrentUser } from '../../contexts/CurrentUserContext';
+import { EditDeleteDropdown } from '../../components/EditDeleteDropdown';
+import { axiosRes } from '../../api/axiosDefaults';
+import DeleteConfirmationModal from '../../components/DeleteConfirmationModal';
 
 const ReviewComment = (props) => {
 
- const { 
-  profile_id,
-  profile_image,
-  owner, 
-  updated_at,
-  review,
-  rating,
- } = props;
-    
+  const { 
+    profile_id,
+    profile_image,
+    owner, 
+    updated_at,
+    review,
+    rating,
+    id,
+    setEvents,
+    setReviewComments,
+  } = props;
+      
+  const currentUser = useCurrentUser();
+  const is_owner = currentUser?.username === owner;
+
+  const [show, setShow] = useState(false);
+  const [message, setMessage] = useState("");
+  const [type, setType] = useState("");
+  const handleShow = () => {
+    setShow(true);
+    setMessage(`Are you sure you want to delete this review?`);
+    setType("review");
+  };
+
+    const handleClose = () => setShow(false);
+  
+  const handleReviewDelete = async () => {
+    try {
+      await axiosRes.delete(`/reviews/${id}/`)
+      setEvents((prevEvents) => ({
+        ...prevEvents,
+        results: prevEvents.results.map((event) => {
+          return event.id === id
+            ? { ...event, review_count: event.review_count - 1, average_rating: event.average_rating }
+            : event;
+        }),
+      }));
+
+      setReviewComments((prevReviews) => ({
+        ...prevReviews,
+        results: prevReviews.results.filter((review) => review.id !== id),
+    }));
+    } catch (err) {
+      console.log(err)
+    }
+  }
 
   return (
     <div>
@@ -32,8 +73,20 @@ const ReviewComment = (props) => {
               <Rating readonly initialValue={rating} size={25} />
             </p>
           </Media.Body>
+          {is_owner &&  (
+          <EditDeleteDropdown
+            handleShow={handleShow} 
+          />
+          )}
         </Media>
         <hr />
+        <DeleteConfirmationModal
+        showModal={show}
+        handleClose={handleClose}
+        handleReviewDelete={handleReviewDelete}
+        type={type}
+        message={message}
+      />
     </div>
   )
 }

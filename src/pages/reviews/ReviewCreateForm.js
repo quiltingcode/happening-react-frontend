@@ -30,7 +30,7 @@ function ReviewCreateForm(props) {
 
   const handleRating = (rate) => {
     setRating(rate / 20);
-    console.log(rating);
+
   };
 
   const handleSubmit = async (e) => {
@@ -40,7 +40,6 @@ function ReviewCreateForm(props) {
     formData.append("event", id);
     formData.append("rating", rating);
     formData.append("review", review);
-    console.log(formData);
     try {
       const { data } = await axiosRes.post("/reviews/", formData);
       history.push(`/reviews`);
@@ -52,7 +51,7 @@ function ReviewCreateForm(props) {
         ...prevEvents,
         results: prevEvents.results.map((event) => {
           return event.id === id
-            ? { ...event, review_count: event.review_count + 1 }
+            ? { ...event, review_count: event.review_count + 1, average_rating: event.average_rating }
             : event;
         }),
       }));
