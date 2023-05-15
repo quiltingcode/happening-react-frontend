@@ -7,6 +7,7 @@ import Asset from '../../components/Asset';
 import { Card } from 'react-bootstrap';
 import styles from "../../styles/PopularEvents.module.css"
 import { Link } from 'react-router-dom/cjs/react-router-dom.min';
+import DateFormatter from '../../utils/DateFormatter';
 
 const PopularEvents = ({ mobile }) => {
 
@@ -60,7 +61,7 @@ const PopularEvents = ({ mobile }) => {
                             <strong>{event.title}</strong>
                         </Link>
                         <p>
-                            {event.event_date}
+                        <DateFormatter event_date={event.event_date} />
                         </p>
                         <hr />
                     </div>
