@@ -92,7 +92,7 @@ function ReviewsPage({ message, filter="" }) {
           <>
             {events.results.length ? (
               <InfiniteScroll
-                children={events.results.map((review) => (
+                children={events.results.filter(a => new Date(a.event_date) - new Date < 0).map((review) => (
                   <Review key={review.id} {...review} setEvents={setEvents} />
                 ))}
                 dataLength={events.results.length}

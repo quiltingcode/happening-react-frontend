@@ -16,8 +16,6 @@ import { useRedirect } from '../../hooks/UseRedirect';
 import { Rating } from "react-simple-star-rating";
 import DateFormatter from "../../utils/DateFormatter";
 
-
-
 const Review = (props) => {
 
   useRedirect('loggedOut')
