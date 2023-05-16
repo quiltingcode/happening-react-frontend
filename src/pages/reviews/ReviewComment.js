@@ -20,6 +20,7 @@ const ReviewComment = (props) => {
     review,
     rating,
     id,
+    eventId,
     setEvents,
     setReviewComments,
   } = props;
@@ -44,7 +45,7 @@ const ReviewComment = (props) => {
       setEvents((prevEvents) => ({
         ...prevEvents,
         results: prevEvents.results.map((event) => {
-          return event.id === id
+          return event.id === eventId
             ? { ...event, review_count: event.review_count - 1, average_rating: event.average_rating }
             : event;
         }),

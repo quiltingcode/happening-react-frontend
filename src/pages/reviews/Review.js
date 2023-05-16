@@ -45,10 +45,7 @@ const Review = (props) => {
 
     const [displayReviewComments, setDisplayReviewComments] = useState(false);
     
-
-
-
-  const [reviewComments, setReviewComments] = useState({ results: [] });
+    const [reviewComments, setReviewComments] = useState({ results: [] });
 
   
     useEffect(() => {
@@ -164,6 +161,7 @@ const Review = (props) => {
                     {...review} 
                     setEvents={setEvents}
                     setReviewComments={setReviewComments}
+                    eventId={id}
                   />
                 ))
               ) : (<span>no reviews....yet</span> ) }
@@ -173,8 +171,6 @@ const Review = (props) => {
         id={id}
         showModal={showCreateForm}
         handleCloseCreateForm={handleCloseCreateForm}
-        
-        event={id}
         setEvents={setEvents}
         setReviewComments={setReviewComments}
       />

@@ -11,7 +11,6 @@ import { Alert, Button, Col, Modal, Row } from "react-bootstrap";
 
 function ReviewCreateForm(props) {
   const {
-
     setReviewComments,
     setEvents,
     id,
@@ -51,7 +50,7 @@ function ReviewCreateForm(props) {
         ...prevEvents,
         results: prevEvents.results.map((event) => {
           return event.id === id
-            ? { ...event, review_count: event.review_count + 1, average_rating: event.average_rating }
+            ? { ...event, review_count: event.review_count + 1, average_rating: (event.average_rating + rating) / event.review_count }
             : event;
         }),
       }));
