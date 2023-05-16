@@ -101,6 +101,9 @@ const ReviewComment = (props) => {
           handleCloseEditModal={handleCloseEditModal}
           eventId={eventId}
           avgRating={avgRating}
+          reviewId={id}
+          review={review}
+          rating={rating}
         />
     </div>
   )

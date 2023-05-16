@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 
 import Form from "react-bootstrap/Form";
 import { axiosReq } from "../../api/axiosDefaults";
@@ -12,7 +12,9 @@ import { Alert, Button, Col, Modal, ModalFooter, Row } from "react-bootstrap";
 function ReviewEditForm(props) {
 
   const { 
-        id, 
+        reviewId, 
+        review,
+        rating,
         showEditModal,
         handleCloseEditModal, 
         setReviewComments,
@@ -21,36 +23,18 @@ function ReviewEditForm(props) {
         avgRating,
     } = props;
 
-    const [review, setReview] = useState("");
-    const [rating, setRating] = useState(0);
+    const [newReview, setNewReview] = useState("");
+    const [newRating, setNewRating] = useState(0);
 
   const history = useHistory();
   const [errors, setErrors] = useState({});
 
-  useEffect(() => {
-    const handleMount = async () => {
-        try {
-            const { data } = await axiosReq.get(`/reviews/${id}/`);
-            const {rating, review, is_owner} = data;
-
-
-            setReview(review)
-            setRating(rating)
-
-        } catch (err) {
-            console.log(err);
-        }
-    };
-
-    handleMount();
-  }, [history, id]);
-
   const handleChange = (event) => {
-    setReview(event.target.value);
+    setNewReview(event.target.value);
   };
 
   const handleRating = (rate) => {
-    setRating(rate / 20);
+    setNewRating(rate / 20);
 
   };
 
@@ -63,15 +47,15 @@ function ReviewEditForm(props) {
     formData.append('review', review)
 
     try {
-        await axiosReq.put(`/reviews/${id}/`, formData);
+        await axiosReq.put(`/reviews/${reviewId}/`, formData);
       setReviewComments((prevComments) => ({
         ...prevComments,
         results: prevComments.results.map((comment) => {
-          return comment.id === id
+          return comment.id === reviewId
             ? {
                 ...comment,
-                rating,
-                review,
+                rating: newRating,
+                review: newReview,
                 updated_at: "now",
               }
             : comment;
@@ -102,7 +86,7 @@ function ReviewEditForm(props) {
           <Col className="py-2 mx-auto text-center" md={6}>
             <Form onSubmit={handleSubmit}>
               <Form.Group className="pr-1">
-                <Rating onClick={handleRating} value={rating} />
+                <Rating onClick={handleRating} initialValue={rating} />
               </Form.Group>
               {errors?.rating?.map((message, idx) => (
                 <Alert key={idx} variant="warning">
