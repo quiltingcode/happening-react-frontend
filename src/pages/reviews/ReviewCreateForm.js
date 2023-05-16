@@ -50,7 +50,7 @@ function ReviewCreateForm(props) {
         ...prevEvents,
         results: prevEvents.results.map((event) => {
           return event.id === id
-            ? { ...event, review_count: event.review_count + 1, average_rating: (event.average_rating + rating) / event.review_count }
+            ? { ...event, review_count: event.review_count + 1, average_rating: ((event.average_rating + rating) / event.review_count) }
             : event;
         }),
       }));
