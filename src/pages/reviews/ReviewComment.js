@@ -9,6 +9,7 @@ import { useCurrentUser } from '../../contexts/CurrentUserContext';
 import { EditDeleteDropdown } from '../../components/EditDeleteDropdown';
 import { axiosRes } from '../../api/axiosDefaults';
 import DeleteConfirmationModal from '../../components/DeleteConfirmationModal';
+import ReviewEditForm from './ReviewEditForm';
 
 const ReviewComment = (props) => {
 
@@ -21,6 +22,7 @@ const ReviewComment = (props) => {
     rating,
     id,
     eventId,
+    avgRating,
     setEvents,
     setReviewComments,
   } = props;
@@ -36,8 +38,13 @@ const ReviewComment = (props) => {
     setMessage(`Are you sure you want to delete this review?`);
     setType("review");
   };
+  const handleClose = () => setShow(false);
 
-    const handleClose = () => setShow(false);
+  const [showEditModal, setShowEditModal] = useState(false);
+  const handleShowEditModal = () => {
+    setShowEditModal(true);
+  };
+  const handleCloseEditModal = () => setShowEditModal(false);
   
   const handleReviewDelete = async () => {
     try {
@@ -46,7 +53,7 @@ const ReviewComment = (props) => {
         ...prevEvents,
         results: prevEvents.results.map((event) => {
           return event.id === eventId
-            ? { ...event, review_count: event.review_count - 1, average_rating: event.average_rating }
+            ? { ...event, review_count: event.review_count - 1, average_rating: ((event.average_rating - rating) / event.review_count) }
             : event;
         }),
       }));
@@ -76,18 +83,25 @@ const ReviewComment = (props) => {
           </Media.Body>
           {is_owner &&  (
           <EditDeleteDropdown
-            handleShow={handleShow} 
+            handleEdit={handleShowEditModal} 
+            handleShow={handleShow}
           />
           )}
         </Media>
         <hr />
         <DeleteConfirmationModal
-        showModal={show}
-        handleClose={handleClose}
-        handleReviewDelete={handleReviewDelete}
-        type={type}
-        message={message}
-      />
+          showModal={show}
+          handleClose={handleClose}
+          handleReviewDelete={handleReviewDelete}
+          type={type}
+          message={message}
+        />
+        <ReviewEditForm 
+          showEditModal={showEditModal}
+          handleCloseEditModal={handleCloseEditModal}
+          eventId={eventId}
+          avgRating={avgRating}
+        />
     </div>
   )
 }

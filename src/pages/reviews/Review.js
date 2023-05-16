@@ -162,6 +162,8 @@ const Review = (props) => {
                     setEvents={setEvents}
                     setReviewComments={setReviewComments}
                     eventId={id}
+                    review_count={review_count}
+                    avgRating={average_rating}
                   />
                 ))
               ) : (<span>no reviews....yet</span> ) }
