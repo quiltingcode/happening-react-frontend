@@ -16,7 +16,7 @@ import btnStyles from "../../styles/Button.module.css";
 import PopularProfiles from "./PopularProfiles";
 import { useCurrentUser } from "../../contexts/CurrentUserContext";
 import PopularEvents from "../events/PopularEvents";
-import { useParams } from "react-router-dom/cjs/react-router-dom.min";
+import { Link, useParams } from "react-router-dom/cjs/react-router-dom.min";
 import { axiosReq } from "../../api/axiosDefaults";
 import { useSetProfileData } from "../../contexts/ProfileDataContext";
 import { useProfileData } from "../../contexts/ProfileDataContext";
@@ -167,17 +167,24 @@ function ProfilePage() {
             )}
             {profile?.website && (
               <Col className="p-1">
-                <i className="fas fa-globe"></i> {profile?.website}
+                <Link to={{ pathname: profile.website }} target="_blank">
+                  <i className="fas fa-globe"></i> {profile?.website}
+                </Link>
               </Col>
             )}
             {profile?.facebook_link && (
               <Col className="p-1">
-                <i className="fab fa-facebook"></i> {profile?.facebook_link}
+                <Link to={{ pathname: profile.facebook_link }} target="_blank">
+                  <i className="fab fa-facebook"></i> {profile?.facebook_link}
+                </Link>
+                
               </Col>
             )}
             {profile?.instagram_link && (
               <Col className="p-1">
-                <i className="fab fa-instagram"></i> {profile?.instagram_link}
+                <Link to={{ pathname: profile.instagram_link }} target="_blank">
+                  <i className="fab fa-instagram"></i> {profile?.instagram_link}
+                </Link>
               </Col>
             )}
           </Container>
