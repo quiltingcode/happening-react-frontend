@@ -43,7 +43,7 @@ const PopularEvents = ({ mobile }) => {
             <h4 className='text-center mb-4'>Top Upcoming Events</h4>
             {mobile ? (
                 <div className='d-flex'>
-                    {topEvents.results.slice(0,5).filter(a => new Date(a.event_date) - new Date > 0).map((event) => (
+                    {topEvents.results.slice(0,5).filter(a => new Date(a.event_date) - new Date() > 0).map((event) => (
                     <Card 
                         key={event.id} 
                         className={`${styles.Card} mr-2`}
@@ -55,7 +55,7 @@ const PopularEvents = ({ mobile }) => {
                     ))}
                 </div>
             ) : (
-                topEvents.results.filter(a => new Date(a.event_date) - new Date > 0).map((event) => (
+                topEvents.results.filter(a => new Date(a.event_date) - new Date() > 0).map((event) => (
                     <div key={event.id}>
                         <Link to={`/events/${event.id}`}>
                             <strong>{event.title}</strong>
