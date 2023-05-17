@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 
 import styles from "../../styles/Comment.module.css";
-import { Link } from 'react-router-dom/cjs/react-router-dom.min';
+import { Link, useHistory } from 'react-router-dom/cjs/react-router-dom.min';
 import Avatar from '../../components/Avatar';
 import Media from 'react-bootstrap/Media';
 import { Rating } from "react-simple-star-rating";
@@ -29,6 +29,7 @@ const ReviewComment = (props) => {
       
   const currentUser = useCurrentUser();
   const is_owner = currentUser?.username === owner;
+  const history = useHistory();
 
   const [show, setShow] = useState(false);
   const [message, setMessage] = useState("");
@@ -62,6 +63,7 @@ const ReviewComment = (props) => {
         ...prevReviews,
         results: prevReviews.results.filter((review) => review.id !== id),
     }));
+    history.push(`/reviews/`)
     } catch (err) {
       console.log(err)
     }
