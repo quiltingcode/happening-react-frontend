@@ -80,7 +80,6 @@ function ReviewEditForm(props) {
     <div className="text-center">
       <Form.Group>
         <Rating 
-          name="rating"
           initialValue={rating}
           onClick={handleRating} 
         />

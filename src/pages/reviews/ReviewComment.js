@@ -45,7 +45,9 @@ const ReviewComment = (props) => {
   const handleShowEditModal = () => {
     setShowEditModal(true);
   };
-  const handleCloseEditModal = () => setShowEditModal(false);
+  const handleCloseEditModal = () => {
+    setShowEditModal(false);
+  }
   
   const handleReviewDelete = async () => {
     try {
@@ -105,7 +107,6 @@ const ReviewComment = (props) => {
           avgRating={avgRating}
           reviewId={id}
           review={review}
-          rating={rating}
         />
     </div>
   )

@@ -62,7 +62,7 @@ const Review = (props) => {
       };
 
       handleMount();
-    }, [id]);
+    }, [currentUser,id]);
 
     
 
