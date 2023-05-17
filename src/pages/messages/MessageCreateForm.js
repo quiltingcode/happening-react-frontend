@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Container from 'react-bootstrap/Container';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
@@ -11,6 +11,14 @@ const MessageCreateForm = (props) => {
 
     const {sendToProfile, mobile} = props
 
+    const [message, setMessage] = useState("");
+
+    const handleChange = (event) => {
+        setMessage(event.target.value);
+      };
+
+    
+
   return (
     <Container className={`${appStyles.Content} mb-3 ${mobile && 'd-lg-none text-center'}`}>
       <Form>
@@ -20,6 +28,9 @@ const MessageCreateForm = (props) => {
             as="textarea"
             rows={2} 
             placeholder="Type your message here" 
+            name="message"
+            value={message}
+            onChange={handleChange}
           />
         </Form.Group>
 
