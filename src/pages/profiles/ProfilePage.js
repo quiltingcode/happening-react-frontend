@@ -26,6 +26,7 @@ import { fetchMoreData } from "../../utils/Utils";
 import { ProfileEditDropdown } from "../../components/EditDeleteDropdown";
 import ChangeUsernameModal from "./ChangeUsernameModal";
 import ChangePasswordModal from "./ChangePasswordModal";
+import MessageCreateForm from "../messages/MessageCreateForm";
 
 function ProfilePage() {
 
@@ -223,6 +224,7 @@ function ProfilePage() {
     <Row>
       <Col className="py-2 p-0 p-lg-2" lg={8}>
         <PopularProfiles mobile />
+        <MessageCreateForm mobile sendToProfile={profile?.owner}/>
         <Container className={appStyles.Content}>
           {hasLoaded ? (
             <>
@@ -233,14 +235,12 @@ function ProfilePage() {
             <Asset spinner />
           )}
         </Container>
-        <Container>
-            <p className="d-block d-lg-none p-0 p-lg-2">Send a message - mobile</p>
-        </Container>
+        
       </Col>
       <Col lg={4} className="d-none d-lg-block p-0 p-lg-2">
-        <Container>
-            <p className="d-none d-lg-block p-0 p-lg-2">Send a message - desktop </p>
-        </Container>
+
+        <MessageCreateForm sendToProfile={profile?.owner}/>
+
         <PopularEvents />
         
       </Col>
