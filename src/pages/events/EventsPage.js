@@ -77,7 +77,7 @@ function EventsPage({ message, filter="" }) {
               value={category}
               onChange={(event) => setCategory(event.target.value)}
             >
-              <option>Filter by category...</option>
+              <option key = 'blankChoice' hidden value> Category </option>
               <option>Sport</option>
               <option>Music</option>
               <option>Culture</option>
