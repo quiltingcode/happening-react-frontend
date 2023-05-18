@@ -30,6 +30,7 @@ import MessageCreateForm from "../messages/MessageCreateForm";
 
 function ProfilePage() {
 
+
   const [hasLoaded, setHasLoaded] = useState(false);
   const currentUser = useCurrentUser();
   const {id} = useParams();
@@ -224,7 +225,9 @@ function ProfilePage() {
     <Row>
       <Col className="py-2 p-0 p-lg-2" lg={8}>
         <PopularProfiles mobile />
-        <MessageCreateForm mobile sendToProfile={profile?.owner}/>
+        {!is_owner && (
+          <MessageCreateForm mobile sendToProfile={profile?.owner} />
+        )}
         <Container className={appStyles.Content}>
           {hasLoaded ? (
             <>
@@ -235,27 +238,22 @@ function ProfilePage() {
             <Asset spinner />
           )}
         </Container>
-        
       </Col>
       <Col lg={4} className="d-none d-lg-block p-0 p-lg-2">
-
-        <MessageCreateForm 
-          sendToProfile={profile?.owner} 
-          profileId={profile?.id}
-        />
+        {!is_owner && (
+          <MessageCreateForm
+            sendToProfile={profile?.owner}
+            profileId={profile?.id}
+          />
+        )}
 
         <PopularEvents />
-        
       </Col>
-      <ChangeUsernameModal 
-        showModal={show}
-        handleClose={handleClose}
-      />
-      <ChangePasswordModal 
+      <ChangeUsernameModal showModal={show} handleClose={handleClose} />
+      <ChangePasswordModal
         showPasswordModal={showPasswordModal}
         handleClosePasswordModal={handleClosePasswordModal}
       />
-
     </Row>
   );
 }
