@@ -239,7 +239,10 @@ function ProfilePage() {
       </Col>
       <Col lg={4} className="d-none d-lg-block p-0 p-lg-2">
 
-        <MessageCreateForm sendToProfile={profile?.owner}/>
+        <MessageCreateForm 
+          sendToProfile={profile?.owner} 
+          profileId={profile?.id}
+        />
 
         <PopularEvents />
         
