@@ -2,12 +2,12 @@ import React, { useState } from 'react'
 import Container from 'react-bootstrap/Container';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
+import Alert from 'react-bootstrap/Alert';
 
 import appStyles from '../../App.module.css'
 import btnStyles from '../../styles/Button.module.css'
 import { axiosRes } from '../../api/axiosDefaults';
-import { Alert } from 'react-bootstrap';
-import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
+import AlertMessage from '../../components/AlertMessage';
 
 
 
@@ -17,7 +17,10 @@ const MessageCreateForm = (props) => {
 
     const [message, setMessage] = useState("");
     const [errors, setErrors] = useState({});
-    const history = useHistory();
+
+    const [variant, setVariant] = useState("");
+    const [alertMessage, setAlertMessage] = useState("");
+    const [showAlert, setShowAlert] = useState(false);
 
     const handleChange = (event) => {
         setMessage(event.target.value);
@@ -32,7 +35,9 @@ const MessageCreateForm = (props) => {
         try {
           await axiosRes.post('/contact/', formData);
           setMessage("")
-          
+          setShowAlert(true)
+          setVariant("success")
+          setAlertMessage("Your message has been sent successfully")
 
         } catch (err) {
           console.log(err)
@@ -73,6 +78,11 @@ const MessageCreateForm = (props) => {
           Send
         </Button>
       </Form>
+      {showAlert && 
+      <Alert variant={variant} onClose={() => setShowAlert(false)} dismissible className='mt-3'>
+        <p> {alertMessage} </p>
+      </Alert>}
+
     </Container>
   );
 }
