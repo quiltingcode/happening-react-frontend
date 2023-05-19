@@ -15,7 +15,6 @@ import btnStyles from "../../styles/Button.module.css";
 
 import PopularProfiles from "./PopularProfiles";
 import { useCurrentUser } from "../../contexts/CurrentUserContext";
-import PopularEvents from "../events/PopularEvents";
 import { Link, useParams } from "react-router-dom/cjs/react-router-dom.min";
 import { axiosReq } from "../../api/axiosDefaults";
 import { useSetProfileData } from "../../contexts/ProfileDataContext";
@@ -27,7 +26,7 @@ import { ProfileEditDropdown } from "../../components/EditDeleteDropdown";
 import ChangeUsernameModal from "./ChangeUsernameModal";
 import ChangePasswordModal from "./ChangePasswordModal";
 import MessageCreateForm from "../messages/MessageCreateForm";
-import Messages from "../messages/Messages";
+import Message from "../messages/Message";
 import { useRedirect } from "../../hooks/UseRedirect";
 
 function ProfilePage() {
@@ -233,11 +232,16 @@ function ProfilePage() {
         <h3 className="text-center">Messages</h3>
 
         {profileMessages.results.length ? (
-          profileMessages.results.map((message) => (
-            <p key={message.id}>
-              {message.owner} - {message.message}
-            </p>
-          ))
+          <InfiniteScroll
+          children={
+            profileMessages.results.map((message) => (
+              <Message key={message.id}{...message} />
+            ))}
+          dataLength={profileMessages.results.length}
+          loader={<Asset spinner />}
+          hasMore={!!profileMessages.next}
+          next={() => fetchMoreData(profileMessages, setProfileMessages)}
+          />
         ) : (
           <Asset message={`no messages yet...`} />
         )}
@@ -274,7 +278,6 @@ function ProfilePage() {
               profileId={profile?.id}
             />
           )}
-
 
           {currentUser &&
             is_owner &&
