@@ -1,70 +1,54 @@
-# Getting Started with Create React App
+# **Happening**
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+I live in a small town of around 15,000 people in the south of Spain, where lots of great events happen, but unlike in the big cities, there are no websites or applications dedicated to publicising the event information out to the people.
 
-## Available Scripts
+The most similar browser-based platform that exists today would be Eventbrite. If I do a search in Eventbrite for events filtered by my town, the closest event is 100Km away. Even though I know there are lots of great events happening every day on my doorstep, there is no single application or website where I can see them. These days, people simply rely on diffusion via Whatsapp groups and posters in the streets. 
 
-In the project directory, you can run:
+Happening provides an interactive platform to create, view, edit and delete event information for a local area. A user who wishes to share an event can upload information about the event, including the date, a description, a category for who it's ideally aimed at, an image or event poster, and keyword tags. A user who wishes to attend events can follow event hosts, show their interest in an event, mark as attending an event, comment on an event and write a review for an event. 
 
-### `npm start`
+This fictional site was created for Portfolio Project #5 (Advanced Front End) - Diploma in Full Stack Software Development Diploma at the [Code Institute](https://www.codeinstitute.net).
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+[View live website here](https://happening-react.herokuapp.com/)
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+![Responsive design](static/images/readme/devicemockup.png)
 
-### `npm test`
+## Table of Contents
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- [Project](<#project>)
+    * [Objective](<#objective>)
+    * [Site Users Goal](<#site-users-goal>)
+    * [Site Owners Goal](<#site-owners-goal>)
+    * [Project Management](<#project-management>)
 
-### `npm run build`
+- [User Experience (UX)](<#user-experience-ux>)
+    * [Wireframes](<#wireframes>)
+    * [User Stories](<#user-stories>)
+    * [Site Structure](<#site-structure>)
+    * [Design Choices](<#design-choices>)
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- [Existing Features](#features)
+  * [Homepage](#homepage)
+  * [Profile Data](#profile-list)
+  * [Events Data](#events-list)
+  * [Comments Data](#comments-data)
+  * [Interested Data](#interested-data)
+  * [Going Data](#going-data)
+  * [Followers Data](#followers-data)
+  * [Reviews Data](#reviews-data)
+  * [Contact Data](#contact-data)
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+- [Features Left To Implement](<#features-left-to-implement>)
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+- [Technologies Used](<#technologies-used>)
+    * [Languages](<#languages>)
+    * [Frameworks & Software](<#frameworks--software>)
+    * [Libraries](<#libraries>)
+- [Agile Workflow](#agile-workflow)
+  * [Github Project Board](#github-project-board)
+- [Testing](#testing)
+- [Deployment](#deployment)
+- [Credits](#credits)
 
-### `npm run eject`
+# **Project**
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+## Objective

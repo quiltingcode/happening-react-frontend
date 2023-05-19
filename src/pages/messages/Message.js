@@ -22,7 +22,7 @@ const Message = (props) => {
           <Avatar src={profile_image} height={45} />
         </Link>
         <Media.Body>
-          <span><strong>{owner} on {created_at}</strong> </span>
+          <span><strong>{owner}, {created_at}</strong> </span>
           <p>{message}</p>
         </Media.Body>
       </Media>
