@@ -63,7 +63,7 @@ function ProfilePage() {
         const [{data: pageProfile}, {data: profileEvents}, {data: profileMessages}] = await Promise.all([
           axiosReq.get(`/profiles/${id}/`),
           axiosReq.get(`/events/?owner__profile=${id}`),
-          axiosReq.get(`/contact/?owner__profile=${id}`)
+          axiosReq.get(`/contact/?profile=${id}`)
         ]);
         setProfileData(prevState => ({
           ...prevState,
@@ -228,19 +228,22 @@ function ProfilePage() {
   );
 
   const mainProfileMessages = (
-    
     <>
-      <h3 className="text-center">Messages</h3>
-      
-      {profileMessages.results.length ? (
-        profileMessages.results.map((message) => (
-          <p  key={message.id}>{message.owner} - {message.message}</p>
-        ) )
-      ) : (
-        <Asset message={`no messages yet...`} />
-      ) }
+      <Container className={appStyles.Content}>
+        <h3 className="text-center">Messages</h3>
+
+        {profileMessages.results.length ? (
+          profileMessages.results.map((message) => (
+            <p key={message.id}>
+              {message.owner} - {message.message}
+            </p>
+          ))
+        ) : (
+          <Asset message={`no messages yet...`} />
+        )}
+      </Container>
     </>
-  )
+  );
 
   return (
     <>
@@ -272,15 +275,19 @@ function ProfilePage() {
             />
           )}
 
-          <Container className={appStyles.Content}>
-            {hasLoaded ? (
+
+          {currentUser &&
+            is_owner &&
+            (
+            hasLoaded ? (
               <>
                 {mainProfileMessages}
               </>
             ) : (
               <Asset spinner />
-            )}
-          </Container>
+            )
+          )}
+
         </Col>
         <ChangeUsernameModal showModal={show} handleClose={handleClose} />
         <ChangePasswordModal
