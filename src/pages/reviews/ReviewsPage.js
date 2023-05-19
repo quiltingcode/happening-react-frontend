@@ -18,7 +18,7 @@ import PopularEvents from "../events/PopularEvents";
 import Review from "./Review";
 
 
-function ReviewsPage({ message, filter="" }) {
+function ReviewsPage({ message="", filter="" }) {
 
   const [events, setEvents] = useState({ results: [] });
   const [hasLoaded, setHasLoaded] = useState(false);

@@ -1,7 +1,8 @@
-import React, { useState } from 'react'
+import React from 'react'
 import Alert from 'react-bootstrap/Alert';
 
 const AlertMessage = (props) => {
+  
   const { variant, alertMessage, showAlert, setShowAlert } = props;
 
   return (

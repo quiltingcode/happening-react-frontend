@@ -27,9 +27,12 @@ import { ProfileEditDropdown } from "../../components/EditDeleteDropdown";
 import ChangeUsernameModal from "./ChangeUsernameModal";
 import ChangePasswordModal from "./ChangePasswordModal";
 import MessageCreateForm from "../messages/MessageCreateForm";
+import Messages from "../messages/Messages";
+import { useRedirect } from "../../hooks/UseRedirect";
 
 function ProfilePage() {
 
+  useRedirect('loggedOut')
 
   const [hasLoaded, setHasLoaded] = useState(false);
   const currentUser = useCurrentUser();
@@ -40,6 +43,7 @@ function ProfilePage() {
   const is_owner = currentUser?.username === profile?.owner;
 
   const [profileEvents, setProfileEvents] = useState({results: []});
+  const [profileMessages, setProfileMessages] = useState({results: []});
 
   const [show, setShow] = useState(false);
   const handleShow = () => {
@@ -56,15 +60,17 @@ function ProfilePage() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const [{data: pageProfile}, {data: profileEvents}] = await Promise.all([
+        const [{data: pageProfile}, {data: profileEvents}, {data: profileMessages}] = await Promise.all([
           axiosReq.get(`/profiles/${id}/`),
           axiosReq.get(`/events/?owner__profile=${id}`),
+          axiosReq.get(`/contact/?owner__profile=${id}`)
         ]);
         setProfileData(prevState => ({
           ...prevState,
           pageProfile: {results: [pageProfile]}
         }));
         setProfileEvents(profileEvents);
+        setProfileMessages(profileMessages);
         setHasLoaded(true);
       } catch (err) {
         console.log(err);
@@ -83,15 +89,15 @@ function ProfilePage() {
         />
       )}
       <Row noGutters className="px-3 text-center">
-        <Col lg={3} className="text-lg-left">
+        <Col lg={4} >
           <Image
             className={styles.ProfilePic}
             roundedCircle
             src={profile?.profile_pic}
           />
         </Col>
-        <Col lg={9}>
-          <h3 className="my-2">{profile?.owner}'s Profile</h3>
+        <Col lg={8}>
+          <h3 className="my-2">{profile?.owner}'s Stats</h3>
           <Row className="justify-content-center no-gutters">
             <Col xs={5} className="my-2">
               <div>{profile?.events_count}</div>
@@ -221,40 +227,68 @@ function ProfilePage() {
     </>
   );
 
-  return (
-    <Row>
-      <Col className="py-2 p-0 p-lg-2" lg={8}>
-        <PopularProfiles mobile />
-        {!is_owner && (
-          <MessageCreateForm mobile sendToProfile={profile?.owner} />
-        )}
-        <Container className={appStyles.Content}>
-          {hasLoaded ? (
-            <>
-              {mainProfile}
-              {mainProfileEvents}
-            </>
-          ) : (
-            <Asset spinner />
-          )}
-        </Container>
-      </Col>
-      <Col lg={4} className="d-none d-lg-block p-0 p-lg-2">
-        {!is_owner && (
-          <MessageCreateForm
-            sendToProfile={profile?.owner}
-            profileId={profile?.id}
-          />
-        )}
+  const mainProfileMessages = (
+    
+    <>
+      <h3 className="text-center">Messages</h3>
+      
+      {profileMessages.results.length ? (
+        profileMessages.results.map((message) => (
+          <p  key={message.id}>{message.owner} - {message.message}</p>
+        ) )
+      ) : (
+        <Asset message={`no messages yet...`} />
+      ) }
+    </>
+  )
 
-        <PopularEvents />
-      </Col>
-      <ChangeUsernameModal showModal={show} handleClose={handleClose} />
-      <ChangePasswordModal
-        showPasswordModal={showPasswordModal}
-        handleClosePasswordModal={handleClosePasswordModal}
-      />
-    </Row>
+  return (
+    <>
+      <Container className={`${appStyles.Content} mt-3`}>
+        <h2 className="text-center">{profile?.owner}'s Profile Page</h2>
+      </Container>
+      <Row>
+        <Col className="py-2 p-0 p-lg-2" lg={8}>
+          <PopularProfiles mobile />
+          {!is_owner && (
+            <MessageCreateForm mobile sendToProfile={profile?.owner} />
+          )}
+          <Container className={appStyles.Content}>
+            {hasLoaded ? (
+              <>
+                {mainProfile}
+                {mainProfileEvents}
+              </>
+            ) : (
+              <Asset spinner />
+            )}
+          </Container>
+        </Col>
+        <Col lg={4} className="d-none d-lg-block p-0 p-lg-2">
+          {!is_owner && (
+            <MessageCreateForm
+              sendToProfile={profile?.owner}
+              profileId={profile?.id}
+            />
+          )}
+
+          <Container className={appStyles.Content}>
+            {hasLoaded ? (
+              <>
+                {mainProfileMessages}
+              </>
+            ) : (
+              <Asset spinner />
+            )}
+          </Container>
+        </Col>
+        <ChangeUsernameModal showModal={show} handleClose={handleClose} />
+        <ChangePasswordModal
+          showPasswordModal={showPasswordModal}
+          handleClosePasswordModal={handleClosePasswordModal}
+        />
+      </Row>
+    </>
   );
 }
 
