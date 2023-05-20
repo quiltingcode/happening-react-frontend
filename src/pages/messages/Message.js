@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom/cjs/react-router-dom.min';
 import Avatar from '../../components/Avatar';
-import { Media } from 'react-bootstrap';
+import Media from 'react-bootstrap/Media';
 
 
 const Message = (props) => {

@@ -8,8 +8,15 @@ import { useCurrentUser } from '../../contexts/CurrentUserContext';
 import { Link } from 'react-router-dom/cjs/react-router-dom';
 import Avatar from '../../components/Avatar';
 import { axiosReq } from '../../api/axiosDefaults';
-import { Button, Col, Container, OverlayTrigger, Row, Tooltip } from 'react-bootstrap';
+
+import Button from 'react-bootstrap/Button';
+import Col from 'react-bootstrap/Col';
+import Container from 'react-bootstrap/Container';
+import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
+import Row from 'react-bootstrap/Row';
+import Tooltip from 'react-bootstrap/Tooltip';
 import ReviewCreateForm from './ReviewCreateForm';
+
 import ReviewComment from './ReviewComment';
 import { useRedirect } from '../../hooks/UseRedirect';
 import { Rating } from "react-simple-star-rating";

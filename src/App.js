@@ -13,6 +13,7 @@ import EventEditForm from './pages/events/EventEditForm';
 import ProfilePage from './pages/profiles/ProfilePage';
 import ProfileEditForm from './pages/profiles/ProfileEditForm';
 import ReviewsPage from './pages/reviews/ReviewsPage';
+import NotFound from './components/NotFound';
 
 function App() {
 
@@ -72,7 +73,7 @@ function App() {
           <Route exact path="/events/:id/edit" render={() => <EventEditForm />} />
           <Route exact path="/profiles/:id" render={() => <ProfilePage />} />
           <Route exact path="/profiles/:id/edit" render={() => <ProfileEditForm />} />
-          <Route render={() => <p>Page not found!</p>} />
+          <Route render={() => <NotFound />} />
         </Switch>
       </Container>
     </div>

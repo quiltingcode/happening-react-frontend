@@ -13,7 +13,7 @@ import btnStyles from "../../styles/Button.module.css";
 import Image from "react-bootstrap/Image";
 import { useHistory } from "react-router-dom/cjs/react-router-dom";
 import { axiosReq } from "../../api/axiosDefaults";
-import { Alert } from "react-bootstrap";
+import Alert from "react-bootstrap/Alert";
 import { useParams } from "react-router-dom/cjs/react-router-dom.min";
 
 function EventEditForm() {

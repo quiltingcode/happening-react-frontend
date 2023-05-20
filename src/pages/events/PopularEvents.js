@@ -4,7 +4,7 @@ import { useCurrentUser } from '../../contexts/CurrentUserContext';
 import { axiosReq } from '../../api/axiosDefaults';
 import Container from 'react-bootstrap/Container';
 import Asset from '../../components/Asset';
-import { Card } from 'react-bootstrap';
+import Card from 'react-bootstrap/Card';
 import styles from "../../styles/PopularEvents.module.css"
 import { Link } from 'react-router-dom/cjs/react-router-dom.min';
 import DateFormatter from '../../utils/DateFormatter';
