@@ -9,8 +9,6 @@ import btnStyles from '../../styles/Button.module.css'
 import { axiosRes } from '../../api/axiosDefaults';
 
 
-
-
 const MessageCreateForm = (props) => {
 
     const {sendToProfile, profileId, mobile} = props
