@@ -2,6 +2,7 @@ import React from 'react'
 import { Link } from 'react-router-dom/cjs/react-router-dom.min';
 import Avatar from '../../components/Avatar';
 import Media from 'react-bootstrap/Media';
+import { Button } from 'bootstrap';
 
 
 const Message = (props) => {
@@ -24,7 +25,7 @@ const Message = (props) => {
         <Media.Body>
           <span><strong>{owner}, {created_at}</strong> </span>
           <p>{message}</p>
-        </Media.Body>
+        </Media.Body> 
       </Media>
     </div>
   )

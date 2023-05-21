@@ -142,7 +142,7 @@ const Review = (props) => {
             ) : review_id ? (
               <OverlayTrigger
                 placement="top"
-                overlay={<Tooltip>You've already reviewed this event'</Tooltip>}
+                overlay={<Tooltip>You've already reviewed this event</Tooltip>}
               >
                 <Button className={`${btnStyles.Button} ${btnStyles.Form}`}>
                   Post a Review

@@ -29,7 +29,7 @@ import MessageCreateForm from "../messages/MessageCreateForm";
 import Message from "../messages/Message";
 
 
-function ProfilePage() {
+function ProfilePage( { mobile }) {
 
 
   const [hasLoaded, setHasLoaded] = useState(false);
@@ -227,7 +227,7 @@ function ProfilePage() {
 
   const mainProfileMessages = (
     <>
-      <Container className={appStyles.Content}>
+      <Container className={`${appStyles.Content} ${styles.Messages}`}>
         <h3 className="text-center">Messages</h3>
 
         {profileMessages.results.length ? (
@@ -259,6 +259,17 @@ function ProfilePage() {
           {!is_owner && (
             <MessageCreateForm mobile sendToProfile={profile?.owner} />
           )}
+          {currentUser &&
+            is_owner &&
+            (
+            hasLoaded ? (
+              <Container className='d-lg-none mb-3'>
+                {mainProfileMessages}
+              </Container>
+            ) : (
+              <Asset spinner />
+            )
+          )}
           <Container className={appStyles.Content}>
             {hasLoaded ? (
               <>
@@ -282,9 +293,9 @@ function ProfilePage() {
             is_owner &&
             (
             hasLoaded ? (
-              <>
+              <Container className="d-none d-lg-block">
                 {mainProfileMessages}
-              </>
+              </Container>
             ) : (
               <Asset spinner />
             )
