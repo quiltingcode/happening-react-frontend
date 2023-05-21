@@ -27,11 +27,10 @@ import ChangeUsernameModal from "./ChangeUsernameModal";
 import ChangePasswordModal from "./ChangePasswordModal";
 import MessageCreateForm from "../messages/MessageCreateForm";
 import Message from "../messages/Message";
-import { useRedirect } from "../../hooks/UseRedirect";
+
 
 function ProfilePage() {
 
-  useRedirect('loggedOut')
 
   const [hasLoaded, setHasLoaded] = useState(false);
   const currentUser = useCurrentUser();
