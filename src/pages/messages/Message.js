@@ -5,6 +5,7 @@ import Media from 'react-bootstrap/Media';
 import { Button } from 'react-bootstrap';
 import btnStyles from '../../styles/Button.module.css'
 import MessageReplyForm from './MessageReplyForm';
+import AlertMessage from '../../components/AlertMessage';
 
 
 const Message = (props) => {
@@ -22,6 +23,15 @@ const Message = (props) => {
       setShow(true);
     };
     const handleClose = () => setShow(false);
+    const [showAlert, setShowAlert] = useState(false);
+    const [variant, setVariant] = useState("");
+    const [alertMessage, setAlertMessage] = useState("");
+
+    const handleAlert = () => {
+      setShowAlert(true);
+      setVariant("success")
+      setAlertMessage("Your reply has been sent successfully")
+    }
 
   return (
     <div>
@@ -41,7 +51,8 @@ const Message = (props) => {
           Reply
         </Button>
       </Media>
-      <MessageReplyForm profile_id={profile_id} showModal={show} handleClose={handleClose} />
+      <AlertMessage showAlert={showAlert} setShowAlert variant={variant} alertMessage={alertMessage}/>
+      <MessageReplyForm profile_id={profile_id} showModal={show} handleClose={handleClose} handleAlert={handleAlert} />
     </div>
   )
 }

@@ -3,11 +3,12 @@ import Alert from 'react-bootstrap/Alert';
 
 const AlertMessage = (props) => {
   
-  const { variant, alertMessage, showAlert, setShowAlert } = props;
+  const { showAlert, setShowAlert, variant, alertMessage } = props;
+  
 
   return (
     showAlert && (
-      <Alert variant={variant} onClose={() => setShowAlert(false)} dismissible>
+      <Alert variant={variant} onClose={() => setShowAlert(false)} className='fade' dismissible>
         <p> {alertMessage} </p>
       </Alert>
     )

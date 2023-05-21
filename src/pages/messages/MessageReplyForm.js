@@ -13,7 +13,7 @@ import { axiosRes } from '../../api/axiosDefaults';
 
 const MessageReplyForm = (props) => {
 
-    const {profile_id, showModal, handleClose} = props
+    const {profile_id, showModal, handleClose, handleAlert} = props
 
     const [message, setMessage] = useState("");
     const [errors, setErrors] = useState({});
@@ -30,10 +30,8 @@ const MessageReplyForm = (props) => {
         formData.append("message", message);
         try {
           await axiosRes.post('/contact/', formData);
-        //   setMessage("")
-          setShowAlert(true)
-        //   setVariant("success")
-        //   setAlertMessage("Your message has been sent successfully")
+          handleAlert()
+          
             handleClose();
         } catch (err) {
           console.log(err)
