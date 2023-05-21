@@ -141,3 +141,23 @@
   color: #2f4858;
   border-color: transparent;
 }
+
+.Reply {
+  background-color: #db628e;
+  border-color: transparent;
+}
+
+.Reply:hover {
+  background-color: #6e5e93;
+  border-color: transparent;
+}
+
+.Reply:focus {
+  background-color: #6e5e93;
+  border-color: transparent;
+}
+
+.Reply:not(:disabled):not(:disabled):active {
+  background-color: #6e5e93;
+  border-color: transparent;
+}
