@@ -52,7 +52,7 @@ const Message = (props) => {
         </Button>
       </Media>
       <AlertMessage showAlert={showAlert} setShowAlert variant={variant} alertMessage={alertMessage}/>
-      <MessageReplyForm profile_id={profile_id} showModal={show} handleClose={handleClose} handleAlert={handleAlert} />
+      <MessageReplyForm profile_id={profile_id} owner={owner} showModal={show} handleClose={handleClose} handleAlert={handleAlert} />
     </div>
   )
 }

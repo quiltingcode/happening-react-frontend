@@ -13,7 +13,7 @@ import { axiosRes } from '../../api/axiosDefaults';
 
 const MessageReplyForm = (props) => {
 
-    const {profile_id, showModal, handleClose, handleAlert} = props
+    const {profile_id, owner, showModal, handleClose, handleAlert} = props
 
     const [message, setMessage] = useState("");
     const [errors, setErrors] = useState({});
@@ -44,7 +44,7 @@ const MessageReplyForm = (props) => {
   return (
     <Modal show={showModal} onHide={handleClose}>
     <Modal.Header closeButton>
-      <Modal.Title>Reply to Message</Modal.Title>
+      <Modal.Title>Reply to {owner}</Modal.Title>
     </Modal.Header>
     <Modal.Body>
       <Row>
