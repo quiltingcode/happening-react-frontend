@@ -1,4 +1,5 @@
 import React from 'react'
+import { Container } from 'react-bootstrap';
 import Alert from 'react-bootstrap/Alert';
 
 const AlertMessage = (props) => {
@@ -8,9 +9,12 @@ const AlertMessage = (props) => {
 
   return (
     showAlert && (
-      <Alert variant={variant} onClose={() => setShowAlert(false)} className='fade' dismissible>
+      <Container className='my-3'>
+        <Alert variant={variant} onClose={() => setShowAlert(false)} className='fade' dismissible>
         <p> {alertMessage} </p>
       </Alert>
+      </Container>
+      
     )
   );
 }

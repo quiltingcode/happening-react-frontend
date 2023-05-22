@@ -7,7 +7,7 @@ import Alert from 'react-bootstrap/Alert';
 import appStyles from '../../App.module.css'
 import btnStyles from '../../styles/Button.module.css'
 import { axiosRes } from '../../api/axiosDefaults';
-
+import AlertMessage from '../../components/AlertMessage';
 
 const MessageCreateForm = (props) => {
 
@@ -76,10 +76,7 @@ const MessageCreateForm = (props) => {
           Send
         </Button>
       </Form>
-      {showAlert && 
-      <Alert variant={variant} onClose={() => setShowAlert(false)} dismissible className='mt-3'>
-        <p> {alertMessage} </p>
-      </Alert>}
+      <AlertMessage showAlert={showAlert} setShowAlert variant={variant} alertMessage={alertMessage}/>
 
     </Container>
   );
