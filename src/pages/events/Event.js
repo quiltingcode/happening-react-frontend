@@ -49,12 +49,7 @@ const Event = (props) => {
         setMessage(`Are you sure you want to delete ${title}? It could be an amazing event...`);
         setType("event");
     };
-
     const handleClose = () => setShow(false);
-
-    // const [showAlert, setShowAlert] = useState(false)
-    // const [confirmEventMessage, setConfirmEventMessage] = useState(null);
-
 
     const handleEdit = async () => {
         history.push(`/events/${id}/edit`)
@@ -62,10 +57,8 @@ const Event = (props) => {
 
     const handleEventDelete = async () => {
         try{
-            await axiosRes.delete(`/events/${id}/`)
-            history.goBack()
-            // setShowAlert(true)
-            // setConfirmEventMessage(`The event '${title}' was deleted successfully.`);
+            await axiosRes.delete(`/events/${id}/`);
+            history.goBack();
 
         } catch(err){
             console.log(err)
@@ -175,10 +168,6 @@ const Event = (props) => {
 
   return (
     <>
-    {/* {confirmEventMessage && 
-        <Alert variant="success">{confirmEventMessage}</Alert>
-    }
-         */}
         <Card className={styles.Event}>
             <Card.Body>
             

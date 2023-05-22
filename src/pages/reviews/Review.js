@@ -42,8 +42,6 @@ const Review = (props) => {
     const currentUser = useCurrentUser();
     const is_owner = currentUser?.username === owner;
 
-   
-
     const [showCreateForm, setShowCreateForm] = useState(false);
     const handleShowCreateForm = () => {
         setShowCreateForm(true);

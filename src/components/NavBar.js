@@ -9,22 +9,22 @@ import { Link } from "react-router-dom";
 import { useCurrentUser, useSetCurrentUser } from '../contexts/CurrentUserContext';
 import Avatar from './Avatar';
 import axios from 'axios';
-import useClickOutsideToggle from '../hooks/useClickOutsideToggle';
 import { removeTokenTimestamp } from '../utils/Utils';
-
+import { useState } from 'react';
 
 const NavBar = () => {
 
   const currentUser = useCurrentUser();
   const setCurrentUser = useSetCurrentUser();
 
-  const {expanded, setExpanded, ref} = useClickOutsideToggle();
+  const [toggleNavBar, setToggleNavBar] = useState(false);
 
 
   const handleSignOut = async () => {
     try {
       await axios.post("dj-rest-auth/logout/");
       setCurrentUser(null);
+      setToggleNavBar(!toggleNavBar);
       removeTokenTimestamp();
     } catch (err) {
       console.log(err);
@@ -42,12 +42,16 @@ const NavBar = () => {
     </NavLink>
   );
   const loggedInIcons = (
+    
     <>
       <NavLink
         exact
         className={styles.NavLink}
         activeClassName={styles.Active}
         to="/feed"
+        onClick={() => {
+          setToggleNavBar(!toggleNavBar);
+        }}
       >
         <i className="fas fa-stream"></i>Feed
       </NavLink>
@@ -57,6 +61,9 @@ const NavBar = () => {
         className={styles.NavLink}
         activeClassName={styles.Active}
         to="/myevents"
+        onClick={() => {
+          setToggleNavBar(!toggleNavBar);
+        }}
       >
         <i className="fas fa-heart"></i>My Events
       </NavLink>
@@ -66,7 +73,9 @@ const NavBar = () => {
         className={styles.NavLink}
         activeClassName={styles.Active}
         to="/reviews"
-        
+        onClick={() => {
+          setToggleNavBar(!toggleNavBar);
+        }}
       >
         <i className="fas fa-star"></i>Reviews
       </NavLink>
@@ -80,6 +89,9 @@ const NavBar = () => {
       <NavDropdown.Item 
         as={Link} 
         to={`/profiles/${currentUser?.profile_id}`}
+        onClick={() => {
+          setToggleNavBar(!toggleNavBar);
+        }}
       >
       <Avatar src={currentUser?.profile_image} text="Profile" height={40} />
 
@@ -105,14 +117,18 @@ const NavBar = () => {
       <NavDropdown.Item 
         as={Link} 
         to="/signin"
-
+        onClick={() => {
+          setToggleNavBar(!toggleNavBar);
+        }}
       >
         <i className="fas fa-sign-in-alt"></i>Sign in
       </NavDropdown.Item>
       <NavDropdown.Item 
         as={Link} 
         to="/signup"
-
+        onClick={() => {
+          setToggleNavBar(!toggleNavBar);
+        }}
       >
         <i className="fas fa-user-plus"></i>Sign up
       </NavDropdown.Item>
@@ -124,7 +140,7 @@ const NavBar = () => {
       className={styles.NavBar} 
       expand="md" 
       fixed="top"
-      expanded={expanded}
+      expanded={toggleNavBar}
       collapseOnSelect
     >
       <Container>
@@ -135,9 +151,9 @@ const NavBar = () => {
         </NavLink>
         {currentUser && addEventIcon}
         <Navbar.Toggle 
-          // onToggle={onToggle} show={isOpen}
-          ref={ref}
-          onClick={() => setExpanded(!expanded)} 
+          onClick={() => {
+            setToggleNavBar(!toggleNavBar);
+          }}
           aria-controls="basic-navbar-nav" 
         />
         <Navbar.Collapse id="basic-navbar-nav">
@@ -147,6 +163,9 @@ const NavBar = () => {
               className={styles.NavLink}
               activeClassName={styles.Active}
               to="/"
+              onClick={() => {
+                setToggleNavBar(!toggleNavBar);
+              }}
             >
               <i className="fas fa-home"></i>Home
             </NavLink>

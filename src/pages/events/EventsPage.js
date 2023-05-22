@@ -18,8 +18,7 @@ import PopularProfiles from "../profiles/PopularProfiles";
 import PopularEvents from "./PopularEvents";
 import { useCurrentUser } from "../../contexts/CurrentUserContext";
 
-
-function EventsPage({ message, filter="" }) {
+function EventsPage({ message="", filter="" }) {
 
   const [events, setEvents] = useState({ results: [] });
   const [hasLoaded, setHasLoaded] = useState(false);
@@ -50,74 +49,82 @@ function EventsPage({ message, filter="" }) {
     
   }, [filter, search, pathname, category, currentUser]);
   
+  
+
   return (
-    <Row className="h-100">
-      <Col className="py-2 p-0 p-lg-2" lg={8}>
-        <PopularProfiles />
+    <>
+    
+      <Row className="h-100">
+        <Col className="py-2 p-0 p-lg-2" lg={8}>
+          <PopularProfiles />
 
-        <PopularEvents mobile />
+          <PopularEvents mobile />
 
-        <Container>
-          <i className={`fas fa-search ${styles.SearchIcon}`} />
-          <Form
-            className={styles.SearchBar}
-            onSubmit={(event) => event.preventDefault()}
-          >
-            <Form.Control
-              size="sm"
-              type="text"
-              className="mr-sm-2"
-              placeholder="Search events by title, profile, event date or tags"
-              value={search}
-              onChange={(event) => setSearch(event.target.value)}
-            />
-
-            <Form.Control 
-              size="sm" 
-              as="select" 
-              placeholder="Choose..."
-              value={category}
-              onChange={(event) => setCategory(event.target.value)}
+          <Container>
+            <i className={`fas fa-search ${styles.SearchIcon}`} />
+            <Form
+              className={styles.SearchBar}
+              onSubmit={(event) => event.preventDefault()}
             >
-              <option key = 'blankChoice' hidden value> Category </option>
-              <option>Sport</option>
-              <option>Music</option>
-              <option>Culture</option>
-              <option>Family</option>
-              <option>Kids</option>
-              <option>Education</option>
-            </Form.Control>
-          </Form>
-        </Container>
-
-        {hasLoaded ? (
-          <>
-            {events.results.length ? (
-              <InfiniteScroll
-                children={events.results.map((event) => (
-                  <Event key={event.id} {...event} setEvents={setEvents} />
-                ))}
-                dataLength={events.results.length}
-                loader={<Asset spinner />}
-                hasMore={!!events.next}
-                next={() => fetchMoreData(events, setEvents)}
+              <Form.Control
+                size="sm"
+                type="text"
+                className="mr-sm-2"
+                placeholder="Search events by title, profile, event date or tags"
+                value={search}
+                onChange={(event) => setSearch(event.target.value)}
               />
-            ) : (
-              <Container className={appStyles.Content}>
-                <Asset src={NoResults} message={message} />
-              </Container>
-            )}
-          </>
-        ) : (
-          <Container className={appStyles.Content}>
-            <Asset spinner />
+
+              <Form.Control
+                size="sm"
+                as="select"
+                placeholder="Choose..."
+                value={category}
+                onChange={(event) => setCategory(event.target.value)}
+              >
+                <option key="blankChoice" hidden value>
+                  {" "}
+                  Category{" "}
+                </option>
+                <option>Sport</option>
+                <option>Music</option>
+                <option>Culture</option>
+                <option>Family</option>
+                <option>Kids</option>
+                <option>Education</option>
+              </Form.Control>
+            </Form>
           </Container>
-        )}
-      </Col>
-      <Col md={4} className="d-none d-lg-block p-0 p-lg-2">
-        <PopularEvents />
-      </Col>
-    </Row>
+
+          {hasLoaded ? (
+            <>
+              {events.results.length ? (
+                <InfiniteScroll
+                  children={events.results.map((event) => (
+                    <Event key={event.id} {...event} setEvents={setEvents} />
+                  ))}
+                  dataLength={events.results.length}
+                  loader={<Asset spinner />}
+                  hasMore={!!events.next}
+                  next={() => fetchMoreData(events, setEvents)}
+                />
+              ) : (
+                <Container className={appStyles.Content}>
+                  <Asset src={NoResults} message={message} />
+                </Container>
+              )}
+            </>
+          ) : (
+            <Container className={appStyles.Content}>
+              <Asset spinner />
+            </Container>
+          )}
+        </Col>
+        <Col md={4} className="d-none d-lg-block p-0 p-lg-2">
+          <PopularEvents />
+        </Col>
+      </Row>
+    </>
   );
 }
 
