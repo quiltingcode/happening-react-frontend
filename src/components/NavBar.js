@@ -19,7 +19,6 @@ const NavBar = () => {
 
   const [toggleNavBar, setToggleNavBar] = useState(false);
 
-
   const handleSignOut = async () => {
     try {
       await axios.post("dj-rest-auth/logout/");
@@ -42,7 +41,6 @@ const NavBar = () => {
     </NavLink>
   );
   const loggedInIcons = (
-    
     <>
       <NavLink
         exact
@@ -56,17 +54,35 @@ const NavBar = () => {
         <i className="fas fa-stream"></i>Feed
       </NavLink>
 
-      <NavLink
-        exact
-        className={styles.NavLink}
-        activeClassName={styles.Active}
-        to="/myevents"
-        onClick={() => {
-          setToggleNavBar(!toggleNavBar);
-        }}
+      <NavDropdown
+        title={
+          <span>
+            <i className="fas fa-heart"></i> My Events
+          </span>
+        }
+        id="basic-nav-dropdown"
       >
-        <i className="fas fa-heart"></i>My Events
-      </NavLink>
+        <NavDropdown.Item
+          as={Link}
+          className={styles.NavLink}
+          to="/myevents/going"
+          onClick={() => {
+            setToggleNavBar(!toggleNavBar);
+          }}
+        >
+          <i className="far fa-calendar-check"></i>Going
+        </NavDropdown.Item>
+        <NavDropdown.Item
+          className={styles.NavLink}
+          as={Link}
+          to="/myevents/interested"
+          onClick={() => {
+            setToggleNavBar(!toggleNavBar);
+          }}
+        >
+          <i className="fa-regular fa-eye"></i>Interested
+        </NavDropdown.Item>
+      </NavDropdown>
 
       <NavLink
         exact
@@ -79,8 +95,6 @@ const NavBar = () => {
       >
         <i className="fas fa-star"></i>Reviews
       </NavLink>
-
-      
     </>
   );
 

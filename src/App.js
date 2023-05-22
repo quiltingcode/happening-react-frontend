@@ -44,11 +44,21 @@ function App() {
           />
           <Route
             exact
-            path="/myevents"
+            path="/myevents/going"
             render={() => (
               <EventsPage
-                message="Oh no! Try adjusting the search keyword or click to show you're interested or going to an event"
+                message="Oh no! Try adjusting the search keyword or click to show you're going to an event"
                 filter={`going__owner__profile=${profile_id}&ordering=-going__created_at`}
+              />
+            )}
+          />
+          <Route
+            exact
+            path="/myevents/interested"
+            render={() => (
+              <EventsPage
+                message="Oh no! Try adjusting the search keyword or click to show you're interested in an event"
+                filter={`interested__owner__profile=${profile_id}&ordering=-interested__created_at`}
               />
             )}
           />
