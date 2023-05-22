@@ -12,6 +12,8 @@ import { axiosReq } from "../../api/axiosDefaults";
 import btnStyles from "../../styles/Button.module.css";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import { Rating } from "react-simple-star-rating";
+import { OverlayTrigger, Tooltip } from "react-bootstrap";
+
 
 function ReviewEditForm(props) {
 
@@ -19,33 +21,31 @@ function ReviewEditForm(props) {
         reviewId, 
         showEditModal,
         handleCloseEditModal, 
+        rating,
+        setReviewComments,
     } = props;
 
   const [reviewData, setReviewData] = useState({
     review: "",
-    rating: 0,
+
   })
 
-  const { review, rating } = reviewData;
+  const { review } = reviewData;
 
   const history = useHistory();
   const [errors, setErrors] = useState({});
 
-  const [newRating, setNewRating] = useState(0);
-  const handleRating = (rate) => {
-    setNewRating(rate / 20);
-    handleChange(newRating)
-  };
+ 
 
   useEffect(() => {
     const handleMount = async () => {
       try {
         const { data } = await axiosReq.get(`/reviews/${reviewId}/`)
-        const {review, rating} = data;
+        const {review} = data;
 
         setReviewData({
           review,
-          rating
+
         })
       } catch (err) {
         console.log(err)
@@ -58,7 +58,7 @@ function ReviewEditForm(props) {
     setReviewData({
       ...reviewData,
       [event.target.name]: event.target.value,
-      [rating]: newRating
+
     });
   };
 
@@ -66,13 +66,25 @@ function ReviewEditForm(props) {
     event.preventDefault()
     const formData = new FormData();
 
-    formData.append('rating', rating)
     formData.append('review', review)
-
+    formData.append('rating', rating)
 
     try {
       await axiosReq.put(`/reviews/${reviewId}/`, formData);
-      history.push(`/reviews/`)
+      handleCloseEditModal()
+      setReviewComments((prevComments) => ({
+        ...prevComments,
+        results: prevComments.results.map((comment) => {
+          return comment.id === reviewId
+            ? {
+                ...comment,
+                review: review,
+                updated_at: "now",
+              }
+            : comment;
+        })
+        
+      }));
     } catch (err) {
       console.log(err)
       if (err.response?.status !== 401){
@@ -84,19 +96,20 @@ function ReviewEditForm(props) {
   const textFields = (
     <div className="text-center">
       <Form.Group>
-        <Rating 
-          initialValue={rating}
-          onClick={handleRating} 
-        />
-      </Form.Group>
-      {errors?.rating?.map((message, idx) => (
-        <Alert variant="warning" key={idx}>
-          {message}
-        </Alert>
-      ))}
+        <OverlayTrigger
+          placement="top"
+          overlay={
+            <Tooltip>
+              To edit your rating, delete the review and start again.
+            </Tooltip>
+          }
+        >
+          <p>
+            <Rating readonly initialValue={rating} size={25} />
+          </p>
+        </OverlayTrigger>
 
-      <Form.Group>
-        <Form.Label>Review</Form.Label>
+        <Form.Label>Edit your Review: </Form.Label>
         <Form.Control
           as="textarea"
           rows={3}

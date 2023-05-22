@@ -22,7 +22,6 @@ const ReviewComment = (props) => {
     rating,
     id,
     eventId,
-    avgRating,
     setEvents,
     setReviewComments,
   } = props;
@@ -103,10 +102,10 @@ const ReviewComment = (props) => {
         <ReviewEditForm 
           showEditModal={showEditModal}
           handleCloseEditModal={handleCloseEditModal}
-          eventId={eventId}
-          avgRating={avgRating}
+          setReviewComments={setReviewComments}
           reviewId={id}
           review={review}
+          rating={rating}
         />
     </div>
   )
