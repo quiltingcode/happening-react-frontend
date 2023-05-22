@@ -52,3 +52,9 @@ This fictional site was created for Portfolio Project #5 (Advanced Front End) - 
 # **Project**
 
 ## Objective
+
+The objective of this project was to build a community-based content sharing web application for a small local area allowing users to learn about events happening in the area and to interact with the published content. The platform allows users to view, create, edit, delete, comment and review event postings. The content can be viewed in a logical order,  filtered by category, and searched on by keyword search. Users can also follow each other and register their interest in other users shared content. 
+
+## Site User's Goal
+
+There are primarily two types of users who will be interacting with this platform. Users who host events in the local area, and users who attend events in the local area. Of course there will also be some cross over between the two groups for those who post events but also attend them as well, which is highly likely being that it is to be used in a small town. 
