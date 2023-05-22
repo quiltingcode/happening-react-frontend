@@ -180,20 +180,24 @@ function EventCreateForm() {
   );
 
   return (
-    <Form onSubmit={handleSubmit}>
-      <Row>
-        <Col className="py-2 p-0 p-md-2" md={7} lg={8}>
-          <Container
-            className={`${appStyles.Content} ${styles.Container} d-flex flex-column justify-content-center`}
-          >
-            <Form.Group className="text-center">
+    <>
+      <Container className={`${appStyles.Content} mt-3`}>
+        <h2 className="text-center">Share a New Event</h2>
+      </Container>
+      <Form onSubmit={handleSubmit}>
+        <Row>
+          <Col className="py-2 p-0 p-md-2" md={7} lg={8}>
+            <Container
+              className={`${appStyles.Content} ${styles.Container} d-flex flex-column justify-content-center`}
+            >
+              <Form.Group className="text-center">
                 {image ? (
                   <>
                     <figure>
                       <Image className={appStyles.Image} src={image} rounded />
                     </figure>
                     <div>
-                      <Form.Label 
+                      <Form.Label
                         className={`${btnStyles.Button} ${btnStyles.Form} btn`}
                         htmlFor="image-upload"
                       >
@@ -203,34 +207,35 @@ function EventCreateForm() {
                   </>
                 ) : (
                   <Form.Label
-                  className="d-flex justify-content-center"
-                  htmlFor="image-upload"
-                >
-                  <Asset src={Upload} message="Click to upload an image" />
-                </Form.Label>
+                    className="d-flex justify-content-center"
+                    htmlFor="image-upload"
+                  >
+                    <Asset src={Upload} message="Click to upload your event poster here" />
+                  </Form.Label>
                 )}
-                
-                <Form.File 
-                  id="image-upload" 
+
+                <Form.File
+                  id="image-upload"
                   accept="image/*"
-                  onChange={handleChangeImage} 
+                  onChange={handleChangeImage}
                   ref={imageInput}
                 />
-            </Form.Group>
-            {errors?.image?.map((message, idx) => (
-              <Alert variant="warning" key={idx}>
-                {message}
-              </Alert>
-            ))}
+              </Form.Group>
+              {errors?.image?.map((message, idx) => (
+                <Alert variant="warning" key={idx}>
+                  {message}
+                </Alert>
+              ))}
 
-            <div className="d-md-none">{textFields}</div>
-          </Container>
-        </Col>
-        <Col md={5} lg={4} className="d-none d-md-block p-0 p-md-2">
-          <Container className={appStyles.Content}>{textFields}</Container>
-        </Col>
-      </Row>
-    </Form>
+              <div className="d-md-none">{textFields}</div>
+            </Container>
+          </Col>
+          <Col md={5} lg={4} className="d-none d-md-block p-0 p-md-2">
+            <Container className={appStyles.Content}>{textFields}</Container>
+          </Col>
+        </Row>
+      </Form>
+    </>
   );
 }
 
