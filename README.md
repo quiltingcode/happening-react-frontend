@@ -53,8 +53,96 @@ This fictional site was created for Portfolio Project #5 (Advanced Front End) - 
 
 ## Objective
 
-The objective of this project was to build a community-based content sharing web application for a small local area allowing users to learn about events happening in the area and to interact with the published content. The platform allows users to view, create, edit, delete, comment and review event postings. The content can be viewed in a logical order,  filtered by category, and searched on by keyword search. Users can also follow each other and register their interest in other users shared content. 
+The objective of this project is to build a community-based content sharing web application for a small local area allowing users to learn about events happening in the area and to interact with the published content. The platform allows users to view, create, edit, delete, comment and review event postings. The content can be viewed in a logical order,  filtered by category, and searched on by keywords. Users can also follow each other and register their interest in other user's shared content. 
 
 ## Site User's Goal
 
-There are primarily two types of users who will be interacting with this platform. Users who host events in the local area, and users who attend events in the local area. Of course there will also be some cross over between the two groups for those who post events but also attend them as well, which is highly likely being that it is to be used in a small town. 
+There are primarily two types of users who will be interacting with this platform. Users who host events in the local area, and users who attend events in the local area. Of course there will also be some cross over between the two groups for those who post events but also attend them as well.
+
+The event hosts wants to share the details of upcoming events with as many members of the local community in one single sharing platform and then gauge two things as a result of the post. Prior to the event happening, the user can see how many people are interested in the event or plan to attend the event. They can also read people's comments regarding the event, and receive messages from interested users who have questions. After the event has taken place, they can read reviews given about the event and see individual ratings and an overall average rating for the event. 
+
+All remaining members of the community who are not hosting events, want to find out about all the upcoming events happening in the local area in one single platform. The users can view the full details of each event in an ordered manner, or filter the full list of events based on their personal preferences. Users can show their interest in an event or show they plan to attend. They can write public comments about the event while it is being advertised for others to read, and once the event has taken place they can add a review as well, giving the hosts and other users excellent feedback. If in doubt users can send each other direct messages, or find further contact details within the profile page. 
+
+## Site Owner's Goal
+
+As the site owner, I saw a problem in the town where I live which I have tried to solve with this platform. I want all members of the local community to be able to find out what is happening in the town in a single dedicated platform. However, not only can they simply see all the event posters listed in one place, they also have the ability to interact with the content, share opinions publicly and contact the event organisers. 
+
+## Project Management
+
+### Github Project Board
+
+I've been using the project board in GitHub to keep my project together. In the initial design phase, it was really helpful to plan the project as a whole, and create the user stories based on my wireframe designs. I created a Milestone for each main app created in the backend API plus one additional for Navigation and Authentication, in order to maintain a similar structure to the backend Project Board. Each milestone has a list of bullet points for the main desired frontend features. Then, I created a linked User Story for each feature and gave it a level of prioritization using the MoSCoW method and a number of User Story points to indicate the level of difficulty for that feature.
+
+Later on, during the build, I also used the Project Board to log and track bugs found in my code which could not be fixed immmediately. Where git commits are directly related to a user story, the commit message has been linked to the user story via the hashtag numbering system. 
+
+![User Stories](images/user-stories.jpg)
+
+### Database Schema
+
+All the models have been set up in a separate DRF repository. Click [here](https://github.com/quiltingcode/events-backend-api) to view the repository or [here](https://happening-api-kelz.herokuapp.com/) to view the deployed API.
+
+ 
+[Back to top](<#table-of-content>)
+
+# **User Experience (UX)**
+
+## Wireframes
+
+The wireframes for the site were created in the software [Balsamiq](https://balsamiq.com). The wireframes have been created principally for desktop devices as this is a browser based platform. However, the wesbite is responsive for tablet and mobile, and I have created additional wireframes to show how the various events pages and profile page adapt to smaller devices. The main grid layout of the components is initially based on the CI Moments walkthrough tutorial as this seems to me the best layout both for wider desktops as for smaller mobile devices for a content sharing platform so I didn't see much reason to change it or find many areas where I could improve on it. Any differences are down to personalised content that fits the project goals.
+
+<details><summary><b>Wireframes</b></summary>
+
+![Events Page](images/events-page.png)
+![Events Detail Page](images/event-detail.png)
+![Events Page - Mobile](images/events-page-mobile.png)
+![Profile Page](images/profile-page.png)
+![Profile Page - Mobile](images/profile-page-mobile.png)
+![Reviews Page](images/reviews-page.png)
+![Reviews Page - Comments](images/review-comments.png)
+
+</details><br/>
+
+## User Stories
+Here I have listed the main user stories for a user who is not logged in, or has no account and a logged in user. These user stories were then tested and confirmed in the [Testing](<#testing>) section.
+
+### Logged Out Site User
+|  | | |
+|:-------:|:--------|:--------|
+| As a Logged out User | I can log in so that I can interact fully with the site | &check; |
+| As a Logged out User | I can sign up so that I can interact fully with the site | &check; |
+| As a Logged out User | I can view the Events homepage | &check; |
+| As a Logged out User | I can view the details of an individual event | &check; |
+| As a Logged out User | I can view the top upcoming events | &check; |
+| As a Logged out User | I can view the popular profiles | &check; |
+| As a Logged out User | I can view the details of an individual profile page | &check; |
+| As a Logged out User | I can filter events by category | &check; |
+| As a Logged out User | I can search events by title, profile, date or tag | &check; |
+
+### Logged In Site User
+|  | | |
+|:-------:|:--------|:--------|
+| As a Logged in User | I can log in so that I can interact fully with the site | &check; |
+| As a Logged in User | I can log out from the site so that no-one else can interact with the site using my details | &check; |
+| As a Logged in User | I can view the Events homepage | &check;
+| As a Logged in User | I can view the details of an individual event | &check; |
+| As a Logged in User | I can view the top upcoming events | &check; |
+| As a Logged in User | I can view the popular profiles | &check; |
+| As a Logged in User | I can view the details of an individual profile page | &check; |
+| As a Logged in User | I can filter events by category | &check; |
+| As a Logged in User | I can search events by title, profile, date or tag | &check; |
+
+
+[Back to top](<#table-of-content>)
+
+## Site Structure
+
+
+Read more about the different choices in the [Features](<#features>) section.
+
+
+## Design Choices
+
+* ### Color Scheme
+* ### Typography
+
+[Back to top](<#table-of-content>)
