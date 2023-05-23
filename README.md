@@ -110,26 +110,63 @@ Here I have listed the main user stories for a user who is not logged in, or has
 |:-------:|:--------|:--------|
 | As a Logged out User | I can log in so that I can interact fully with the site | &check; |
 | As a Logged out User | I can sign up so that I can interact fully with the site | &check; |
-| As a Logged out User | I can view the Events homepage | &check; |
-| As a Logged out User | I can view the details of an individual event | &check; |
-| As a Logged out User | I can view the top upcoming events | &check; |
-| As a Logged out User | I can view the popular profiles | &check; |
-| As a Logged out User | I can view the details of an individual profile page | &check; |
-| As a Logged out User | I can filter events by category | &check; |
-| As a Logged out User | I can search events by title, profile, date or tag | &check; |
+| As a Logged out User | I can see a list of all events so that I can see all events that have been shared to the site | &check; |
+| As a Logged out User | I can view a single event so that I can see single event details| &check; |
+| As a Logged out User | I can view the top upcoming events so that I know which events have the highest going count | &check; |
+| As a Logged out User | I can view the popular profiles so that I can see who has the most followers | &check; |
+| As a Logged out User | I can view the details of an individual profile page so that I can see more profile data | &check; |
+| As a Logged out User | I can filter events by category so that I can view only the events I'm interested in | &check; |
+| As a Logged out User | I can search events by title, profile, date or tag so that I can find one particular event | &check; |
+| As a Logged out User | I can view comments of an event so that I can see what other users think about the event | &check; |
 
 ### Logged In Site User
 |  | | |
 |:-------:|:--------|:--------|
 | As a Logged in User | I can log in so that I can interact fully with the site | &check; |
 | As a Logged in User | I can log out from the site so that no-one else can interact with the site using my details | &check; |
-| As a Logged in User | I can view the Events homepage | &check;
-| As a Logged in User | I can view the details of an individual event | &check; |
-| As a Logged in User | I can view the top upcoming events | &check; |
-| As a Logged in User | I can view the popular profiles | &check; |
-| As a Logged in User | I can view the details of an individual profile page | &check; |
-| As a Logged in User | I can filter events by category | &check; |
-| As a Logged in User | I can search events by title, profile, date or tag | &check; |
+EVENTS
+| As a Logged in User | I can see a list of all events so that I can see all events that have been shared to the site | &check;
+| As a Logged in User | I can view a single event so that I can see single event details | &check; |
+| As a Logged in User | I can view the top upcoming events so that I know which events have the highest going count | &check; |
+| As a Logged in User | I can view the feed page so that I can only see events of profiles I follow | &check; |
+| As a Logged in User | I can view the My Events page so that I can see only the events i'm interested in or going to | &check; |
+| As a Logged in User | I can view the details of an individual profile page so that I can see more profile data | &check; |
+| As a Logged in User |  I can see all the events from one profile so that I can view all the events of one profile easily | &check; |
+| As a Logged in User | I can filter events by category so that I can view only the events I'm interested in  | &check; |
+| As a Logged in User | I can search events by title, profile, date or tag so that I can find one particular event | &check; |
+| As a Logged in User | I can create a new event so that I can promote an event in the town| &check; |
+| As a Logged in User | I can edit my events so that I can change the details or correct mistakes | &check; |
+| As a Logged in User | I can delete my own events so that I can remove events from the site | &check; |
+INTERESTED/GOING
+| As a Logged in User | I can add interested to a post so that I can publicly display my interest in an event | &check; |
+| As a Logged in User | I can remove interested to a post so that I can remove interest in an event if i change my mind | &check; |
+| As a Logged in User |  I can add going to an event so that I can publicly show that i plan to attend | &check; |
+| As a Logged in User | I can remove going from an event so that I can remove going to an event if i no longer plan to attend | &check; |
+COMMENTS
+| As a Logged in User | I can view comments of an event so that I can see what other users think about the event | &check; |
+| As a Logged in User | I can create a comment so that I can publicly show my thoughts about an upcoming event | &check; |
+| As a Logged in User | I can edit my comments so that I can correct mistakes | &check; |
+| As a Logged in User | I can delete a comment that I created so that I can remove comments as I see fit | &check; |
+| As a Logged in User | I can delete a comment that I created so that I can remove comments as I see fit | &check; |
+FOLLOW
+| As a Logged in User | I can follow another user so that I can see their events in my feed page | &check; |
+| As a Logged in User | I can unfollow another user so that I can stop seeing their events in my feed page | &check; |
+REVIEWS
+| As a Logged in User | I can view all events that have happened so that I can see their average rating and review count | &check; |
+| As a Logged in User | I can view all the reviews relating to a single event so that I can see other user's opinions of the event | &check; |
+| As a Logged in User | I can post a review on a past event so that I can share my opinion on the event | &check; |
+| As a Logged in User | I can edit my own reviews so that I can correct my comments | &check; |
+| As a Logged in User | I can delete a review that I created so that I can remove reviewsI no longer want published | &check; |
+PROFILES
+| As a Logged in User | I can view the popular profiles so that I can see who has the most followers | &check; |
+| As a Logged in User | I can view the profile page of another user so that I can see more details about that user | &check; |
+| As a Logged in User | I can edit my own profile page so that I can add additional information for other users to see about me | &check; |
+| As a Logged in User | I can change my username and password so that I can change my login details if I feel they are not secure | &check; |
+| As a Logged in User | I can change my username and password so that I can change my login details if I feel they are not secure | &check; |
+CONTACT
+| As a Logged in User | I can view messages in my profile page so that I can read messages other users have sent me | &check; |
+| As a Logged in User | I can send a message to another user so that I can ask a question about an event they are hosting | &check; |
+
 
 
 [Back to top](<#table-of-content>)
