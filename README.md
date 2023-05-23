@@ -167,19 +167,22 @@ CONTACT
 | As a Logged in User | I can view messages in my profile page so that I can read messages other users have sent me | &check; |
 | As a Logged in User | I can send a message to another user so that I can ask a question about an event they are hosting | &check; |
 
-
-
 [Back to top](<#table-of-content>)
 
 ## Site Structure
 
-
-Read more about the different choices in the [Features](<#features>) section.
-
+Happening is split up in two parts: when the user is logged out and when the user is logged in. Depending on login status different pages are available for the user. When the user is logged out the pages: Home, and Sign In or Up are available from the Navigation Bar menu. When the user is logged in Feed, My Events, Reviews, Signout and Profile Page also become available. 
 
 ## Design Choices
 
 * ### Color Scheme
+
+When deciding on the colour scheme for my site, I looked at other content sharing platforms such as Facebook, Instagram and Eventbrite for inspiration. All of these use a very neutral color scheme with barely any background colour at all, and then just hints of brand color here and there to let the buttons stand out. In order to follow a similar approach, I chose a very neutral background color and then complimentary pink and purple tones for the icons and buttons. 
+
+![Colour Palette](images/color-palette.png)
+
 * ### Typography
+
+![Typography](images/typography.jpg)
 
 [Back to top](<#table-of-content>)
