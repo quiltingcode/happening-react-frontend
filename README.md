@@ -27,15 +27,18 @@ This fictional site was created for Portfolio Project #5 (Advanced Front End) - 
     * [Design Choices](<#design-choices>)
 
 - [Existing Features](#features)
+  * [Navigation](#navigation)
+  * [Authentication](#authentication)
   * [Homepage](#homepage)
-  * [Profile Data](#profile-list)
-  * [Events Data](#events-list)
-  * [Comments Data](#comments-data)
-  * [Interested Data](#interested-data)
-  * [Going Data](#going-data)
-  * [Followers Data](#followers-data)
-  * [Reviews Data](#reviews-data)
-  * [Contact Data](#contact-data)
+  * [Feed](#feed)
+  * [My Events](#my-events)
+  * [Event Detail Page](#event-detail-page)
+  * [Reviews](#reviews)
+  * [Profile Page](#profile-page)
+  * [Contact](#contact)
+  * [Feed](#feed)
+  * [Reusable React Components](#reusable-react-components)
+
 
 - [Features Left To Implement](<#features-left-to-implement>)
 
@@ -183,6 +186,68 @@ When deciding on the colour scheme for my site, I looked at other content sharin
 
 * ### Typography
 
+The main font used for the site is 'Montserrat' with a fallback font of Sans-Serif just in case it doesn't load. This font is nice and clear to read even though the platform in general is not text-heavy. 
+
 ![Typography](images/typography.jpg)
+
+[Back to top](<#table-of-content>)
+
+# **Existing Features**
+
+* ## Navigation
+
+The navigation bar is very clean and straight forward. Depending on whether you are logged in or not, different menus are visible for the site user. For tablet and mobile devices, the navigation bar menu turns into a hamburger dropdown list. 
+
+On accessing the site for the first time, the user is logged out and the following menu items are visible:
+
+* Happening Logo - On the far left hand side of the navigatin bar is the Happening brand logo. This is visible throughout the site to all user types and contains a link back to the homepage. 
+* Home - the first menu item, and the initial default start page, is 'Home', where all events shared among the community are displayed. 
+* Authentication - Next is a dropdown menu in the form of a profile icon. Within this dropdown the user has the options to Signin or Signup which takes them to the respective page. 
+
+![Logged out Navbar](images/navbar-loggedout.jpg)
+![Logged out Navbar Mobile](images/navbar-loggedout-mobile.jpg)
+
+Once the user logs in, additional links become available to select:
+
+* Feed - Logged in users can access the feed page where they can see events of other profiles they follow.
+* My Events - Logged in users can access the My Events dropdown menu where they can view either all the events where they have clicked 'interested' or all the events where they have clicked 'going'.
+* Reviews - Logged in users can go to the reviews page and read reviews about events
+* Authentication - The icons within the authentication change once a user has logged in, and now display a link to the user's own profile page or a link to sign out of the site. 
+
+![Logged in Navbar](images/navbar-loggedin.jpg)
+![Logged in Navbar Mobile](images/navbar-loggedin-mobile.jpg)
+
+## Authentication
+
+Users who are new to the site, or haven't previously created an account can click on the Signup Menu option on the Navigation Bar to create a user account.  I have used the standard dj-rest/auth/registration user account signup process for this. 
+
+![Sign up](images/signup.jpg)
+
+If a user has a Happening user account, they can click on the Signin menu option in the Navigation Bar to sign into their account.
+
+![Sign in](images/signin.jpg)
+
+If the user wishes to sign out, once signed in, the sign out option becomes visible in the Navigation Bar for them to select. 
+
+* ## Homepage
+
+There are three main react components which make up the Home events page. 
+
+1. Popular Profiles Component
+2. Shared events content
+3. Top Upcoming Events
+
+### Popular Profiles Component
+
+
+
+* ## Feed
+* ## My Events
+* ## Event Detail Page
+* ## Reviews
+* ## Profile Page
+* ## Contact
+* ## Feed
+* ## Reusable React Components
 
 [Back to top](<#table-of-content>)
