@@ -26,10 +26,16 @@ const Profile = (props) => {
         </Link>
       </div>
       <div className={`mx-2 ${styles.WordBreak}`}>{owner}</div>
+      {currentUser &&
       <div className="mx-2">
-        {currentUser &&
-          !is_owner &&
-          (following_id ? (
+        
+        {  is_owner ? (
+            <Button
+              className={`${btnStyles.Button} ${btnStyles.Follow}`}
+            >
+              can't
+            </Button>
+          ) : following_id ? (
             <Button
               className={`${btnStyles.Button} ${btnStyles.Unfollow}`}
               onClick={() => handleUnfollow(profile)}
@@ -43,8 +49,9 @@ const Profile = (props) => {
             >
               follow
             </Button>
-          ))}
+          )}
       </div>
+      }     
     </div>
   );
 }
