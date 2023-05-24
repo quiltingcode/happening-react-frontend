@@ -10,7 +10,6 @@
     text-align: center;
     display:flex;
     justify-content:center;
-
   }
 
   .Button:hover {
@@ -122,6 +121,30 @@
 
 .UnfollowMe:hover {
   background-color: #2f4858;
+}
+
+.CantFollow {
+  background-color: #2f48583a;
+  color: white;
+  font-size: 0.6rem;
+  min-width: 50px;
+  padding: 2px;
+}
+
+.CantFollow:hover {
+  background-color: #2f485856;
+  color: white;
+  font-size: 0.6rem;
+  min-width: 50px;
+  padding: 2px;
+}
+
+.CantFollow:focus {
+  background-color: #2f48585d;
+  color: white;
+  font-size: 0.6rem;
+  min-width: 50px;
+  padding: 2px;
 }
 
 .ReviewCountToggle {

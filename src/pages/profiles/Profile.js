@@ -6,6 +6,8 @@ import { Link } from 'react-router-dom/cjs/react-router-dom.min';
 import Avatar from '../../components/Avatar';
 import Button from 'react-bootstrap/Button';
 import { useSetProfileData } from '../../contexts/ProfileDataContext';
+import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
+import Tooltip from 'react-bootstrap/Tooltip';
 
 
 const Profile = (props) => {
@@ -28,13 +30,19 @@ const Profile = (props) => {
       <div className={`mx-2 ${styles.WordBreak}`}>{owner}</div>
       {currentUser &&
       <div className="mx-2">
-        
         {  is_owner ? (
-            <Button
-              className={`${btnStyles.Button} ${btnStyles.Follow}`}
+            <OverlayTrigger
+              placement="top"
+              overlay={
+                <Tooltip>You can't follow yourself!</Tooltip>
+              }
             >
-              can't
+              <Button
+              className={`${btnStyles.Button} ${btnStyles.CantFollow}`}
+            >
+              follow
             </Button>
+            </OverlayTrigger>
           ) : following_id ? (
             <Button
               className={`${btnStyles.Button} ${btnStyles.Unfollow}`}
