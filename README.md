@@ -306,13 +306,43 @@ In the original plan for this project, I wanted the My Events page to be a combi
 
 If you are logged in, you are able to share new events with the community. By clicking on the Add Event menu option in the Navigation Bar, you are taken to the Share a New Event page, where you can submit the event creation form to the API.
 
+All fields are mandatory apart from the event description (which may be understood from the event poster image that is uploaded) and an image must be uploaded for the event to be submitted successfully. Once the form has been submitted successfully, you can see the event published successfully as you are re-directed automatically to the newly created event details page. 
+
+Each time you share a new event with the community, your events count goes up on your profile page for other users to see how active you are as an event host. 
+
 ![Create an Event](images/event-create.jpg)
 
 * ## Event Detail Page
+
+In the event details page, this simply shows everything relating to one single event. You can reach this page by clicking on an event image in any of the events pages or on the event title in the Top Upcoming Events component and Reviews page. It also shows the popular profiles component and the Top Upcoming Events component for continuity across the pages. If you are the owner of the event, from this page you have the option to edit or delete the event by clicking on the three dots that appear next to the event posted date. 
+
+If you select Edit, you are taken back to the event creation form, but the fields are already pre-populated with the existing event information. You can edit the desired fields and save the changes, which will return you to the event detail page and you can see that the event has been updated successfully. 
+
+![Edit an Event](images/event-edit.jpg)
+
+If you select Delete, a pop-up message appears asking you if you are sure you want to delete this event. This defensive design component allows the user to cancel out of the deletion process if the button was pressed in error. If however, the user wishes to proceed with the deletion they can click confirm and the event will be removed from all pages and the user redirected back to the previously visited page. 
+
+![Delete an Event](images/event-delete.jpg)
+
+Below the event details, any comments that have been posted about this event are displayed.
+
+![Comments](images/comments.jpg)
+
+If there are no comments yet, the user will see a message telling them that there are no comments. 
+
+If the user is not logged in, they can read any comments that have been posted but they can't post a comment themselves unless they log in. 
+
+![Comments - not logged in](images/comments-none.jpg)
+
 * ## Reviews
 * ## Profile Page
 * ## Contact
 * ## Feed
 * ## Reusable React Components
+
+### Three Dots Edit Delete Dropdown Menu
+### Delete Confirmation Component
+### Date Formatter Component
+### Alert Component
 
 [Back to top](<#table-of-content>)
