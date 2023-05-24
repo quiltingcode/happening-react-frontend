@@ -14,7 +14,7 @@ const PopularProfiles = () => {
         {popularProfiles.results.length ? (
             <>
                 <h4 className='text-center'>Follow these Popular Profiles</h4>
-                {popularProfiles.results.slice(0,5).map((profile) => (
+                {popularProfiles.results.slice(0,6).map((profile) => (
                     <Container key={profile.id} className='d-inline justify-content-center align-items-center'>
                         <Profile profile={profile} mobile />
                     </Container>
