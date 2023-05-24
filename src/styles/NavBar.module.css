@@ -7,6 +7,12 @@
     padding: 5px;
 }
 
+.nav-link {
+    display: block;
+    padding: 0.5rem 1rem;
+    text-align: center;
+}
+
 .Active i {
     color: #db628e;
 }
@@ -18,6 +24,5 @@
     vertical-align: middle;
 }
 
-.NavDropdown > li:focus {
-    background-color: yellow;
-}
+
+

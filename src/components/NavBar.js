@@ -55,12 +55,14 @@ const NavBar = () => {
       </NavLink>
 
       <NavDropdown
-        title={
-          <span>
-            <i className="fas fa-heart"></i> My Events
-          </span>
-        }
         id="basic-nav-dropdown"
+        title=
+          <span className={styles.NavLink}>
+            <i className="fas fa-heart"></i>
+            <br />
+            My Events
+          </span>
+        
       >
         <NavDropdown.Item
           as={Link}
