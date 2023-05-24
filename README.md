@@ -32,6 +32,7 @@ This fictional site was created for Portfolio Project #5 (Advanced Front End) - 
   * [Homepage](#homepage)
   * [Feed](#feed)
   * [My Events](#my-events)
+  * [Create an Event](#create-an-event)
   * [Event Detail Page](#event-detail-page)
   * [Reviews](#reviews)
   * [Profile Page](#profile-page)
@@ -213,6 +214,7 @@ Once the user logs in, additional links become available to select:
 * My Events - Logged in users can access the My Events dropdown menu where they can view either all the events where they have clicked 'interested' or all the events where they have clicked 'going'.
 * Reviews - Logged in users can go to the reviews page and read reviews about events
 * Authentication - The icons within the authentication change once a user has logged in, and now display a link to the user's own profile page or a link to sign out of the site. 
+* Add Event - Logged in users can access the event creation page to share their own events to the site. 
 
 ![Logged in Navbar](images/navbar-loggedin.jpg)
 ![Logged in Navbar Mobile](images/navbar-loggedin-mobile.jpg)
@@ -231,18 +233,81 @@ If the user wishes to sign out, once signed in, the sign out option becomes visi
 
 * ## Homepage
 
-There are three main react components which make up the Home events page. 
+There are four main react components which make up the Home events page. 
 
 1. Popular Profiles Component
-2. Shared events content
+2. Events posts
 3. Top Upcoming Events
+4. Search and Filter
 
 ### Popular Profiles Component
 
+The popular profiles component is a permanent feature across the entire site. It appears at the top of all pages. This component uses a filter to order all site users by followers count from highest to lowest. The users with the highest follower count are determined to be the most popular profiles and the top six are displayed within the popular profiles component. 
 
+If the user isn't logged in, they can see avatar, and the username of the top 6 most popular profiles, and if the user is logged in, they will also see a button enabling them to follow or unfollow the profile. 
+
+![Popular Profiles - logged out](images/popular-profiles-loggedout.jpg)
+![Popular Profiles - logged in](images/popular-profiles-loggedin.jpg)
+
+If the follow button is greyed out, it is because your own profile has made it to the top 6 most popular profiles list, but you are not allowed to follow yourself. Originally, it was simply the case that no button appeared under your own profile but aesthetically, this didn't look good and the component didn't look balanced, so I decided to put an inactive button with a tooltip there instead. 
+
+![Popular Profiles - own profile](images/popular-profiles-followyourself.jpg)
+
+Each profile avatar can be clicked on to view the full profile page of that user. 
+
+### Events Posts
+
+All events that are created through the Happening sharing platform are displayed on the Homepage. All events created are requested from the API and they are ordered by the created date starting with the most recently posted and working backwards. 
+
+![Event](images/event.jpg)
+
+Each event posting displays the user who shared it and the date it was shared. The event poster is in the center, and underneath are the event details. In bold, you can see the event title and the date it's going to take place. Next is a description of the event, and the tags.
+
+Each event has three counts shown - A count of people interested in the event, a count of people planning on going to the event, and a count of comments users have posted about this event. 
+
+The first two counts work on a toggle system but in addition to this, they are also mutually exclusive. You can click the interested button on and off to make the count go up and down. Equally, you can click the going button on and off to make the count go up and down. However, if you have previoulsy clicked interested, and now you've decided to attend the event, by clicking the going button, the interested count automatically goes down by 1 as the going count goes up by 1. And vice versa. You can't be both interested and going to an event. It must be one or the other. 
+
+By clicking on the event image or the comments count, the user is taken to the event details page.
+
+### Top Upcoming Events
+
+The third component of the events page is the Top Upcoming Events component. In desktop view, this is shown next to the popular profiles and events, and on tablet and mobile devices, this component moves over into the center and is displayed between the popular profiles and the events. 
+
+This component uses two filters: The first filter comes from the API and orders all site events by going count from highest to lowest. Next, I used a Javascript filter on the frontend results to check the event date, and filter out any events where the event_date field is in the past. There is no point continually promoting fantastic events which have already taken place. Finally, on smaller devices I've taken just the top five results so that it fits better on smaller screens. 
+
+If you click on any of the top events listed, you are taken to the event details page.
+
+![Popular Events - Desktop](images/popular-events-desktop.jpg)
+![Popular Events - Mobile](images/popular-events-mobile.jpg)
+
+### Search and Filter
+
+If the user wants to search for specific events or an event, they have two ways to achieve this:
+
+1. All events are assigned a category on creation, and so the events list can be filtered by these categories to show only the events in one category selected by the user from the dropdown options. 
+
+2. Search - The user can search all the events listed by event title, username who posted it, event date, or event tags. This search can be used in conjunction with the category filter or independently, but when the site has a lot of shared events, using both search and filter together makes the overall search facility much more efficient. 
+
+![Events Filter](images/search-filter.jpg)
 
 * ## Feed
+
+The feed page looks identical to the homepage, only the Events Posts component changes. In this page all the events are requested from the API, but then a filter is used to only show events posted by profiles that the currently logged in user is following. For this reason, this page doesn't work if the user is not logged in. Equally, if the user isn't following any other profiles, no events will be displayed and a 'No Results found' message will appear instead inside the events posts component. 
+
+![Feed- No Results](images/no-results.jpg)
+
 * ## My Events
+
+The My Events page looks identical to the homepage, only the Events Posts component changes. On selecting the My Events menu option in the NavBar, you are shown a dropdown with two additional options. Interested or Going. If you select interested, the events posts component will be filtered to only show the events where the logged in user has clicked the interested button. Alternatively, if the user selects the going option from navbar dropdown, the filter changes to only show events where the logged in user has clicked the going button. 
+
+In the original plan for this project, I wanted the My Events page to be a combination of all the events where the user has selected either interested or going on an event. Initially, I tried to set up the backend API and display both these filters at the same time, but I couldn't join the two filterset fields together. I asked among the slack community and others had achieved adding two filters together with an AND command, but nobody seemed to know how to do an OR command. I consulted my mentor further into the project when I had the frontend up and running and he was also unsure how this could be achieved and suggested I just add an additional filter dropdown to toggle between the two for now. 
+
+* ## Create an Event
+
+If you are logged in, you are able to share new events with the community. By clicking on the Add Event menu option in the Navigation Bar, you are taken to the Share a New Event page, where you can submit the event creation form to the API.
+
+![Create an Event](images/event-create.jpg)
+
 * ## Event Detail Page
 * ## Reviews
 * ## Profile Page
