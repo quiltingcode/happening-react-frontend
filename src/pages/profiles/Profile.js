@@ -21,7 +21,7 @@ const Profile = (props) => {
     const {handleFollow, handleUnfollow} = useSetProfileData();
 
   return (
-    <div className={styles.Profiles}>
+    <div className={`${styles.Profiles} mb-2`}>
       <div>
         <Link className="align-self-center" to={`/profiles/${id}`}>
           <Avatar src={profile_pic} height={40} />
