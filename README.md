@@ -10,7 +10,7 @@ This fictional site was created for Portfolio Project #5 (Advanced Front End) - 
 
 [View live website here](https://happening-react.herokuapp.com/)
 
-![Responsive design](static/images/readme/devicemockup.png)
+![Responsive design](images/mockup.jpg)
 
 ## Table of Contents
 
@@ -324,15 +324,15 @@ If you select Delete, a pop-up message appears asking you if you are sure you wa
 
 ![Delete an Event](images/event-delete.jpg)
 
-Below the event details, any comments that have been posted about this event are displayed.
-
-![Comments](images/comments.jpg)
-
-If there are no comments yet, the user will see a message telling them that there are no comments. 
+Below the event details is the comments section. If there are no comments yet, the user will see a message telling them that there are no comments. 
 
 If the user is not logged in, they can read any comments that have been posted but they can't post a comment themselves unless they log in. 
 
 ![Comments - not logged in](images/comments-none.jpg)
+
+Any comments that have been posted about this event are displayed, regardless of login status. If the user logs in they will see a comment form above the existing comments where they can post their own comment to the event. 
+
+![Comments](images/comments.jpg)
 
 * ## Reviews
 * ## Profile Page
