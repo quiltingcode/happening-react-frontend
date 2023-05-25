@@ -330,7 +330,7 @@ If the user is not logged in, they can read any comments that have been posted b
 
 ![Comments - not logged in](images/comments-none.jpg)
 
-Any comments that have been posted about this event are displayed, regardless of login status. If the user logs in they will see a comment form above the existing comments where they can post their own comment to the event. 
+Any comments that have been posted about this event are displayed, regardless of login status. If the user logs in they will see a comment form above the existing comments where they can post their own comments about the event for other users to read. 
 
 ![Comments](images/comments.jpg)
 

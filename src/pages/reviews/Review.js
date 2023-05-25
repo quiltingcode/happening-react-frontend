@@ -16,15 +16,12 @@ import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
 import Row from 'react-bootstrap/Row';
 import Tooltip from 'react-bootstrap/Tooltip';
 import ReviewCreateForm from './ReviewCreateForm';
-
 import ReviewComment from './ReviewComment';
-import { useRedirect } from '../../hooks/UseRedirect';
 import { Rating } from "react-simple-star-rating";
 import DateFormatter from "../../utils/DateFormatter";
 
 const Review = (props) => {
 
-  useRedirect('loggedOut')
 
     const {
         id,

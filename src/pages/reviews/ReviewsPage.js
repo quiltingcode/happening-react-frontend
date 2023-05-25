@@ -27,10 +27,13 @@ function ReviewsPage({ message="", filter="" }) {
   const [search, setSearch] = useState("");
   const [category, setCategory] = useState("");
 
+  const current = new Date();
+  const date = `${current.getFullYear()}-${current.getMonth()+1}-${current.getDate()}`;
+
   useEffect(() => {
     const fetchEvents = async () => {
       try {
-        const { data } = await axiosReq.get(`/events/${filter}&search=${search}&category=${category}`);
+        const { data } = await axiosReq.get(`/events/${filter}&search=${search}&category=${category}&event_date__lte=${date}`);
         setEvents(data);
         setHasLoaded(true);
       } catch (err) {
@@ -46,7 +49,7 @@ function ReviewsPage({ message="", filter="" }) {
       clearTimeout(timer)
     }
     
-  }, [filter, search, pathname, category]);
+  }, [filter, search, pathname, category, date]);
   
   return (
     <Row className="h-100">
@@ -92,8 +95,8 @@ function ReviewsPage({ message="", filter="" }) {
           <>
             {events.results.length ? (
               <InfiniteScroll
-                children={events.results.filter(a => new Date(a.event_date) - new Date() < 0).map((review) => (
-                  <Review key={review.id} {...review} setEvents={setEvents} />
+                children={events.results.map((event) => (
+                  <Review key={event.id} {...event} setEvents={setEvents} />
                 ))}
                 dataLength={events.results.length}
                 loader={<Asset spinner />}
