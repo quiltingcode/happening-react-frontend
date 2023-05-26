@@ -448,5 +448,41 @@ As stated previously, there is no way for the user to check whether the message 
 
 [Back to top](<#table-of-content>)
 
-# **Technologies Used**
+# **Technologies Used - Frontend**
 
+## Languages
+
+* [HTML5](https://en.wikipedia.org/wiki/HTML) - Provides the content and structure for the website.
+* [CSS3](https://en.wikipedia.org/wiki/CSS) - Provides the styling for the website.
+* [JavaScript](https://en.wikipedia.org/wiki/JavaScript) - Provides interactive elements of the website
+* [React.js](https://en.wikipedia.org/wiki/React_(software)) - Provides the base for the frontend components
+
+## Frameworks & Software
+* [React Bootstrap](https://react-bootstrap.github.io/) - A CSS framework that helps build solid, responsive, mobile-first sites
+* [Balsamiq](https://balsamiq.com/) - Used to create the wireframes
+* [Github](https://github.com/) - Used to host the repository, store the commit history and manage the project board containing user stories and bug reports.
+* [Heroku](https://en.wikipedia.org/wiki/Heroku) - A cloud platform that the application is deployed to.
+* [Lighthouse](https://developer.chrome.com/docs/lighthouse/overview/) - Used to test site performance.
+* [Responsive Design Checker](https://www.responsivedesignchecker.com/) - Used for responsiveness check across devices.
+* [Favicon](https://favicon.io/) - Used to create the favicon.
+* [Google Chrome DevTools](https://developer.chrome.com/docs/devtools/) - Used to debug and test responsiveness.
+* [Cloudinary](https://cloudinary.com/) - A service that hosts image files in the project.
+* [My Free Logo Maker](https://myfreelogomaker.com/explore) - Used to create the Happening brand logo
+* [ColorSpace](https://mycolor.space/?hex=%23081045&sub=1) - Used to create the colour palette
+* [HTML Validation](https://validator.w3.org/) - Used to validate HTML code
+* [CSS Validation](https://jigsaw.w3.org/css-validator/) - Used to validate CSS code
+* [JSHint Validation](https://jshint.com/) - Used to validate JavaScript code
+
+## Libraries
+
+* [NPM React-star-rating](https://www.npmjs.com/package/react-simple-star-rating) - A simple react component for adding a star rating to your project.
+
+[Back to top](<#table-of-content>)
+
+# Testing
+
+Please click [**_here_**](TESTING.md) to read more information about testing The Craft Cafe
+
+[Back to top](<#contents>)
+
+# Deployment
