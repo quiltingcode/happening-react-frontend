@@ -37,7 +37,6 @@ This fictional site was created for Portfolio Project #5 (Advanced Front End) - 
   * [Reviews](#reviews)
   * [Profile Page](#profile-page)
   * [Contact](#contact)
-  * [Feed](#feed)
   * [Reusable React Components](#reusable-react-components)
 
 
@@ -335,9 +334,78 @@ Any comments that have been posted about this event are displayed, regardless of
 ![Comments](images/comments.jpg)
 
 * ## Reviews
+
+If the user is logged in, they can access the reviews page. The structure of this page is the same as the other events pages with the popular profiles component, the top upcoming events component and the search events component all still visible. The filter for the events listed however is different. The initial filter in the App.js file (filter={`?ordering=-event_date`}) orders the full list of events retrieved by their event_date in descending order. Once the full list has been called and ordered, a second filter (event_date__lte=${date}) is applied to remove any events where the event_date is less than or equal to today's date.
+
+This differentiates the usage between the comments feature and the reviews feature. The comments are intended to be posted while an event is being promoted, prior to it taking place, to gauge the level of enthusiasm for the future event. The reviews are only for past events that have now taken place where people who attended can leave their feedback for others to read. 
+
+When the user first enters the reviews page, each past event is listed with the following information: The profile avatar of the event host, the event title, the event date, the event's average rating score and the review count. This information is displayed in an in-line block on desktop devices and in column format on tablets and mobile. 
+
+![Event Review Summary - desktop](images/review-desktop.jpg)
+![Event Review Summary - mobile](images/review-mobile.jpg)
+
+If you hover your mouse over the review count a tooltip tells you that you can click to view the individual opinions which have been left. The review comments component will open and close on a toggle function as you click the review count button. 
+
+![Event Review Comments](images/review-comments.jpg)
+
+Each event has a button prompting the user to post a review. If you are the owner of the event, a tooltip will tell you that you are not allowed to review your own event, and the button remains inactive. Similarly, if you have already posted a review to the selected event, the tooltip will tell you that you have already reviewed the event and will prevent you from posting a second. You can click on the event title to take you to the event details page and see more information about the event. You can also click on the avatars to see the profile page of the user who posted the event, or the profiles of other users who have left reviews.  
+
+If the event is not your own, and you haven't previously submitted a review, you can click the button and access the modal pop up for writing a review. 
+
+![Write a Review](images/review-create.jpg)
+
+The review form has two parts to it. Firstly, it has a five star rating component, which I installed and followed the library documentation from [NPM React Simple Rating](https://www.npmjs.com/package/react-simple-star-rating). Then it has a text input field for users to publish an opinion. The input field is mandatory so you must leave a comment if you want to post a review, but if you leave the star rating blank, it will assume you are leaving a bad review and allocate 0 stars to your published review, and the average rating for the event will be recalculated accordingly. 
+
+If you make a typing error or you wish to change your comments, once the review is published you have the option to edit the comments, or delete the entire review and start again if you want to change the star rating as well. If you want to delete the review, similarly to the event deletion, you will see a popup message asking you to confirm the delete request before it is actually removed from the site. 
+
+![Edit a Review](images/review-edit.jpg)
+
 * ## Profile Page
+
+Throughout the site, wherever you see profile avatars, albeit in the popular profiles component, or next to events, comments or reviews that have been published, you can click on the avatar to view the full profile page of that user. In the Navigation Bar, in the authentication dropdown, you can access your own profile page as well. 
+
+### Messaging
+
+At the top of the profile page, the user can still see the popular profiles component as a permanent feature across the site, but the top upcoming events component has been replaced by a messaging system component. On desktop devices the message component is visible on the right of popular profiles, but for tablet and mobile it moves into place between the popular profiles and the User Profile Stats. 
+
+If you are viewing someone else's profile, the message component contains a form to write a message and send it to the owner of the profile page you are viewing. 
+
+![Create Message](images/message-create.jpg)
+
+If you are viewing your own profile page the messaging component will display your own private message inbox. Other users will not be able to see the messages that have not been sent to them. All messages that have been sent to you, are displayed in descending order of when they were sent. You can see the avatar and the username of the sender, the date the message was sent, and the message itself. Each message has a 'reply' button if the user wants to send a reply message back to the sender. 
+
+![Received Messages](images/message-inbox.jpg)
+![Messages - Reply](images/message-reply.jpg)
+
+Unlike with other forms such as creating an event, comment or review, where you can see the published content once the form has been posted successfully, the user does not have access to other user's inboxes to check whether the message has been sent successfully or not. For this reason, in the case of the messaging component, I have set up an alert system using Bootstrap alerts, to display a success alert message when a message or a reply message have been sent successfully. This adds to good user experience, and user peace of mind. 
+
+![Message Alert](images/message-alert.jpg)
+
+
+For the time being, there is no alert system in place to send a notification to a user when they receive a new message, but this is something I would like to look into in future development sprints. 
+
+### Profile Stats
+
+When a user signs up and creates a new site account, a basic profile is automatically created with a username, password and defauly avatar image. The only information that subsequently gets updated in the profile page is the site usage stats, as follows: 
+
+* Number of events the user has posted
+* Number of events the user has flagged as going
+* Number of profiles they are following
+* Number of profiles that are following them
+
+There is an about container and a contact details container which remain empty until the user goes into their own profile page and clicks on the three dots dropdown to Edit the profile and add their personal details to the page. If they click on the Edit Profile option, they are taken to a new page containing the full profile details form to fill in and submit. Here, they can add their own avatar image, a name, bio, website address, instagram or facebook link, a telephone number and an email address. These are designed mainly to give event hosts the opportunity to publish additional contact information and social media links but of course all users are welcome to add as much or little personal info as they wish. 
+
+![Profile Edit](images/profile-edit.jpg)
+
+Once these fields have been filled in, they can be seen by other users in the main profile page stats container. Any website links that are entered can be clicked on to open the website in a new browser tab. 
+
+Each profile also has a follow button inside the stats container so that other users can click it to follow and unfollow the profile as all profiles won't always appear listed in the popular profiles component, to access the follow functionality there. 
+
+![Profile Stats](images/profile-stats.jpg)
+
+### Profile Posts
+
 * ## Contact
-* ## Feed
 * ## Reusable React Components
 
 ### Three Dots Edit Delete Dropdown Menu
