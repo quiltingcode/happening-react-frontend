@@ -481,7 +481,7 @@ As stated previously, there is no way for the user to check whether the message 
 
 # Testing
 
-Please click [**_here_**](TESTING.md) to read more information about testing The Craft Cafe
+Please click [**_here_**](TESTING.md) to read more information about testing Happening Frontend
 
 [Back to top](<#contents>)
 
