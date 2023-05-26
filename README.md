@@ -39,7 +39,6 @@ This fictional site was created for Portfolio Project #5 (Advanced Front End) - 
   * [Contact](#contact)
   * [Reusable React Components](#reusable-react-components)
 
-
 - [Features Left To Implement](<#features-left-to-implement>)
 
 - [Technologies Used](<#technologies-used>)
@@ -362,27 +361,7 @@ If you make a typing error or you wish to change your comments, once the review 
 
 * ## Profile Page
 
-Throughout the site, wherever you see profile avatars, albeit in the popular profiles component, or next to events, comments or reviews that have been published, you can click on the avatar to view the full profile page of that user. In the Navigation Bar, in the authentication dropdown, you can access your own profile page as well. 
-
-### Messaging
-
-At the top of the profile page, the user can still see the popular profiles component as a permanent feature across the site, but the top upcoming events component has been replaced by a messaging system component. On desktop devices the message component is visible on the right of popular profiles, but for tablet and mobile it moves into place between the popular profiles and the User Profile Stats. 
-
-If you are viewing someone else's profile, the message component contains a form to write a message and send it to the owner of the profile page you are viewing. 
-
-![Create Message](images/message-create.jpg)
-
-If you are viewing your own profile page the messaging component will display your own private message inbox. Other users will not be able to see the messages that have not been sent to them. All messages that have been sent to you, are displayed in descending order of when they were sent. You can see the avatar and the username of the sender, the date the message was sent, and the message itself. Each message has a 'reply' button if the user wants to send a reply message back to the sender. 
-
-![Received Messages](images/message-inbox.jpg)
-![Messages - Reply](images/message-reply.jpg)
-
-Unlike with other forms such as creating an event, comment or review, where you can see the published content once the form has been posted successfully, the user does not have access to other user's inboxes to check whether the message has been sent successfully or not. For this reason, in the case of the messaging component, I have set up an alert system using Bootstrap alerts, to display a success alert message when a message or a reply message have been sent successfully. This adds to good user experience, and user peace of mind. 
-
-![Message Alert](images/message-alert.jpg)
-
-
-For the time being, there is no alert system in place to send a notification to a user when they receive a new message, but this is something I would like to look into in future development sprints. 
+Throughout the site, wherever you see profile avatars, albeit in the popular profiles component, or next to events, comments or reviews that have been published, you can click on the avatar to view the full profile page of that user. In the Navigation Bar, in the authentication dropdown, you can access your own profile page as well.  
 
 ### Profile Stats
 
@@ -405,12 +384,69 @@ Each profile also has a follow button inside the stats container so that other u
 
 ### Profile Posts
 
+Below the profile stats you can see all the events posted by the profile you are viewing. Any of these can be clicked on to view the individual event detail page with comments if there are any. 
+
 * ## Contact
+
+At the top of the profile page, the user can still see the popular profiles component as a permanent feature across the site, but the top upcoming events component has been replaced by a messaging system component. On desktop devices the message component is visible on the right of popular profiles, but for tablet and mobile it moves into place between the popular profiles and the User Profile Stats. 
+
+If you are viewing someone else's profile, the message component contains a form to write a message and send it to the owner of the profile page you are viewing. 
+
+![Create Message](images/message-create.jpg)
+
+If you are viewing your own profile page the messaging component will display your own private message inbox. Other users will not be able to see the messages that have not been sent to them. All messages that have been sent to you, are displayed in descending order of when they were sent. You can see the avatar and the username of the sender, the date the message was sent, and the message itself. Each message has a 'reply' button if the user wants to send a reply message back to the sender. 
+
+![Received Messages](images/message-inbox.jpg)
+![Messages - Reply](images/message-reply.jpg)
+
+Unlike with other forms such as creating an event, comment or review, where you can see the published content once the form has been posted successfully, the user does not have access to other user's inboxes to check whether the message has been sent successfully or not. For this reason, in the case of the messaging component, I have set up an alert system using Bootstrap alerts, to display a success alert message when a message or a reply message have been sent successfully. This adds to good user experience, and user peace of mind. 
+
+![Message Alert](images/message-alert.jpg)
+
+Equally, if the user tries to send a blank message, they will see a Bootstrap warning message telling them that they must fill in the message field in order to send the message successfully. 
+
+![Message Alert](images/message-error.jpg)
+
+For the time being, there is no alert system in place to send a notification to a user when they receive a new message, but this is something I would like to look into in future development sprints.
+
 * ## Reusable React Components
 
 ### Three Dots Edit Delete Dropdown Menu
+
+Based on the Moments walkthrough project 'MoreDropdown' component, I have utilised the same idea in my project but extended it's use even further to be accessed when editing or deleting events, comments and also reviews. In addition to this re-usable component which I learnt from the course tutorials, I also developed three more custom re-usable components specifically for my project.
+
 ### Delete Confirmation Component
+
+In order to improve defensive design, I wanted to add a validation check before data gets deleted from the site. For this reason, I have developed a modal pop-up component which double checks whether the user wants to continue with their choice, after having clicked the delete button from the EditDeleteDropdown component on an event, a comment or a review. This component checks what type of data the user is trying to delete, and customises the modal message appropriately. On clicking the 'Confirm Deletion' button the corresponding handleDelete function is called, and the data is removed from the site
+
+![Delete Event](images/delete-event.jpg)
+![Delete Comment](images/delete-comment.jpg)
+![Delete Review](images/delete-review.jpg)
+
 ### Date Formatter Component
+
+Originally, I tried to format the event event_date field on the backend, but it caused all sorts of error messages and I couldn't quite get it to work correctly. Having consulted tutor support, they told me that it was also possible to leave the date format on the backend and just format it where necessary on the frontend. There are three areas in this site where event_date is published; in the event posting, in the top upcoming events component, and in the review listings. 
+
+When I tried requesting the event_date from the API in a formatted form, it came through OK, similar to how the created_at date is formatted in the backend, but then when it came to pre-populating it back into an edit form, it wouldn't go back correctly into the date field. I therefore decided to leave the date format for all the API requests in it's original format, and just created a re-usable function - 'DateFormatter.js' to make it appear nicely for the front end user to view. 
+
+![Date Unformatted](images/date-before.jpg)
+![Date Formatted](images/date-after.jpg)
+
 ### Alert Component
 
+As stated previously, there is no way for the user to check whether the message form has been submitted correctly or not, as the user doesn't have access to other user's inbox. I therefore wanted to set up a bootstrap success alert. Initially I created this as a single function inside the MessageCreateForm.js component. In a later sprint, when I was developing the reply feature, I decided to create a re-usable Alert component which could be used interchangeably between the send message and reply message forms. I refactored the code inside the MessageCreateForm component and imported the newly created AlertMessage component into the ReplyMessageForm.js component as well. In future development, I can extend this functionality to show user alerts in more areas of the site. 
+
 [Back to top](<#table-of-content>)
+
+# **Features Left to Implement**
+
+* Add a notification system in to alert users when they receive a new message
+* Differentiate between types of users - event hosts and event attendees -  set up profiles pages accordingly
+* Turn this into a mobile app
+* Get users from my town signed up and using the site to generate data, and get real user feedback for future sprints
+* Set alerts for when events in your MyEvents page are about to take place
+
+[Back to top](<#table-of-content>)
+
+# **Technologies Used**
+
