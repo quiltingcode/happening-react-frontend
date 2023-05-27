@@ -1,3 +1,5 @@
+import { rest } from "msw";
+
 const baseURL = "https://happening-api-kelz.herokuapp.com/"
 
 export const handlers = [
