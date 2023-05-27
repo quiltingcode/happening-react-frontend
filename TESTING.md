@@ -1,6 +1,6 @@
-# **Happening React Frontend**
+# **Happening**
 
-# Testing
+# Frontend Testing
 
 ## Table of Contents
 
