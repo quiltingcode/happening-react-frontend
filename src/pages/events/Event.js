@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import styles from '../../styles/Event.module.css'
 import { useCurrentUser } from '../../contexts/CurrentUserContext';
 
@@ -196,7 +196,7 @@ const Event = (props) => {
                 <div>
                     {is_owner ? (
                         /* First check if the logged in user created the event */
-                        <OverlayTrigger placement='top' overlay={<Tooltip>`You can't be interested in your own event, sorry!`</Tooltip>}>
+                        <OverlayTrigger placement='top' overlay={<Tooltip>You can't be interested in your own event, sorry!</Tooltip>}>
                             <i className="fa-regular fa-eye"></i>
                         </OverlayTrigger>
                         /* If yes, can't do anything. If no, check if they've already posted going */

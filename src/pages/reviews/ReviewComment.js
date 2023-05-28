@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 
 import styles from "../../styles/Comment.module.css";
 import { Link, useHistory } from 'react-router-dom/cjs/react-router-dom.min';

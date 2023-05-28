@@ -12,13 +12,13 @@
 
 ## Code Validation 
 
-The Happening site has been passed through the [W3C html Validator](https://validator.w3.org/), the [W3C CSS Validator](https://jigsaw.w3.org/css-validator/) and the [JS Hint Validator](https://jshint.com/).
+The Happening site has been passed through the [W3C html Validator](https://validator.w3.org/), the [W3C CSS Validator](https://jigsaw.w3.org/css-validator/) and the [ESLint Validator](https://eslint.org/docs/latest/use/getting-started#next-steps).
 
-### W3C html Validation Results
+### W3C HTML Validation Results
 
 ### W3C CSS Validation Results
 
-### JS Hint Validation Results
+### ESLint Validation Results
 
 ## Automatic Testing
 

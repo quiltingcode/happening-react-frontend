@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 
 import Form from "react-bootstrap/Form";
 import Alert from "react-bootstrap/Alert";
@@ -100,7 +100,7 @@ function SignInForm() {
         </Container>
         <Container className={`mt-3 ${appStyles.Content}`}>
           <Link className={styles.Link} to="/signup">
-            <span>Don't have an account?</span> <span>Sign up now!</span>
+            Don't have an account? <span>Sign up now!</span>
           </Link>
         </Container>
       </Col>

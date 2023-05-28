@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import styles from "../../styles/Comment.module.css";
 import Media from 'react-bootstrap/Media';
 import { Link } from 'react-router-dom/cjs/react-router-dom';
@@ -54,7 +54,7 @@ const Comment = (props) => {
                 ...prevComments,
                 results: prevComments.results.filter((comment) => comment.id !== id),
             }));
-        } catch (error) {
+        } catch (err) {
             console.log(err)
         }
     };

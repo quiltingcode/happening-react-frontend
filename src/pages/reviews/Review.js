@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import styles from '../../styles/Review.module.css'
 import appStyles from "../../App.module.css";
 import btnStyles from "../../styles/Button.module.css";

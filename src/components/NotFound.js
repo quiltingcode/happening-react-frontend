@@ -1,4 +1,3 @@
-import React from 'react'
 import PageNotFound from "../assets/page-not-found-bg.png";
 import styles from "../styles/NotFound.module.css";
 import Asset from './Asset';
