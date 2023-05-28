@@ -282,7 +282,7 @@ function ProfilePage( { mobile }) {
           </Container>
         </Col>
         <Col lg={4} className="d-none d-lg-block p-0 p-lg-2">
-          {!is_owner && (
+          {currentUser && !is_owner && (
             <MessageCreateForm
               sendToProfile={profile?.owner}
               profileId={profile?.id}
