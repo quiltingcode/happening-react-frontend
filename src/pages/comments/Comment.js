@@ -55,7 +55,7 @@ const Comment = (props) => {
                 results: prevComments.results.filter((comment) => comment.id !== id),
             }));
         } catch (error) {
-            
+            console.log(err)
         }
     };
 

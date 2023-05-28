@@ -16,6 +16,7 @@ const ThreeDots = React.forwardRef(({ onClick }, ref ) => (
       }}
     />
   ));
+  ThreeDots.displayName = "ThreeDots";
 
   export const EditDeleteDropdown = ({handleEdit, handleShow}) => {
     

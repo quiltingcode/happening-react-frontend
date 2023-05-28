@@ -29,8 +29,7 @@ import MessageCreateForm from "../messages/MessageCreateForm";
 import Message from "../messages/Message";
 
 
-function ProfilePage( { mobile }) {
-
+function ProfilePage() {
 
   const [hasLoaded, setHasLoaded] = useState(false);
   const currentUser = useCurrentUser();
