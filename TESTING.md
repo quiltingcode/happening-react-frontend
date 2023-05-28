@@ -16,9 +16,21 @@ The Happening site has been passed through the [W3C html Validator](https://vali
 
 ### W3C HTML Validation Results
 
+No errors were found when the deployed Happening URL was passed through W3C HTML validation checker. Only some lines of info were noted regarding the standard Meta code in the index.html file. 
+
+![W3C HTML Validation](images/html-no-errors.jpg)
+
 ### W3C CSS Validation Results
 
+No errors or warnings were found when the deployed Happening URL was passed through the W3C CSS Validation checker.
+
+![W3C CSS Validation](images/css-no-errors.jpg)
+
 ### ESLint Validation Results
+
+* NavBar.test.js - 2 undefined variables found.  Details can be found in the [Bugs](<#known-bugs>) section. The issues were fixed and after further testing, no more errors were returned.
+
+* SetupTests.js - 3 undefined variables found.  Details can be found in the [Bugs](<#known-bugs>) section. The issues were fixed and after further testing, no more errors were returned.
 
 ## Automatic Testing
 
@@ -31,5 +43,11 @@ The following automatic tests have been written into the Happening API, in order
 As well as the automatic tests, I carried out the following additional manual tests:
 
 ## Known Bugs
+
+1. Having run the ESLint program from, the report came out with 40 errors, but no warnings. 
+
+![EsLint Errors](images/eslint-errors.jpg)
+
+The majority of the errors were caused due to the automatic import of 'react' into each js file, where in many in the end it is not used. I removed all of these imports, which left 9 errrors remaining. These 9 errors were caused by undefined variables in the jest test files. 
 
 ### Resolved
