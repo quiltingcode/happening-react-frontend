@@ -27,6 +27,7 @@ import ChangeUsernameModal from "./ChangeUsernameModal";
 import ChangePasswordModal from "./ChangePasswordModal";
 import MessageCreateForm from "../messages/MessageCreateForm";
 import Message from "../messages/Message";
+import PopularEvents from "../events/PopularEvents";
 
 
 function ProfilePage() {
@@ -260,15 +261,13 @@ function ProfilePage() {
           )}
           {currentUser &&
             is_owner &&
-            (
-            hasLoaded ? (
-              <Container className='d-lg-none mb-3'>
+            (hasLoaded ? (
+              <Container className="d-lg-none mb-3">
                 {mainProfileMessages}
               </Container>
             ) : (
               <Asset spinner />
-            )
-          )}
+            ))}
           <Container className={appStyles.Content}>
             {hasLoaded ? (
               <>
@@ -290,16 +289,20 @@ function ProfilePage() {
 
           {currentUser &&
             is_owner &&
-            (
-            hasLoaded ? (
+            (hasLoaded ? (
               <Container className="d-none d-lg-block">
                 {mainProfileMessages}
               </Container>
             ) : (
               <Asset spinner />
-            )
-          )}
+            ))}
 
+        <Col md={4} className="d-none d-lg-block p-0 p-lg-2">
+          {!currentUser && (
+            <PopularEvents />
+          )}
+        </Col>
+          
         </Col>
         <ChangeUsernameModal showModal={show} handleClose={handleClose} />
         <ChangePasswordModal
