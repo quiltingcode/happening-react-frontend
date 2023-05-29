@@ -35,12 +35,12 @@ After resolving the errors caused where files, by default, had react imported bu
 
 ## Automatic Testing
 
-The following Jest automatic tests have been written to check that the main components render correctly: 
+The following Jest automatic tests have been written to check that the main frontend components render correctly: 
 
 ### NavBar.js
 |  | | |
 |:-------:|:--------|:--------|
-| Renders Navbar | &check; |
+| Renders Navbar Home link| &check; |
 | Renders link to the feed page for a logged in user | &check; |
 | Renders link to the reviews page for a logged in user | &check; |
 
@@ -60,10 +60,28 @@ The following Jest automatic tests have been written to check that the main comp
 | Renders event component | &check; |
 | Event owner avatar renders | &check; |
 
-
 ## Manual Testing
 
 As well as the automatic tests, I carried out the following additional manual tests to check all the user story scenarios:
+
+| Status | **Homepage - User Logged Out**
+|:-------:|:--------|
+| &check; | Clicking the navbar brand logo loads the home page
+| &check; | Clicking the Home button on the nav bar re-loads the home page
+| &check; | Clicking the Sign In button on the nav bar loads the sign up page
+| &check; | Clicking the Sign Up button on the nav bar loads the sign in page
+| &check; | The user can not see the personal profile icon in the navigation bar
+| &check; | The user can not see the Feed menu option in the navigation bar
+| &check; | The user can not see the My Events menu option in the navigation bar
+| &check; | The user can not see the Reviews menu option in the navigation bar
+| &check; | Desktop users can see three reviews
+| &check; | Tablet and Mobile users can see two reviews
+
+| Status | **Authentication - User Logged Out**
+|:-------:|:--------|
+| &check; | Typing 'https://happening-react.herokuapp.com/feed' url into the browser, the user can not access the feed page. User is redirected Home
+| &check; | Typing 'https://happening-react.herokuapp.com/myevents/going' url into the browser, the user views the homepage events feed
+| &check; | Typing 'https://happening-react.herokuapp.com/myevents/interested' url into the browser, the user views the homepage events feed
 
 
 

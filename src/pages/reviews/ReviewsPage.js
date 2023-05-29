@@ -16,10 +16,11 @@ import { fetchMoreData } from "../../utils/Utils";
 import PopularProfiles from "../profiles/PopularProfiles";
 import PopularEvents from "../events/PopularEvents";
 import Review from "./Review";
-
+import { useRedirect } from "../../hooks/UseRedirect";
 
 function ReviewsPage({ message="", filter="" }) {
 
+  useRedirect ('loggedOut')
   const [events, setEvents] = useState({ results: [] });
   const [hasLoaded, setHasLoaded] = useState(false);
   const { pathname } = useLocation();
