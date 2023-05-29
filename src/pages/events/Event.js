@@ -262,8 +262,6 @@ const Event = (props) => {
         </Card>
         <DeleteConfirmationModal showModal={show} handleClose = {handleClose} handleEventDelete = {handleEventDelete} type={type} message={message} />
     </>
-    
-    
   )
 }
 

@@ -28,19 +28,39 @@ No errors or warnings were found when the deployed Happening URL was passed thro
 
 ### ESLint Validation Results
 
-* NavBar.test.js - 2 undefined variables found.  Details can be found in the [Bugs](<#known-bugs>) section. The issues were fixed and after further testing, no more errors were returned.
+After resolving the errors caused where files, by default, had react imported but not used, only 9 errors regarding the testing files, so I have left these, and subsequently uninstalled ES Lint as it was causing conflicts with the dependency tree. 
 
-* SetupTests.js - 3 undefined variables found.  Details can be found in the [Bugs](<#known-bugs>) section. The issues were fixed and after further testing, no more errors were returned.
+![ES Lint](images/eslint-results.png)
+
 
 ## Automatic Testing
 
-The following automatic tests have been written into the Happening API, in order to cover all the user story scenarios. These are the tests that were created: 
+The following Jest automatic tests have been written to check that the main components render correctly: 
 
-![Automatic Test Summary](images/test-summary.png)
+### NavBar.js
+|  | | |
+|:-------:|:--------|:--------|
+| Renders Navbar | &check; |
+| Renders link to the feed page for a logged in user | &check; |
+| Renders link to the reviews page for a logged in user | &check; |
+
+### NotFound.js
+|  | | |
+|:-------:|:--------|:--------|
+| Go Back to homepage link renders | &check; |
+
+### Event.js
+|  | | |
+|:-------:|:--------|:--------|
+| Renders event component | &check; |
+| Event owner avatar renders | &check; |
+
 
 ## Manual Testing
 
-As well as the automatic tests, I carried out the following additional manual tests:
+As well as the automatic tests, I carried out the following additional manual tests to check all the user story scenarios:
+
+
 
 ## Known Bugs
 
@@ -48,6 +68,6 @@ As well as the automatic tests, I carried out the following additional manual te
 
 ![EsLint Errors](images/eslint-errors.jpg)
 
-The majority of the errors were caused due to the automatic import of 'react' into each js file, where in many in the end it is not used. I removed all of these imports, which left 9 errrors remaining. These 9 errors were caused by undefined variables in the jest test files. 
+The majority of the errors were caused due to the automatic import of 'react' into each js file, where in many in the end it is not used. I removed all of these imports, which left 9 errrors remaining. These 9 errors were caused by undefined variables in the jest test files, which I am ignoring as they are only test files. 
 
 ### Resolved
