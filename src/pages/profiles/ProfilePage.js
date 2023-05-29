@@ -297,11 +297,10 @@ function ProfilePage() {
               <Asset spinner />
             ))}
 
-        <Col md={4} className="d-none d-lg-block p-0 p-lg-2">
           {!currentUser && (
             <PopularEvents />
           )}
-        </Col>
+
           
         </Col>
         <ChangeUsernameModal showModal={show} handleClose={handleClose} />
