@@ -255,7 +255,7 @@ function ProfilePage() {
       <Row>
         <Col className="py-2 p-0 p-lg-2" lg={8}>
           <PopularProfiles mobile />
-          {!is_owner && (
+          {currentUser && !is_owner && (
             <MessageCreateForm mobile sendToProfile={profile?.owner} />
           )}
           {currentUser &&
