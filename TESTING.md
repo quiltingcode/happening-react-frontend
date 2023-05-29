@@ -49,6 +49,11 @@ The following Jest automatic tests have been written to check that the main comp
 |:-------:|:--------|:--------|
 | Go Back to homepage link renders | &check; |
 
+### Avatar.js
+|  | | |
+|:-------:|:--------|:--------|
+| Avatar renders | &check; |
+
 ### Event.js
 |  | | |
 |:-------:|:--------|:--------|
