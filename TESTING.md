@@ -92,6 +92,11 @@ As well as the automatic tests, I carried out the following additional manual te
 | &check; | Users can not see the 'Add Event' button in the navigation bar
 | &check; | Tablet and mobile users can see the navigation bar options in a burger menu dropdown
 | &check; | Clicking a link from the navigation bar links automatically closes the burger menu
+| &check; | User can not sign in with false credentials - warning message displayed
+| &check; | User can not sign in without filling out all the input fields - warning message displayed
+| &check; | User can not sign up without filling out all the input fields - warning message displayed
+| &check; | User can not sign up if the two password fields don't match - warning message displayed
+| &check; | User can not sign up if the username chosen already exists in the database - warning message displayed
 
 | Status | **Homepage - User Logged Out**
 |:-------:|:--------|
@@ -354,11 +359,18 @@ As well as the automatic tests, I carried out the following additional manual te
 | &check; | If the user clicks going, having previously clicked interested, the going count goes up, and the interested count goes down.
 | &check; | Clicking on an event comments count, users are redirected to the selected event detail page
 | &check; | Clicking on a url in the contact details section will open the web page in a new browser tab.
-| &check; | If the logged in user is viewing their own profile page, they can see the three dots edit profile menu next to the profile stats
-| &check; | User can edit their own profile page via the three dots edit/delete menu
+| &check; | If the user is viewing their own profile page, they can see the three dots edit profile menu next to the profile stats
+| &check; | Users can edit their own profile page via the three dots edit/delete menu
 | &check; | On clicking edit profile, user is redirected to the edit profile page
 | &check; | User can edit their own username via the three dots edit profile menu
 | &check; | User can edit their own password via the three dots edit profile menu
+| &check; | If the user is viewing their own profile page, they can view their personal messages inbox
+| &check; | In the messages inbox, users can view all messages received by other users - sender username, date sent, and message content
+| &check; | Clicking on the 'reply' button of a particular message, the user can send a reply message back to the original sender in a popup modal message form
+| &check; | Users receive a success alert message when a reply has been successfully sent to another user
+| &check; | If the user is viewing someone else's profile page, they can see a form to send that profile user a message
+| &check; | Users can't send a blank message to another profile user - warning message displayed
+| &check; | Users receive a success alert message when a message has been successfully sent to another user
 
 | Status | **Edit Profile Page - User Logged In**
 |:-------:|:--------|
