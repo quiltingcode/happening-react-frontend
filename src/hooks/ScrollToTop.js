@@ -1,7 +1,9 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 
 export const ScrollToTop = () => {
+
+  const [showButton, setShowButton] = useState(false);
 
 
     useEffect(() => {
