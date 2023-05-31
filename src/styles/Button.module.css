@@ -184,3 +184,22 @@
   background-color: #6e5e93;
   border-color: transparent;
 }
+
+.ScrollToTop {
+  background-color: transparent;
+  padding: 0;
+  border-color: transparent;
+}
+
+.ScrollToTop i {
+  font-size: 3rem;
+}
+
+.ScrollToTop:hover {
+  transition: color ease-in-out 0.3s;
+  color: #db628e;
+  padding: 0;
+  border-color: transparent;
+  background-color: transparent;
+
+}

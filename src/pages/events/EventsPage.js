@@ -8,6 +8,7 @@ import NoResults from "../../assets/no-results.jpg"
 
 import appStyles from "../../App.module.css";
 import styles from "../../styles/EventsPage.module.css";
+import btnStyles from "../../styles/Button.module.css"
 import { useLocation } from "react-router-dom/cjs/react-router-dom.min";
 import { axiosReq } from "../../api/axiosDefaults";
 import Event from "./Event";
@@ -17,8 +18,14 @@ import { fetchMoreData } from "../../utils/Utils";
 import PopularProfiles from "../profiles/PopularProfiles";
 import PopularEvents from "./PopularEvents";
 import { useCurrentUser } from "../../contexts/CurrentUserContext";
+import { Button } from "react-bootstrap";
+
 
 function EventsPage({ message="", filter="" }) {
+
+  const handleScrollToTop = () => {
+    window.scrollTo({ top: 0, behaviour: 'smooth' });
+  };
 
   const [events, setEvents] = useState({ results: [] });
   const [hasLoaded, setHasLoaded] = useState(false);
@@ -79,7 +86,10 @@ function EventsPage({ message="", filter="" }) {
                 value={category}
                 onChange={(event) => setCategory(event.target.value)}
               >
-                <option key = 'blankChoice' hidden value> Category </option>
+                <option key="blankChoice" hidden value>
+                  {" "}
+                  Category{" "}
+                </option>
                 <option>Sport</option>
                 <option>Music</option>
                 <option>Culture</option>
@@ -118,6 +128,15 @@ function EventsPage({ message="", filter="" }) {
           <PopularEvents />
         </Col>
       </Row>
+      <div>
+        <Button
+          className={`${btnStyles.Button} ${btnStyles.ScrollToTop} fixed-bottom-5 left-7 z-50 cursor-pointer`}
+          onClick={handleScrollToTop}
+        >
+          <i className="fa-solid fa-circle-arrow-up" alt="scroll to top"></i>
+        </Button>
+        <span className="text-center">Back to Top</span>
+      </div>
     </>
   );
 }
