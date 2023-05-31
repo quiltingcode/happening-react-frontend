@@ -28,7 +28,7 @@ const Profile = (props) => {
       </div>
       <div className={`mx-2 ${styles.WordBreak}`}>{owner}</div>
       {currentUser &&
-      <div className={`${styles.ProfileFollow} mx-1`} >
+      <div className={`${styles.ProfileFollow}`} >
         {  is_owner ? (
             <OverlayTrigger
               placement="top"
