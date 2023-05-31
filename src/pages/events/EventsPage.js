@@ -71,9 +71,9 @@ function EventsPage({ message="", filter="" }) {
                 value={search}
                 onChange={(event) => setSearch(event.target.value)}
               />
-
               <Form.Control
                 size="sm"
+                // className="mr-sm-2"
                 as="select"
                 placeholder="Choose..."
                 value={category}
