@@ -421,19 +421,11 @@ I do not have any Apple devices available to carry out testing on a Safari brows
 
 ## Lighthouse Testing
 
-Google Lighthouse in Chrome Developer Tools was used to test the application within the areas of *Performance*, *Accessibility*, *Best Practices* and *SEO*. I tested the *home page*, *reviews page*, and the *profile page*. The testing showed the following:
+Google Lighthouse in Chrome Developer Tools was used to test the application within the areas of *Performance*, *Accessibility*, *Best Practices* and *SEO*. The testing showed the following:
 
 * Home Page - Performance: 70, Accessibility: 95, Best Practises: 83, SEO: 100
-* Reviews Page - Performance: 86, Accessibility: 93, Best Practises: 75, SEO: 90
-* Profile Page - Performance: 96, Accessibility: 95, Best Practises: 75, SEO: 80
-
-<details><summary><b>Lighthouse Index Result</b></summary>
 
 ![Lighthouse Homepage Result](images/lighthouse-homepage.jpg)
-![Lighthouse Reviews Page Result](images/testing/lighthouse-home.png)
-![Lighthouse Profile Page Result](images/testing/lighthouse-home.png)
-
-</details><br/>
 
 ### Peer Review
 
@@ -451,9 +443,58 @@ The majority of the errors were caused due to the automatic import of 'react' in
 
 As I was building the project, I logged all major bugs that could not be immediately resolved as a GitHub issue, and tracked the progress of these through the GitHub project board alongside my user stories. See my GitHub Bug Log [here](https://github.com/quiltingcode/happening-react-frontend/issues?q=is%3Aopen+is%3Aissue+label%3Abug)
 
-2. (Bug #30) 
+2. (Bug #30) There is a known issue with the React Bootstrap mobile Navbar.Collapse burger menu that when an item is selected, it doesn't automatically close. Initially I followed the fix given in the CI Moments walkthrough and created the use ClickOutsideToggle.js component to fix this issue. However, this fix does not handle additional dropdown menus, only a simple list of links, and for example where all my authentication menu options (profile, sign in, sign up and sign out) are in a separate dropdown, on mobile devices I couldn't access these options as the burger menu would close on selecting the dropdown header. 
 
+Solution: I created a toggle function and applied it to each individual menu item that contained a link but not to the menu items that dropped down to show the links. Therefore it doesn't just close on any click but only clicks on links. Clicking anywhere outside of the burger menu doesn't close it but I think it's OK to leave it without this extra functionality.
+
+3. (Bug #32) If the user has already clicked going, if they click interested, it needs to reduce the going count and increase the interested count at the same time. I have managed to get this work, but you have to refresh the page manually to see the new counts. I tried to use an axios promise to make the two axios requests to the going and interested tables simultaneously but this didn't work. I tried to make two separate functions with axios requests, but that didn't work either.
+
+Solution: I made one axios request and then within this function, I called the other decrease count method to make the other axios request. This seems to be working better and both counts are updating automatically without a page refresh.
+
+4. (Bug #33) On the creation of a new event, even though I correctly select a date from the event date calendar field, when the event is saved the event date reverts to being the same as the created_at date. This has occurred since I attempted to make a change to the backend to format the event_date field to display 4th May 2023 instead of 2023-05-04 for example. I then found further issues when I tried to edit an existing event, and the formatted date couldn't be read to pre-populate the event_date field.
+
+Solution: I undid the changes on the backend to fix these problems, and I created a DateFormatter react component on the frontend instead to display the dates nicely to the user.
+
+5. (Bug #45) I pulled through all the events to display on the reviews page, but they were not listed in order of the event_date, but in order of the created_at date just like on the home, feed, and my events pages. This is not what I wanted. 
+
+Solution: In App.js where the filter for this page is set, I had coded '&ordering=-event_date' instead of '?ordering=-event_date'. Once this was changed the list ordered itself correctly. 
+
+6. (Bug #47) When a user deletes a review, the review is deleted but the review count and the average rating on the corresponding event does not update automatically. It only updates when the page is refreshed. In one case, a different count went down in testing, so it seems that it doesn't know the id of the correct event to update. 
+
+Solution: I made a change in the props to differentiate between the review ID and the event ID, as the handle delete function was getting confused between the two I think. The delete functions seems to work correctly now and updates the review count on the corresponding event. Still haven't managed to update the average rating yet though, as I can't work out what the sum would be to recalculate this in the same way we do with the count. In the end, I set the page to refresh, so that all the counts are updated correctly when a review is deleted. 
+
+7. (Bug #48) I can pull through the current star rating into the edit review form, but when I try to change the rating, the screen freezes and I get an error in the console. This star rating component doesn't seem to work well with the handle change of the name attribute which the walkthrough uses to update pre-populated fields for editing, as it won't accept a name attribute at all.
+
+Solution: I decided that in the edit popup the user can only edit the review comments they made, but not the star reating, as I'm not able to change the functions of this react component package. If the user wants to change the star rating a tooltip suggests they delete the whole review and start again from scratch. 
+
+8. (Bug #51) The Top Upcoming Events Component is shown in two places, depending on what device you are viewing the site with. In desktop, you see the component on the right hand side, but on mobile devices you see the component under the popular profiles component. Regardless of where the component is displayed, it should always contain the same top 5 events. However, the mobile popular events component was only showing two events, whereas the desktop version was showing 4. 
+
+Solution: On the mobile popular events component I moved the slice method to go after the date filter, so that it filters by future date first and only then it slices out the top 5 results. Otherwise, sometimes it was slicing 5 results and then out of those only two of the events were in the future so those were being filtered out as well, leaving a different set of results showing to the user. 
+
+9. (Bug #52) I used this [Stack Overflow](https://stackoverflow.com/questions/53772417/react-how-to-filter-events-according-to-date) article to filter all the events postings, and only show the events which have an event_date in the future. However, since this article was written it seems that in more recent coding practice, you should always follow 'new Date' with a set of brackets, which weren't included in the original article, otherwise it throws up a warning in the console. 
+
+Solution: I added the brackets after new Date() and the warnings in the console disappeared but the filter still worked correctly. 
+
+10. (Bug #54) If a user tried to post a second review to an event, I could see a 400 bad request error in the console and the review would not post successfully. This behaviour is correct as I set the backend rules to unique_together for a user and an event when posting a review, and I added a conditional tooltip to warn the user if they tried to click on 'Post a Review' when they had already posted one previously (similar to the like_id ? conditional in the walkthrough) but this doesn't seem to be working. 
+
+Solution: I have looked at the API, and I see the issue. The event instance has an interested ID, and a going ID, but it doesn't have a review ID. So when I set up the ternary conditional the same as the interested/going check to check whether the event already has a review posted to it or not, it will never come back with true as I didn't set up this field on the event serializer. Once I added this field, the conditional ternary started working immediately and the warning tooltip appeared correctly when review_id came back true. 
+
+11. (Bug #55) when a logged out user goes into the profile page of another user, they can see the create message form. They can type in the box and click the send button. Nothing happens on the user interface, but I see a 401 unauthorised message appear in the console, and this access should not be allowed for logged out users.
+
+Solution: Extra conditional added for currentUser? - Logged out users can no longer see the create message form. Mobile logged out users just see the popular profiles component and the profile stats. Desktop users will see the top upcoming events component instead of the create message form on the right hand side. 
+
+12. (Bug #57) Once more and more events data was created with future event dates, the reviews page stopped being able to display all the past events. When the axios request gets all the events data, and then a filter on the front end removes any events with a future date, sometimes out of the first 10 results it sorts through (as it only does 10 at a time) it only finds one or two events, and maybe further down the line it won't find any on that first page. Due to this, the functionality existing in the infinite scroll component doesn't kick in on desktop devices( it does on mobile and shows a scroll to force the spinner icon to load page two) and so no further past events are shown. 
+
+Solution: I found an article on [Stack Overflow](https://stackoverflow.com/questions/58837940/django-rest-framework-filter-by-date-range) which helped me to build the filter on the event date into the backend API before the events are requested from the front end axios request. I added an 'lte' filterset onto the events view so that when axios pulls through the first 10 events, they are already filtered and all 10 will be in the past. In future, I could use this same functionality alongside 'gte' to refactor my top upcoming events component as well. 
+
+13. (Bug #58) When a new review is posted, the review count goes up, but the average rating does not change until the page is refreshed. I can't figure out what is the calculation to use for the average rating field. At the moment I have (Average Rating + new Rating) / Review count - but this is technically not correct. It shouldn't be average rating, it should look at all existing reviews and add the individual ratings together from scratch and then re-average them all at the same time. Otherwise, a different result is produced. Right now, it's not doing anything. 
+
+14. (But #59) On small mobile screens < 370px, as the category filter dropdown is centred, the user can't read what the dropdown says, so they won't really understand what it's for. 
+
+Solution: I have removed to left-padding  for this form.control, and now you can see the filter name a lot better on mobile. You can't read all the search options in the search bar when the screen reduces in width, but at least the user can read search so they can try typing in various options and see what works. 
+ 
 ### Unresolved
 
+1. (Bug #56) I followed the walkthrough tutorial to set up the comments component. If the user tries to post a blank comment nothing happens. I tried to add some defensive design in here to show a warning alert to the user that they can't post an empty form, but when I added in the error codes into the comment component, still nothing happens, but not sure why. It's not a major issue as the user can see that the blank comment hasn't posted and there is no horrible errors on screen or anything, but I thought it would be nice to have the warning appear. I will look into this in the future. 
 
 Please click [**_here_**](README.md) to return to the Happening README file.
