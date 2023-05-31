@@ -19,9 +19,12 @@ import PopularProfiles from "../profiles/PopularProfiles";
 import PopularEvents from "./PopularEvents";
 import { useCurrentUser } from "../../contexts/CurrentUserContext";
 import { Button } from "react-bootstrap";
+import { ScrollToTop } from "../../hooks/ScrollToTop";
 
 
 function EventsPage({ message="", filter="" }) {
+
+  ScrollToTop();
 
   const handleScrollToTop = () => {
     window.scrollTo({ top: 0, behaviour: 'smooth' });
