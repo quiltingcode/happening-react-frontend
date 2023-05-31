@@ -8,6 +8,8 @@
     * [Code Validation](<#code-validation>)
     * [Automatic Testing](<#automatic-testing>)
     * [Manual Testing](<#manual-testing>)
+    * [Responsiveness Testing](<#responsiveness-testing>)
+    * [Lighthouse Testing](<#lighthouse-testing>)
     * [Known Bugs](<#known-bugs>)
 
 ## Code Validation 
@@ -381,13 +383,65 @@ As well as the automatic tests, I carried out the following additional manual te
 | &check; | Users must submit a valid email address format into the email address field - warning message displayed
 | &check; | Users must input only integers into the phone number field - warning message displayed
 
+## Responsiveness Testing
 
+### Mobile Devices
 
+||<p>iPhone 6/6s/7</p><p>375 x 667</p>|<p>Samsung Galaxy S5/6/7</p><p>360 x 640</p>|<p>Google Pixel/Nexus 5</p><p>411 x 731</p>|
+| :- | :-: | :-: | :-: |
+|Render|Pass |Pass|Pass|
+|Images|Pass|Pass|Pass|
+|Links|Pass|Pass|Pass|
 
+### Tablet Devices
 
+||<p>Amazon Kindle Fire</p><p>768 x 1024</p>|<p>Samsung Galaxy Tab 10</p><p>800 x 1280</p>|<p>Apple iPad Pro</p><p>1366 x 1024</p><p></p>|
+| :- | :-: | :-: | :-: |
+|Render|Pass|Pass|Pass |
+|Images|Pass|Pass|Pass|
+|Links|Pass|Pass|Pass|
 
+### Desktop Devices
+
+||<p>24 “ Desktop</p><p>1920 x 1200</p>|<p>19” Desktop</p><p>1440 x 900</p>|<p>10” Notebook</p><p>1024 x 600</p>|
+| :- | :-: | :-: | :-: |
+|Render|Pass|Pass|Pass|
+|Images|Pass|Pass|Pass|
+|Links|Pass|Pass|Pass|
+
+### Browser Compatibility 
+
+Happening was tested on the following browsers:
+
+- Google Chrome
+- Microsoft Edge
+- Mozilla Firefox
+
+I do not have any Apple devices available to carry out testing on a Safari browser. Appearance and functionality appear to be consistent throughout all browsers.
+
+## Lighthouse Testing
+
+Google Lighthouse in Chrome Developer Tools was used to test the application within the areas of *Performance*, *Accessibility*, *Best Practices* and *SEO*. I tested the *home page*, *reviews page*, and the *profile page*. The testing showed the following:
+
+* Home Page - Performance: 70, Accessibility: 95, Best Practises: 83, SEO: 100
+* Reviews Page - Performance: 86, Accessibility: 93, Best Practises: 75, SEO: 90
+* Profile Page - Performance: 96, Accessibility: 95, Best Practises: 75, SEO: 80
+
+<details><summary><b>Lighthouse Index Result</b></summary>
+
+![Lighthouse Homepage Result](images/lighthouse-homepage.jpg)
+![Lighthouse Reviews Page Result](images/testing/lighthouse-home.png)
+![Lighthouse Profile Page Result](images/testing/lighthouse-home.png)
+
+</details><br/>
+
+### Peer Review
+
+In addition to the above tests, I asked my peers to create a profile and interact with the site and their overall response was very positive and that this platform is something they would love to use on a day to day basis.
 
 ## Known Bugs
+
+### Resolved
 
 1. Having run the ESLint program from, the report came out with 40 errors, but no warnings. 
 
@@ -395,4 +449,11 @@ As well as the automatic tests, I carried out the following additional manual te
 
 The majority of the errors were caused due to the automatic import of 'react' into each js file, where in many in the end it is not used. I removed all of these imports, which left 9 errrors remaining. These 9 errors were caused by undefined variables in the jest test files, which I am ignoring as they are only test files. 
 
-### Resolved
+As I was building the project, I logged all major bugs that could not be immediately resolved as a GitHub issue, and tracked the progress of these through the GitHub project board alongside my user stories. See my GitHub Bug Log [here](https://github.com/quiltingcode/happening-react-frontend/issues?q=is%3Aopen+is%3Aissue+label%3Abug)
+
+2. (Bug #30) 
+
+### Unresolved
+
+
+Please click [**_here_**](README.md) to return to the Happening README file.
