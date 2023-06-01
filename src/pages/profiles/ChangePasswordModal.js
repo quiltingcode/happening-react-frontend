@@ -93,7 +93,7 @@ const ChangePasswordModal = (props) => {
               <ModalFooter>
                 <Button
                   className={`${btnStyles.Button} ${btnStyles.Form}`}
-                  onClick={() => history.goBack()}
+                  onClick={handleClosePasswordModal}
                 >
                   Cancel
                 </Button>
