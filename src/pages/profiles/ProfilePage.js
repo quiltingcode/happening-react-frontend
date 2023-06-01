@@ -172,14 +172,14 @@ function ProfilePage() {
               </Col>
             )}
             {profile?.website && (
-              <Col className="p-1">
+              <Col className={`${styles.Url} p-1 `}>
                 <Link to={{ pathname: profile.website }} target="_blank">
                   <i className="fas fa-globe"></i> {profile?.website}
                 </Link>
               </Col>
             )}
             {profile?.facebook_link && (
-              <Col className="p-1">
+              <Col className={`${styles.Url} p-1 `}>
                 <Link to={{ pathname: profile.facebook_link }} target="_blank">
                   <i className="fab fa-facebook"></i> {profile?.facebook_link}
                 </Link>
@@ -187,7 +187,7 @@ function ProfilePage() {
               </Col>
             )}
             {profile?.instagram_link && (
-              <Col className="p-1">
+              <Col className={`${styles.Url} p-1 `}>
                 <Link to={{ pathname: profile.instagram_link }} target="_blank">
                   <i className="fab fa-instagram"></i> {profile?.instagram_link}
                 </Link>

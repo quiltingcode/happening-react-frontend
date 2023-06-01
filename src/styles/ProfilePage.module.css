@@ -16,3 +16,8 @@
     max-height: 50vh;
     overflow-y: scroll;
 }
+
+.Url {
+    word-break:break-all; 
+    font-size: 0.7rem;
+}
