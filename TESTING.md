@@ -385,6 +385,10 @@ As well as the automatic tests, I carried out the following additional manual te
 
 ## Responsiveness Testing
 
+The responsive design tests were carried out manually throughout the build using Google Chrome Dev Tools. I based the main design around a desktop view, as this is primarily a browser based platform, although I have added responsive design for tablet and mobile devices as well. 
+
+During the testing process I also used the [Responsive Design Checker](https://www.responsivedesignchecker.com/) website to simulate the website on several other devices. Here are my findings:
+
 ### Mobile Devices
 
 ||<p>iPhone 6/6s/7</p><p>375 x 667</p>|<p>Samsung Galaxy S5/6/7</p><p>360 x 640</p>|<p>Google Pixel/Nexus 5</p><p>411 x 731</p>|
@@ -393,6 +397,8 @@ As well as the automatic tests, I carried out the following additional manual te
 |Images|Pass|Pass|Pass|
 |Links|Pass|Pass|Pass|
 
+1. During mobile iPhone testing, I realised that the modal popup for change password doesn't close correctly when you click the cancel button, only the page behind changes but the modal stays open until the third click. I changed the onClick function on the cancel button from history.goBack() to handleClosePasswordModal. This now uses the came close function as the change username modal. 
+
 ### Tablet Devices
 
 ||<p>Amazon Kindle Fire</p><p>768 x 1024</p>|<p>Samsung Galaxy Tab 10</p><p>800 x 1280</p>|<p>Apple iPad Pro</p><p>1366 x 1024</p><p></p>|
@@ -400,6 +406,12 @@ As well as the automatic tests, I carried out the following additional manual te
 |Render|Pass|Pass|Pass |
 |Images|Pass|Pass|Pass|
 |Links|Pass|Pass|Pass|
+
+1. When I click on the category dropdown the options appear in a select box way off the screen in the [Responsive Simulator Website](https://www.responsivedesignchecker.com/). But then if I replicate the same action on Google dev tools with the same Samsung Galaxy Tab dimensions of 800 x 1280 the dropdown appears OK below the header. I think this is just a glitch in the Response Checker website.
+
+2. (Bug #) On the Apple iPad PRO, when I add an Instagram and Facebook URL to a profile, the URL is too long and it goes out of the Profile Stats Container. 
+
+![Profile URL Error](images/profile-url-error.jpg)
 
 ### Desktop Devices
 
@@ -488,6 +500,12 @@ Solution: Extra conditional added for currentUser? - Logged out users can no lon
 Solution: I found an article on [Stack Overflow](https://stackoverflow.com/questions/58837940/django-rest-framework-filter-by-date-range) which helped me to build the filter on the event date into the backend API before the events are requested from the front end axios request. I added an 'lte' filterset onto the events view so that when axios pulls through the first 10 events, they are already filtered and all 10 will be in the past. In future, I could use this same functionality alongside 'gte' to refactor my top upcoming events component as well. 
 
 13. (Bug #58) When a new review is posted, the review count goes up, but the average rating does not change until the page is refreshed. I can't figure out what is the calculation to use for the average rating field. At the moment I have (Average Rating + new Rating) / Review count - but this is technically not correct. It shouldn't be average rating, it should look at all existing reviews and add the individual ratings together from scratch and then re-average them all at the same time. Otherwise, a different result is produced. Right now, it's not doing anything. 
+
+![Post review - average rating doesn't change](images/avg-rating-error.jpg)
+
+Solution: Further testing has been done on this, both by my mentor and myself, and it seems to be working now. I will keep an eye on this functionality in future, and try to figure out whether there are particular scenarios in which it updates correctly or incorrectly. 
+
+![Post review - average rating does change](images/review-rating-good.jpg)
 
 14. (But #59) On small mobile screens < 370px, as the category filter dropdown is centred, the user can't read what the dropdown says, so they won't really understand what it's for. 
 
