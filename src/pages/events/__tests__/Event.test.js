@@ -3,14 +3,14 @@ import { BrowserRouter as Router } from "react-router-dom"
 import Event from "../Event";
 import { act } from 'react-dom/test-utils';
 
-test('Event owner avatar renders', async () => {
+test('Event owner avatar renders', () => {
     render(
         <Router>
             <Event />
         </Router>
     );
 
-    const eventOwnerAvatar = await screen.getByAltText("avatar");
+    const eventOwnerAvatar = screen.getByAltText("avatar");
     expect(eventOwnerAvatar).toBeInTheDocument()
 });
 
