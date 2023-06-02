@@ -1,22 +1,30 @@
+// Bootstrap imports
 import Container from 'react-bootstrap/Container';
 import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
 import NavDropdown from 'react-bootstrap/NavDropdown';
+// Component imports
 import logo from '../assets/logo-transparent.png';
+// CSS imports
 import styles from '../styles/NavBar.module.css';
+import { useCurrentUser, useSetCurrentUser } from '../contexts/CurrentUserContext';
+import { removeTokenTimestamp } from '../utils/Utils';
+import Avatar from './Avatar';
+// React imports
 import { NavLink } from 'react-router-dom';
 import { Link } from "react-router-dom";
-import { useCurrentUser, useSetCurrentUser } from '../contexts/CurrentUserContext';
-import Avatar from './Avatar';
-import axios from 'axios';
-import { removeTokenTimestamp } from '../utils/Utils';
 import { useState } from 'react';
+// Axios imports
+import axios from 'axios';
+
+
 
 const NavBar = () => {
 
   const currentUser = useCurrentUser();
   const setCurrentUser = useSetCurrentUser();
 
+  // Variables to toggle open and closed mobile navbar burger menu
   const [toggleNavBar, setToggleNavBar] = useState(false);
 
   const handleSignOut = async () => {

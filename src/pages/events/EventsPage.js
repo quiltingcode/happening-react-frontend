@@ -1,30 +1,29 @@
+// React imports
 import { useEffect, useState } from "react";
-
+import { useLocation } from "react-router-dom/cjs/react-router-dom.min";
+// Bootstrap imports
 import Form from "react-bootstrap/Form";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 import Container from "react-bootstrap/Container";
-import NoResults from "../../assets/no-results.jpg"
-
+import Button from "react-bootstrap/Button";
+// CSS imports
 import appStyles from "../../App.module.css";
 import styles from "../../styles/EventsPage.module.css";
 import btnStyles from "../../styles/Button.module.css"
-import { useLocation } from "react-router-dom/cjs/react-router-dom.min";
+// Component imports
+import NoResults from "../../assets/no-results.jpg"
 import { axiosReq } from "../../api/axiosDefaults";
 import Event from "./Event";
 import Asset from "../../components/Asset";
-import InfiniteScroll from "react-infinite-scroll-component";
 import { fetchMoreData } from "../../utils/Utils";
 import PopularProfiles from "../profiles/PopularProfiles";
 import PopularEvents from "./PopularEvents";
 import { useCurrentUser } from "../../contexts/CurrentUserContext";
-import { Button } from "react-bootstrap";
-import { ScrollToTop } from "../../hooks/ScrollToTop";
-
+// Additional react component imports
+import InfiniteScroll from "react-infinite-scroll-component";
 
 function EventsPage({ message="", filter="" }) {
-
-  ScrollToTop();
 
   const handleScrollToTop = () => {
     window.scrollTo({ top: 0, behaviour: 'smooth' });
@@ -45,7 +44,7 @@ function EventsPage({ message="", filter="" }) {
         setEvents(data);
         setHasLoaded(true);
       } catch (err) {
-        console.log(err);
+        // console.log(err);
       }
     };
 

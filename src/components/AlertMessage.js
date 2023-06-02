@@ -5,7 +5,6 @@ const AlertMessage = (props) => {
   
   const { showAlert, setShowAlert, variant, alertMessage } = props;
   
-
   return (
     showAlert && (
       <Container className='my-3'>
@@ -13,7 +12,6 @@ const AlertMessage = (props) => {
         <p> {alertMessage} </p>
       </Alert>
       </Container>
-      
     )
   );
 }

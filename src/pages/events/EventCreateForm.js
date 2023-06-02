@@ -1,21 +1,22 @@
+// React imports
 import { useRef, useState } from "react";
-
+import { useHistory } from "react-router-dom/cjs/react-router-dom";
+// Bootstrap imports
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Container from "react-bootstrap/Container";
-
-import Upload from "../../assets/upload.jpg";
-
+import Image from "react-bootstrap/Image";
+import Alert from "react-bootstrap/Alert";
+// CSS imports
 import styles from "../../styles/EventCreateEditForm.module.css";
 import appStyles from "../../App.module.css";
 import btnStyles from "../../styles/Button.module.css";
+// Component imports
+import Upload from "../../assets/upload.jpg";
 import Asset from "../../components/Asset";
-import Image from "react-bootstrap/Image";
-import { useHistory } from "react-router-dom/cjs/react-router-dom";
 import { axiosReq } from "../../api/axiosDefaults";
-import Alert from "react-bootstrap/Alert";
 import { useRedirect } from "../../hooks/UseRedirect";
 
 function EventCreateForm() {
@@ -68,13 +69,12 @@ function EventCreateForm() {
       const { data } = await axiosReq.post('/events/', formData);
       history.push(`/events/${data.id}`)
     } catch (err) {
-      console.log(err)
+      // console.log(err)
       if (err.response?.status !== 401){
         setErrors(err.response?.data)
       }
     }
   }
-
 
   const textFields = (
     <div className="text-center">
@@ -165,10 +165,10 @@ function EventCreateForm() {
         className={`${btnStyles.Button} ${btnStyles.Form}`}
         onClick={() => history.goBack()}
       >
-        cancel
+        Cancel
       </Button>
       <Button className={`${btnStyles.Button} ${btnStyles.Form}`} type="submit">
-        create
+        Create
       </Button>
       {errors.non_field_errors?.map((message, idx) => (
         <Alert variant="warning" className="mt-3" key={idx}>

@@ -4,7 +4,6 @@ import { axiosReq, axiosRes } from "../api/axiosDefaults";
 import { useCurrentUser } from "./CurrentUserContext";
 import { followHelper, unfollowHelper } from "../utils/Utils";
 
-
 export const ProfileDataContext = createContext();
 export const SetProfileDataContext = createContext();
 

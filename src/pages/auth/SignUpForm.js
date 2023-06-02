@@ -1,19 +1,22 @@
+// React imports
 import {useState} from "react";
 import { Link } from "react-router-dom";
-
+import { useHistory } from "react-router-dom/cjs/react-router-dom";
+// CSS imports
 import styles from "../../styles/SignInUpForm.module.css";
 import btnStyles from "../../styles/Button.module.css";
 import appStyles from "../../App.module.css";
-
+// Bootstrap imports
 import Container from 'react-bootstrap/Container';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 import Image from "react-bootstrap/Image";
-import axios from "axios";
-import { useHistory } from "react-router-dom/cjs/react-router-dom";
 import Alert from "react-bootstrap/Alert";
+// Axios imports
+import axios from "axios";
+// Component imports
 import logo from "../../assets/logo3.png"
 import { useRedirect } from "../../hooks/UseRedirect";
 

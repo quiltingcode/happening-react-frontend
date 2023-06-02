@@ -1,20 +1,21 @@
+// React imports
 import { useEffect, useRef, useState } from "react";
-
+import { useHistory } from "react-router-dom/cjs/react-router-dom";
+import { useParams } from "react-router-dom/cjs/react-router-dom.min";
+// Bootstrap imports
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Container from "react-bootstrap/Container";
-
+import Image from "react-bootstrap/Image";
+import Alert from "react-bootstrap/Alert";
+// CSS imports
 import styles from "../../styles/EventCreateEditForm.module.css";
 import appStyles from "../../App.module.css";
 import btnStyles from "../../styles/Button.module.css";
-
-import Image from "react-bootstrap/Image";
-import { useHistory } from "react-router-dom/cjs/react-router-dom";
+// Component imports
 import { axiosReq } from "../../api/axiosDefaults";
-import Alert from "react-bootstrap/Alert";
-import { useParams } from "react-router-dom/cjs/react-router-dom.min";
 
 function EventEditForm() {
 
@@ -48,7 +49,7 @@ function EventEditForm() {
               tags, 
               image}) : history.push('/')
         } catch (err) {
-            console.log(err);
+            // console.log(err);
         }
     };
 
@@ -96,7 +97,6 @@ function EventEditForm() {
       }
     }
   }
-
 
   const textFields = (
     <div className="text-center">

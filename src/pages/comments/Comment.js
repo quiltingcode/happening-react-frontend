@@ -1,7 +1,11 @@
+// React imports
 import { useState } from 'react'
-import styles from "../../styles/Comment.module.css";
-import Media from 'react-bootstrap/Media';
 import { Link } from 'react-router-dom/cjs/react-router-dom';
+// CSS imports
+import styles from "../../styles/Comment.module.css";
+// Bootstrap imports
+import Media from 'react-bootstrap/Media';
+// Component imports
 import Avatar from '../../components/Avatar';
 import { useCurrentUser } from '../../contexts/CurrentUserContext';
 import { EditDeleteDropdown } from '../../components/EditDeleteDropdown';
@@ -25,8 +29,10 @@ const Comment = (props) => {
     const currentUser = useCurrentUser();
     const is_owner = currentUser?.username === owner;
 
+    // Variables for dispalying the edit comment form
     const [showEditForm, setShowEditForm] = useState(false);
 
+    // Variables for displaying the delete comment modal popup
     const [show, setShow] = useState(false);
     const [message, setMessage] = useState("");
     const [type, setType] = useState("")
@@ -35,7 +41,6 @@ const Comment = (props) => {
         setMessage(`Are you sure you want to delete this comment?`);
         setType("comment");
     };
-
     const handleClose = () => setShow(false);
 
     const handleCommentDelete = async () => {

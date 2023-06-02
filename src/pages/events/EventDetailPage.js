@@ -1,21 +1,24 @@
+// React imports
 import { useEffect, useState } from "react";
-
+import { useParams } from "react-router-dom/cjs/react-router-dom";
+// Bootstrap imports
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 import Container from "react-bootstrap/Container";
-
+// CSS imports
 import appStyles from "../../App.module.css";
-import { useParams } from "react-router-dom/cjs/react-router-dom";
+// Component imports
 import { axiosReq } from "../../api/axiosDefaults";
 import Event from "./Event";
 import CommentCreateForm from "../comments/CommentCreateForm";
 import { useCurrentUser } from "../../contexts/CurrentUserContext";
 import Comment from "../comments/Comment";
 import Asset from "../../components/Asset";
-import InfiniteScroll from "react-infinite-scroll-component";
 import { fetchMoreData } from "../../utils/Utils";
 import PopularProfiles from "../profiles/PopularProfiles";
 import PopularEvents from "./PopularEvents";
+// Additional react component imports
+import InfiniteScroll from "react-infinite-scroll-component";
 
 function EventDetailPage() {
     const { id } = useParams();
@@ -35,13 +38,12 @@ function EventDetailPage() {
             setEvent({ results: [event] });
             setComments(comments)
           } catch (err) {
-            console.log(err);
+            // console.log(err);
           }
         };
     
         handleMount();
       }, [id]);
-
 
   return (
     <Row className="h-100">

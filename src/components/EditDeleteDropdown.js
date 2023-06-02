@@ -1,8 +1,10 @@
+// CSS imports
 import styles from "../styles/EditDeleteDropdown.module.css";
+// React imports
 import React from "react";
-import Dropdown from "react-bootstrap/Dropdown";
 import { useHistory } from "react-router";
-
+// Bootstrap imports
+import Dropdown from "react-bootstrap/Dropdown";
 
 // The forwardRef is important!!
 // Dropdown needs access to the DOM node in order to position the Menu
@@ -18,6 +20,7 @@ const ThreeDots = React.forwardRef(({ onClick }, ref ) => (
   ));
   ThreeDots.displayName = "ThreeDots";
 
+  // Edit and Delete menu for events, comments, and reviews
   export const EditDeleteDropdown = ({handleEdit, handleShow}) => {
     
     return (
@@ -50,6 +53,7 @@ const ThreeDots = React.forwardRef(({ onClick }, ref ) => (
     );
   };
 
+  // Edit menu for profiles
   export function ProfileEditDropdown({ id, handleShow, handlePasswordModalShow }) {
     const history = useHistory();
     return (

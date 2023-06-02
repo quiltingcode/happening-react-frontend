@@ -1,6 +1,7 @@
-
+// Bootstrap imports
 import Modal from "react-bootstrap/Modal";
 import Button from 'react-bootstrap/Button';
+// CSS imports
 import btnStyles from "../styles/Button.module.css";
 
 const DeleteConfirmationModal = (props) => {
@@ -24,6 +25,7 @@ const DeleteConfirmationModal = (props) => {
     </Modal.Header>
     <Modal.Body>{message}</Modal.Body>
     <Modal.Footer>
+      { /* Delete Modal content for deleting an event */ }
       {type === "event" && 
         <>
           <Button className={`${btnStyles.Button} ${btnStyles.Modal}`} onClick={handleClose}>
@@ -34,6 +36,7 @@ const DeleteConfirmationModal = (props) => {
           </Button>
         </>
       }
+      { /* Delete Modal content for deleting a comment */ }
       {type === "comment" && 
         <>
           <Button className={`${btnStyles.Button} ${btnStyles.Modal}`} onClick={handleClose}>
@@ -44,6 +47,7 @@ const DeleteConfirmationModal = (props) => {
           </Button>
         </>
       }
+      { /* Delete Modal content for deleting a review */ }
       {type === "review" && 
         <>
           <Button className={`${btnStyles.Button} ${btnStyles.Modal}`} onClick={handleClose}>

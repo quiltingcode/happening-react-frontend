@@ -1,17 +1,19 @@
+// React imports
 import { useState } from 'react'
+import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
+import { Link } from 'react-router-dom/cjs/react-router-dom';
+// CSS imports
 import styles from '../../styles/Event.module.css'
-import { useCurrentUser } from '../../contexts/CurrentUserContext';
-
+// Bootstrap imports
 import Card from 'react-bootstrap/Card';
 import Media from 'react-bootstrap/Media';
 import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
 import Tooltip from 'react-bootstrap/Tooltip';
-
-import { Link } from 'react-router-dom/cjs/react-router-dom';
+// Component imports
+import { useCurrentUser } from '../../contexts/CurrentUserContext';
 import Avatar from '../../components/Avatar';
 import { axiosRes } from '../../api/axiosDefaults';
 import { EditDeleteDropdown } from '../../components/EditDeleteDropdown';
-import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
 import DeleteConfirmationModal from '../../components/DeleteConfirmationModal';
 import DateFormatter from '../../utils/DateFormatter';
 
@@ -41,6 +43,7 @@ const Event = (props) => {
     const is_owner = currentUser?.username === owner;
     const history = useHistory();
 
+    // Variables for displaying the delete event modal popup
     const [show, setShow] = useState(false);
     const [message, setMessage] = useState("");
     const [type, setType] = useState("")
@@ -61,10 +64,9 @@ const Event = (props) => {
             history.goBack();
 
         } catch(err){
-            console.log(err)
+            // console.log(err)
         }
     }
-
 
     const handleInterested = async () => {
         try {
@@ -78,7 +80,7 @@ const Event = (props) => {
                 })
             }))
         } catch (err) {
-            console.log(err);
+            // console.log(err);
         }
     };
 
@@ -94,7 +96,7 @@ const Event = (props) => {
                 })
             }))
         } catch (err) {
-            console.log(err);
+            // console.log(err);
         }
     };
 
@@ -111,10 +113,11 @@ const Event = (props) => {
                 })
             }))
         } catch (err) {
-            console.log(err)
+            // console.log(err)
         }
     }
 
+    // Function when user clicks going having previously clicked interested - toggle going on, interested off
     const handleNotInterestedGoing = async () => {
         try {
             await axiosRes.delete(`/interested/${interested_id}`);
@@ -129,7 +132,7 @@ const Event = (props) => {
             }))
             handleGoing();
         } catch (err) {
-            console.log(err)
+            // console.log(err)
         }
     }
 
@@ -145,10 +148,11 @@ const Event = (props) => {
                 })
             }))
         } catch (err) {
-            console.log(err)
+            // console.log(err)
         }
     }
 
+    // Function when user clicks interested having previously clicked going - toggle interested on, going off
     const handleNotGoingInterested = async () => {
         try {
             await axiosRes.delete(`/going/${going_id}`);
@@ -162,7 +166,7 @@ const Event = (props) => {
             }))
             handleInterested()
         } catch (err) {
-            console.log(err)
+            // console.log(err)
         }
     }
 
@@ -229,17 +233,18 @@ const Event = (props) => {
                         <OverlayTrigger placement='top' overlay={<Tooltip>You can't go to your own event, sorry!</Tooltip>}>
                             <i className="far fa-calendar-check"></i>
                         </OverlayTrigger>
-                        /* If yes, can't do anything. If no, check if they've already posted going */
+                        /* If yes, can't do anything. If no, check if they've already posted interested */
                     ) : interested_id ? (
                         <span onClick={handleNotInterestedGoing}>
                         <i className="far fa-calendar-check"></i>
                         </span>
+                        /* If yes, delete the interested. If no, check if they've already posted going */
                     ) : going_id ? (
-                        /* If already has going_id, full face */
+                        /* If already has going_id, empty face - remove going */
                         <span onClick={handleNotGoing}>
                             <i className="fas fa-calendar-check"></i>
                         </span>
-                        /* If no going_id, check if user logged in. if yes, empty face */
+                        /* If no going_id, check if user logged in. if yes, fill face */
                     ) : currentUser ? (
                         <span onClick={handleGoing}>
                             <i className="far fa-calendar-check"></i>

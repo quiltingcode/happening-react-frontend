@@ -1,8 +1,10 @@
+// React imports
 import { useState } from "react";
-
+// Bootstrap imports
 import Form from "react-bootstrap/Form";
+// Component imports
 import { axiosRes } from "../../api/axiosDefaults";
-
+// CSS imports
 import styles from "../../styles/CommentForm.module.css";
 import btnStyles from "../../styles/Button.module.css";
 
