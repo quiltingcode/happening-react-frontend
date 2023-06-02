@@ -1,11 +1,14 @@
+// React imports
 import { useState } from 'react'
+// Bootstrap imports
 import Container from 'react-bootstrap/Container';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import Alert from 'react-bootstrap/Alert';
-
+// CSS imports
 import appStyles from '../../App.module.css'
 import btnStyles from '../../styles/Button.module.css'
+// Component imports
 import { axiosRes } from '../../api/axiosDefaults';
 import AlertMessage from '../../components/AlertMessage';
 
@@ -16,6 +19,7 @@ const MessageCreateForm = (props) => {
     const [message, setMessage] = useState("");
     const [errors, setErrors] = useState({});
 
+    // Variables to display success alert when message is sent successfully
     const [variant, setVariant] = useState("");
     const [alertMessage, setAlertMessage] = useState("");
     const [showAlert, setShowAlert] = useState(false);
@@ -38,7 +42,7 @@ const MessageCreateForm = (props) => {
           setAlertMessage("Your message has been sent successfully")
 
         } catch (err) {
-          console.log(err)
+          // console.log(err)
           if (err.response?.status !== 401) {
             setErrors(err.response?.data);
           }

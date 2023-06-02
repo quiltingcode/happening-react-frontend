@@ -1,13 +1,16 @@
+// React imports
+import { Link } from 'react-router-dom/cjs/react-router-dom.min';
+// CSS imports
 import styles from "../../styles/Profile.module.css";
 import btnStyles from "../../styles/Button.module.css";
+// Component imports
 import { useCurrentUser } from '../../contexts/CurrentUserContext';
-import { Link } from 'react-router-dom/cjs/react-router-dom.min';
-import Avatar from '../../components/Avatar';
-import Button from 'react-bootstrap/Button';
 import { useSetProfileData } from '../../contexts/ProfileDataContext';
+import Avatar from '../../components/Avatar';
+// Bootstrap imports
+import Button from 'react-bootstrap/Button';
 import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
 import Tooltip from 'react-bootstrap/Tooltip';
-
 
 const Profile = (props) => {
 

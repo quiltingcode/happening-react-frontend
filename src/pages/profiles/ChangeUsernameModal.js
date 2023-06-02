@@ -1,5 +1,7 @@
+// React imports
 import { useState } from "react";
-
+import { useHistory} from "react-router-dom";
+// Bootstrap imports
 import Alert from "react-bootstrap/Alert";
 import Button from "react-bootstrap/Button";
 import Col from "react-bootstrap/Col";
@@ -7,13 +9,11 @@ import Form from "react-bootstrap/Form";
 import Row from "react-bootstrap/Row";
 import Modal from "react-bootstrap/Modal";
 import ModalFooter from "react-bootstrap/ModalFooter";
-
-import { useHistory} from "react-router-dom";
+// Component imports
 import { axiosRes } from "../../api/axiosDefaults";
 import { useSetCurrentUser } from "../../contexts/CurrentUserContext";
-
+// CSS imports
 import btnStyles from "../../styles/Button.module.css";
-
 
 const ChangeUsernameModal = (props) => {
 
@@ -40,11 +40,10 @@ const ChangeUsernameModal = (props) => {
       }));
       history.goBack();
     } catch (err) {
-      console.log(err);
+      // console.log(err);
       setErrors(err.response?.data);
     }
   };
-
 
   return (
     <Modal show={showModal} onHide={handleClose}>

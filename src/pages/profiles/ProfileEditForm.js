@@ -1,6 +1,7 @@
+// React imports
 import { useState, useEffect, useRef } from "react";
 import { useHistory, useParams } from "react-router-dom";
-
+// Bootstrap imports
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import Image from "react-bootstrap/Image";
@@ -8,13 +9,13 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Container from "react-bootstrap/Container";
 import Alert from "react-bootstrap/Alert";
-
+// Component imports
 import { axiosReq } from "../../api/axiosDefaults";
 import {
   useCurrentUser,
   useSetCurrentUser,
 } from "../../contexts/CurrentUserContext";
-
+// CSS imports
 import btnStyles from "../../styles/Button.module.css";
 import appStyles from "../../App.module.css";
 
@@ -77,7 +78,7 @@ const ProfileEditForm = () => {
                 email 
             });
         } catch (err) {
-          console.log(err);
+          // console.log(err);
           history.push("/");
         }
       } else {
@@ -118,7 +119,7 @@ const ProfileEditForm = () => {
       }));
       history.goBack();
     } catch (err) {
-      console.log(err);
+      // console.log(err);
       setErrors(err.response?.data);
     }
   };
@@ -252,56 +253,55 @@ const ProfileEditForm = () => {
       <Container className={`${appStyles.Content} mt-3`}>
         <h2 className="text-center">Edit {owner}'s Profile</h2>
       </Container>
-        <Form onSubmit={handleSubmit}>
-          <Row>
-            <Col className="py-2 p-0 p-md-2 text-center" md={7} lg={4}>
-              <Container className={appStyles.Content}>
-                <Form.Group>
-                  {profile_pic && (
-                    <figure>
-                      <Image src={profile_pic} fluid />
-                    </figure>
-                  )}
-                  {errors?.profile_pic?.map((message, idx) => (
-                    <Alert variant="warning" key={idx}>
-                      {message}
-                    </Alert>
-                  ))}
-                  <div>
-                    <Form.Label
-                      className={`${btnStyles.Button} ${btnStyles.Form} btn my-auto`}
-                      htmlFor="image-upload"
-                    >
-                      Change profile Image
-                    </Form.Label>
-                  </div>
-                  <Form.File
-                    id="image-upload"
-                    ref={imageFile}
-                    accept="image/*"
-                    onChange={(e) => {
-                      if (e.target.files.length) {
-                        setProfileData({
-                          ...profileData,
-                          profile_pic: URL.createObjectURL(e.target.files[0]),
-                        });
-                      }
-                    }}
-                  />
-                </Form.Group>
-                <div className="d-md-none">{textFields}</div>
-              </Container>
-            </Col>
-            <Col
-              md={5}
-              lg={8}
-              className="d-none d-md-block p-0 p-md-2 text-center"
-            >
-              <Container className={appStyles.Content}>{textFields}</Container>
-            </Col>
-          </Row>
-        </Form>
-      
+      <Form onSubmit={handleSubmit}>
+        <Row>
+          <Col className="py-2 p-0 p-md-2 text-center" md={7} lg={4}>
+            <Container className={appStyles.Content}>
+              <Form.Group>
+                {profile_pic && (
+                  <figure>
+                    <Image src={profile_pic} fluid />
+                  </figure>
+                )}
+                {errors?.profile_pic?.map((message, idx) => (
+                  <Alert variant="warning" key={idx}>
+                    {message}
+                  </Alert>
+                ))}
+                <div>
+                  <Form.Label
+                    className={`${btnStyles.Button} ${btnStyles.Form} btn my-auto`}
+                    htmlFor="image-upload"
+                  >
+                    Change profile Image
+                  </Form.Label>
+                </div>
+                <Form.File
+                  id="image-upload"
+                  ref={imageFile}
+                  accept="image/*"
+                  onChange={(e) => {
+                    if (e.target.files.length) {
+                      setProfileData({
+                        ...profileData,
+                        profile_pic: URL.createObjectURL(e.target.files[0]),
+                      });
+                    }
+                  }}
+                />
+              </Form.Group>
+              <div className="d-md-none">{textFields}</div>
+            </Container>
+          </Col>
+          <Col
+            md={5}
+            lg={8}
+            className="d-none d-md-block p-0 p-md-2 text-center"
+          >
+            <Container className={appStyles.Content}>{textFields}</Container>
+          </Col>
+        </Row>
+      </Form>
     </>
   );
 };

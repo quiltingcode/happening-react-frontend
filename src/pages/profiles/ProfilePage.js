@@ -1,25 +1,24 @@
+// React imports
 import { useEffect, useState } from "react";
-
+import { Link, useParams } from "react-router-dom/cjs/react-router-dom.min";
+// Bootstrap imports
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 import Container from "react-bootstrap/Container";
 import Button from "react-bootstrap/Button";
 import Image from "react-bootstrap/Image";
-
-import Asset from "../../components/Asset";
-import NoResults from "../../assets/no-results.jpg"
-
+// CSS imports
 import styles from "../../styles/ProfilePage.module.css";
 import appStyles from "../../App.module.css";
 import btnStyles from "../../styles/Button.module.css";
-
+// Component imports
+import Asset from "../../components/Asset";
+import NoResults from "../../assets/no-results.jpg"
 import PopularProfiles from "./PopularProfiles";
 import { useCurrentUser } from "../../contexts/CurrentUserContext";
-import { Link, useParams } from "react-router-dom/cjs/react-router-dom.min";
 import { axiosReq } from "../../api/axiosDefaults";
 import { useSetProfileData } from "../../contexts/ProfileDataContext";
 import { useProfileData } from "../../contexts/ProfileDataContext";
-import InfiniteScroll from "react-infinite-scroll-component";
 import Event from "../events/Event";
 import { fetchMoreData } from "../../utils/Utils";
 import { ProfileEditDropdown } from "../../components/EditDeleteDropdown";
@@ -28,7 +27,8 @@ import ChangePasswordModal from "./ChangePasswordModal";
 import MessageCreateForm from "../messages/MessageCreateForm";
 import Message from "../messages/Message";
 import PopularEvents from "../events/PopularEvents";
-
+// Additional react component imports
+import InfiniteScroll from "react-infinite-scroll-component";
 
 function ProfilePage() {
 
@@ -43,12 +43,14 @@ function ProfilePage() {
   const [profileEvents, setProfileEvents] = useState({results: []});
   const [profileMessages, setProfileMessages] = useState({results: []});
 
+  // Variables to display Change Username modal popup
   const [show, setShow] = useState(false);
   const handleShow = () => {
       setShow(true);
   };
   const handleClose = () => setShow(false);
 
+  // Variables to display Change Password modal popup
   const [showPasswordModal, setShowPasswordModal] = useState(false);
   const handlePasswordModalShow = () => {
     setShowPasswordModal(true);
@@ -71,7 +73,7 @@ function ProfilePage() {
         setProfileMessages(profileMessages);
         setHasLoaded(true);
       } catch (err) {
-        console.log(err);
+        // console.log(err);
       }
     }
       fetchData();
@@ -111,8 +113,8 @@ function ProfilePage() {
             </Col>
           </Row>
         </Col>
-        
       </Row>
+
       <Row className="justify-content-center no-gutters my-3">
         <div className="text-align-center">
           {currentUser &&
@@ -134,6 +136,7 @@ function ProfilePage() {
             ))}
         </div>
       </Row>
+
       <Row className="justify-content-center no-gutters">
         <Col className="p-3" sm={8} lg={6}>
           <Container className={appStyles.Content}>
@@ -183,7 +186,6 @@ function ProfilePage() {
                 <Link to={{ pathname: profile.facebook_link }} target="_blank">
                   <i className="fab fa-facebook"></i> {profile?.facebook_link}
                 </Link>
-                
               </Col>
             )}
             {profile?.instagram_link && (
@@ -213,13 +215,11 @@ function ProfilePage() {
           loader={<Asset spinner />}
           hasMore={!!profileEvents.next}
           next={() => fetchMoreData(profileEvents, setProfileEvents)}
-
         />
       ) : (
         <Asset 
           src={NoResults} 
           message={`${profile?.owner} hasn't posted any events yet...`}
-        
         />
       )}
     </>
@@ -229,7 +229,6 @@ function ProfilePage() {
     <>
       <Container className={`${appStyles.Content} ${styles.Messages}`}>
         <h3 className="text-center">Messages</h3>
-
         {profileMessages.results.length ? (
           <InfiniteScroll
           children={

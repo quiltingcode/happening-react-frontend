@@ -1,12 +1,15 @@
+// React imports
 import { useState } from 'react'
 import { Link } from 'react-router-dom/cjs/react-router-dom.min';
+// Component imports
 import Avatar from '../../components/Avatar';
-import Media from 'react-bootstrap/Media';
-import { Button } from 'react-bootstrap';
-import btnStyles from '../../styles/Button.module.css'
 import MessageReplyForm from './MessageReplyForm';
 import AlertMessage from '../../components/AlertMessage';
-
+// Bootstrap imports
+import Media from 'react-bootstrap/Media';
+import Button from 'react-bootstrap/Button';
+// CSS imports
+import btnStyles from '../../styles/Button.module.css'
 
 const Message = (props) => {
 
@@ -18,6 +21,7 @@ const Message = (props) => {
       owner 
     } = props;
 
+    // Variables to display success alert when message is sent successfully
     const [show, setShow] = useState(false);
     const handleShow = () => {
       setShow(true);
