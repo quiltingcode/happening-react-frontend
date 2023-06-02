@@ -12,5 +12,4 @@ const DateFormatter = (props) => {
     }).format(date);
     };
     
-
 export default DateFormatter

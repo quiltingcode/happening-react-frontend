@@ -1,19 +1,21 @@
+// React imports
 import { useEffect, useState } from "react";
-
+import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
+// Bootstrap imports
 import Form from "react-bootstrap/Form";
 import Alert from "react-bootstrap/Alert";
 import Button from "react-bootstrap/Button";
 import Col from "react-bootstrap/Col";
 import Modal from "react-bootstrap/Modal";
 import Row from "react-bootstrap/Row";
-
+import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
+import Tooltip from 'react-bootstrap/Tooltip';
+// Component imports
 import { axiosReq } from "../../api/axiosDefaults";
-
+// CSS imports
 import btnStyles from "../../styles/Button.module.css";
-import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
+// Additional react component imports
 import { Rating } from "react-simple-star-rating";
-import { OverlayTrigger, Tooltip } from "react-bootstrap";
-
 
 function ReviewEditForm(props) {
 
@@ -35,20 +37,16 @@ function ReviewEditForm(props) {
   const history = useHistory();
   const [errors, setErrors] = useState({});
 
- 
-
   useEffect(() => {
     const handleMount = async () => {
       try {
         const { data } = await axiosReq.get(`/reviews/${reviewId}/`)
         const {review} = data;
-
         setReviewData({
           review,
-
         })
       } catch (err) {
-        console.log(err)
+        // console.log(err)
       }
     };
     handleMount();
@@ -58,7 +56,6 @@ function ReviewEditForm(props) {
     setReviewData({
       ...reviewData,
       [event.target.name]: event.target.value,
-
     });
   };
 
@@ -86,7 +83,7 @@ function ReviewEditForm(props) {
         
       }));
     } catch (err) {
-      console.log(err)
+      // console.log(err)
       if (err.response?.status !== 401){
         setErrors(err.response?.data)
       }
@@ -135,7 +132,6 @@ function ReviewEditForm(props) {
       </Button>
     </div>
   );
-
 
   return (
     <Modal show={showEditModal} onHide={handleCloseEditModal}>

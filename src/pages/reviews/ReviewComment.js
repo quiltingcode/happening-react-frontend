@@ -1,15 +1,19 @@
+// React imports
 import { useState } from 'react'
-
-import styles from "../../styles/Comment.module.css";
 import { Link, useHistory } from 'react-router-dom/cjs/react-router-dom.min';
+// CSS imports
+import styles from "../../styles/Comment.module.css";
+// Component imports
 import Avatar from '../../components/Avatar';
-import Media from 'react-bootstrap/Media';
-import { Rating } from "react-simple-star-rating";
 import { useCurrentUser } from '../../contexts/CurrentUserContext';
 import { EditDeleteDropdown } from '../../components/EditDeleteDropdown';
 import { axiosRes } from '../../api/axiosDefaults';
 import DeleteConfirmationModal from '../../components/DeleteConfirmationModal';
 import ReviewEditForm from './ReviewEditForm';
+// Bootstrap imports
+import Media from 'react-bootstrap/Media';
+// Additional react component imports
+import { Rating } from "react-simple-star-rating";
 
 const ReviewComment = (props) => {
 
@@ -30,6 +34,7 @@ const ReviewComment = (props) => {
   const is_owner = currentUser?.username === owner;
   const history = useHistory();
 
+  // Variables to display Delete Review conirmation modal popup
   const [show, setShow] = useState(false);
   const [message, setMessage] = useState("");
   const [type, setType] = useState("");
@@ -40,6 +45,7 @@ const ReviewComment = (props) => {
   };
   const handleClose = () => setShow(false);
 
+  // Variables to display Edit Review modal popup
   const [showEditModal, setShowEditModal] = useState(false);
   const handleShowEditModal = () => {
     setShowEditModal(true);
@@ -66,7 +72,7 @@ const ReviewComment = (props) => {
     }));
     history.push(`/reviews/`)
     } catch (err) {
-      console.log(err)
+      // console.log(err)
     }
   }
 

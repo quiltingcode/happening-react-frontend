@@ -1,27 +1,28 @@
+// React imports
 import { useEffect, useState } from 'react'
+import { Link } from 'react-router-dom/cjs/react-router-dom';
+// CSS imports
 import styles from '../../styles/Review.module.css'
 import appStyles from "../../App.module.css";
 import btnStyles from "../../styles/Button.module.css";
-
+// Component imports
 import { useCurrentUser } from '../../contexts/CurrentUserContext';
-
-import { Link } from 'react-router-dom/cjs/react-router-dom';
 import Avatar from '../../components/Avatar';
 import { axiosReq } from '../../api/axiosDefaults';
-
+import DateFormatter from "../../utils/DateFormatter";
+import ReviewCreateForm from './ReviewCreateForm';
+import ReviewComment from './ReviewComment';
+// Bootstrap imports
 import Button from 'react-bootstrap/Button';
 import Col from 'react-bootstrap/Col';
 import Container from 'react-bootstrap/Container';
 import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
 import Row from 'react-bootstrap/Row';
 import Tooltip from 'react-bootstrap/Tooltip';
-import ReviewCreateForm from './ReviewCreateForm';
-import ReviewComment from './ReviewComment';
+// Additional react component imports
 import { Rating } from "react-simple-star-rating";
-import DateFormatter from "../../utils/DateFormatter";
 
 const Review = (props) => {
-
 
     const {
         id,
@@ -39,17 +40,18 @@ const Review = (props) => {
     const currentUser = useCurrentUser();
     const is_owner = currentUser?.username === owner;
 
+    // Variables to display Create Review modal popup
     const [showCreateForm, setShowCreateForm] = useState(false);
     const handleShowCreateForm = () => {
         setShowCreateForm(true);
     };
     const handleCloseCreateForm = () => setShowCreateForm(false);
 
+    // Variables to toggle open and closed the review comments component
     const [displayReviewComments, setDisplayReviewComments] = useState(false);
     
     const [reviewComments, setReviewComments] = useState({ results: [] });
 
-  
     useEffect(() => {
       const handleMount = async () => {
         try {
@@ -59,17 +61,14 @@ const Review = (props) => {
 
           setReviewComments(reviewComments)
         } catch (err) {
-          console.log(err);
+          // console.log(err);
         }
       };
 
       handleMount();
     }, [currentUser,id]);
 
-    
-
   return (
-    
     <>
       <Container className={`${styles.Review} ${appStyles.Content}`}>
         <Row noGutters className="px-3 text-center">
@@ -96,18 +95,15 @@ const Review = (props) => {
 
           <Col lg={4}>
             <div>
-              <span className='mb-3'>
+              <span className="mb-3">
                 <Rating readonly initialValue={average_rating} size={25} />
               </span>
-              
-              
+
               <OverlayTrigger
                 placement="top"
-                overlay={
-                  <Tooltip>Click to read the reviews</Tooltip>
-                }
+                overlay={<Tooltip>Click to read the reviews</Tooltip>}
               >
-                <Button 
+                <Button
                   className={btnStyles.ReviewCountToggle}
                   onClick={() => {
                     setDisplayReviewComments(!displayReviewComments);
@@ -118,8 +114,6 @@ const Review = (props) => {
                   </span>
                 </Button>
               </OverlayTrigger>
-              
-              
             </div>
           </Col>
           <Col lg={2}>
@@ -153,24 +147,26 @@ const Review = (props) => {
             )}
           </Col>
         </Row>
-      </Container >
-        {displayReviewComments &&
-            <Container className={`${appStyles.Content} mb-3`}>
-              {reviewComments.results.length ?(
-                reviewComments.results.map((review) => (
-                  <ReviewComment 
-                    key={review.id} 
-                    {...review} 
-                    setEvents={setEvents}
-                    setReviewComments={setReviewComments}
-                    eventId={id}
-                    review_count={review_count}
-                    avgRating={average_rating}
-                  />
-                ))
-              ) : (<span>no reviews....yet</span> ) }
-            </Container>
-         }
+      </Container>
+      {displayReviewComments && (
+        <Container className={`${appStyles.Content} mb-3`}>
+          {reviewComments.results.length ? (
+            reviewComments.results.map((review) => (
+              <ReviewComment
+                key={review.id}
+                {...review}
+                setEvents={setEvents}
+                setReviewComments={setReviewComments}
+                eventId={id}
+                review_count={review_count}
+                avgRating={average_rating}
+              />
+            ))
+          ) : (
+            <span>no reviews....yet</span>
+          )}
+        </Container>
+      )}
       <ReviewCreateForm
         id={id}
         showModal={showCreateForm}
@@ -179,7 +175,6 @@ const Review = (props) => {
         setReviewComments={setReviewComments}
       />
     </>
-    
   );
 }
 

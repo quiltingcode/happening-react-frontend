@@ -1,22 +1,25 @@
+// React imports
 import { useEffect, useState } from "react";
-
+import { useLocation } from "react-router-dom/cjs/react-router-dom.min";
+// Bootstrap imports
 import Form from "react-bootstrap/Form";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 import Container from "react-bootstrap/Container";
-import NoResults from "../../assets/no-results.jpg"
-
+// CSS imports
 import appStyles from "../../App.module.css";
 import styles from "../../styles/EventsPage.module.css";
-import { useLocation } from "react-router-dom/cjs/react-router-dom.min";
+// Component imports
+import NoResults from "../../assets/no-results.jpg"
 import { axiosReq } from "../../api/axiosDefaults";
 import Asset from "../../components/Asset";
-import InfiniteScroll from "react-infinite-scroll-component";
 import { fetchMoreData } from "../../utils/Utils";
 import PopularProfiles from "../profiles/PopularProfiles";
 import PopularEvents from "../events/PopularEvents";
 import Review from "./Review";
 import { useRedirect } from "../../hooks/UseRedirect";
+// Additional react component imports
+import InfiniteScroll from "react-infinite-scroll-component";
 
 function ReviewsPage({ message="", filter="" }) {
 
@@ -28,6 +31,7 @@ function ReviewsPage({ message="", filter="" }) {
   const [search, setSearch] = useState("");
   const [category, setCategory] = useState("");
 
+  // Variables to get today's date and format it in order to use it in the axios get request filter
   const current = new Date();
   const date = `${current.getFullYear()}-${current.getMonth()+1}-${current.getDate()}`;
 
@@ -38,7 +42,7 @@ function ReviewsPage({ message="", filter="" }) {
         setEvents(data);
         setHasLoaded(true);
       } catch (err) {
-        console.log(err);
+        // console.log(err);
       }
     };
 

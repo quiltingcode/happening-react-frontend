@@ -1,16 +1,18 @@
+// React imports
 import { useState } from "react";
-
+import { useHistory } from "react-router-dom/cjs/react-router-dom";
+// Bootstrap imports
 import Form from "react-bootstrap/Form";
 import Alert from "react-bootstrap/Alert";
 import Button from "react-bootstrap/Button";
 import Col from "react-bootstrap/Col";
 import Modal from "react-bootstrap/Modal";
 import Row from "react-bootstrap/Row";
-
+// CSS imports
 import btnStyles from "../../styles/Button.module.css";
-
+// Component imports
 import { axiosRes } from "../../api/axiosDefaults";
-import { useHistory } from "react-router-dom/cjs/react-router-dom";
+// Additional react component imports
 import { Rating } from "react-simple-star-rating";
 
 function ReviewCreateForm(props) {
