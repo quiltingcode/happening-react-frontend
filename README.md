@@ -85,7 +85,7 @@ Later on, during the build, I also used the Project Board to log and track bugs 
 All the models have been set up in a separate DRF repository. Click [here](https://github.com/quiltingcode/events-backend-api) to view the repository or [here](https://happening-api-kelz.herokuapp.com/) to view the deployed API.
 
  
-[Back to top](<#table-of-content>)
+[Back to top](<#table-of-contents>)
 
 # **User Experience (UX)**
 
@@ -170,7 +170,7 @@ CONTACT
 | As a Logged in User | I can view messages in my profile page so that I can read messages other users have sent me | &check; |
 | As a Logged in User | I can send a message to another user so that I can ask a question about an event they are hosting | &check; |
 
-[Back to top](<#table-of-content>)
+[Back to top](<#table-of-contents>)
 
 ## Site Structure
 
@@ -190,7 +190,7 @@ The main font used for the site is 'Montserrat' with a fallback font of Sans-Ser
 
 ![Typography](images/typography.jpg)
 
-[Back to top](<#table-of-content>)
+[Back to top](<#table-of-contents>)
 
 # **Existing Features**
 
@@ -437,7 +437,7 @@ When I tried requesting the event_date from the API in a formatted form, it came
 
 As stated previously, there is no way for the user to check whether the message form has been submitted correctly or not, as the user doesn't have access to other user's inbox. I therefore wanted to set up a bootstrap success alert. Initially I created this as a single function inside the MessageCreateForm.js component. In a later sprint, when I was developing the reply feature, I decided to create a re-usable Alert component which could be used interchangeably between the send message and reply message forms. I refactored the code inside the MessageCreateForm component and imported the newly created AlertMessage component into the ReplyMessageForm.js component as well. In future development, I can extend this functionality to show user alerts in more areas of the site. 
 
-[Back to top](<#table-of-content>)
+[Back to top](<#table-of-contents>)
 
 # **Features Left to Implement**
 
@@ -447,7 +447,7 @@ As stated previously, there is no way for the user to check whether the message 
 * Get users from my town signed up and using the site to generate data, and get real user feedback for future sprints
 * Set alerts for when events in your MyEvents page are about to take place
 
-[Back to top](<#table-of-content>)
+[Back to top](<#table-of-contents>)
 
 # **Technologies Used - Frontend**
 
@@ -478,13 +478,13 @@ As stated previously, there is no way for the user to check whether the message 
 
 * [NPM React-star-rating](https://www.npmjs.com/package/react-simple-star-rating) - A simple react component for adding a star rating to your project.
 
-[Back to top](<#table-of-content>)
+[Back to top](<#table-of-contents>)
 
 # Testing
 
 Please click [**_here_**](TESTING.md) to read more information about testing Happening Frontend
 
-[Back to top](<#contents>)
+[Back to top](<#table-of-contents>)
 
 # Deployment
 
@@ -525,7 +525,7 @@ A Git clone creates a linked copy of the project that will continue to synchroni
 
 ![Clone](images/clone.jpg)
 
-[Back to top](<#contents>)
+[Back to top](<#table-of-contents>)
 
 # Credits
 
@@ -542,5 +542,10 @@ A Git clone creates a linked copy of the project that will continue to synchroni
 * I looked at my Mentor, Gareth McGirr's [P5 Project](https://github.com/Gareth-McGirr/body-doodles) to help me get an understanding of how to implement the React-simple-star-rating package. 
 * I read this documentation on the [Star Rating System](https://www.npmjs.com/package/react-simple-star-rating) to help with the install and use of the external component
 
+# Acknowledgements
+This fictional site was created for Portfolio Project #5 (Advanced Front End Specialisation) - Diploma in Full Stack Software Development at the [Code Institute](https://www.codeinstitute.net). I would like to thank my mentor Gareth McGirr for his support and feedback during the project. I would also like to thank everyone in my Slack class for their support, and on all the slack channels for answering my questions and concerns during this project and throughout the course. 
 
-[Back to top](<#contents>)
+*Kelly Hutchison, February 2023*
+
+[Back to top](<#table-of-contents>)
+
