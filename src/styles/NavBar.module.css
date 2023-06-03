@@ -22,9 +22,8 @@
     color: #2f4858;
     transition: color ease-in-out 0.3s;
     padding: 5px;
-    text-align: center;
-    margin-left: 20px;
     text-align: right;
+    margin-left: 20px;
 }
 
 .dropdownText:hover {
@@ -47,9 +46,3 @@
 #dropdownItem:hover {
     color: #6e5e93;
 }
-
-
-
-
-
-

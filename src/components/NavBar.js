@@ -65,9 +65,9 @@ const NavBar = () => {
       <NavDropdown
         id={styles.dropdownMenu}
         title=
-          <span className={styles.dropdownText}>
+          <span className={`${styles.dropdownText} d-sm-inline-column`}>
             <i className="fas fa-heart"></i>
-            <br />
+            
             My Events
           </span>
       >
