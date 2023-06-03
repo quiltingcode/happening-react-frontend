@@ -63,9 +63,9 @@ const NavBar = () => {
       </NavLink>
 
       <NavDropdown
-        id="basic-nav-dropdown"
+        id={styles.dropdownMenu}
         title=
-          <span className={styles.NavLink}>
+          <span className={styles.dropdownText}>
             <i className="fas fa-heart"></i>
             <br />
             My Events

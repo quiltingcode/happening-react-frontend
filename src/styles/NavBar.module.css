@@ -1,6 +1,7 @@
 .NavBar {
     background-color: #ffffff;
     border: 1px solid #dadadf;
+    margin-bottom: 1rem;
 }
 
 .NavLink {
@@ -17,12 +18,21 @@
     color: #db628e;
 }
 
-#basic-nav-dropdown {
-    color: #6e5e93;
-    font-size: 1.6rem;
-    padding: 7px;
-    vertical-align: middle;
+#dropdownMenu {
+    color: #2f4858;
+    transition: color ease-in-out 0.3s;
+    padding: 5px;
+    text-align: center;
+    margin-left: 20px;
 }
+
+.dropdownText:hover {
+    color: #6e5e93;
+}
+
+
+
+
 
 
 

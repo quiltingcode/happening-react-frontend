@@ -32,12 +32,13 @@
 }
 
 a {
-    color: #6e5e93;
+    color: #2f4858;
     transition: color ease-in-out 0.3s;
 }
 
 a:hover {
     text-decoration: none;
+    color: #6e5e93;
 }
 
 a:hover i {
