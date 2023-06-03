@@ -24,12 +24,29 @@
     padding: 5px;
     text-align: center;
     margin-left: 20px;
+    text-align: right;
 }
 
 .dropdownText:hover {
     color: #6e5e93;
 }
 
+#dropdownItem {
+    display: block;
+    padding: 0.25rem 1.5rem;
+    clear: both;
+    font-weight: 400;
+    color: #2f4858;
+    text-align: inherit;
+    white-space: nowrap;
+    background-color: transparent;
+    border: 0;
+    text-align: right;
+}
+
+#dropdownItem:hover {
+    color: #6e5e93;
+}
 
 
 

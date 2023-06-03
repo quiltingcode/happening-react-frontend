@@ -70,9 +70,9 @@ const NavBar = () => {
             <br />
             My Events
           </span>
-        
       >
         <NavDropdown.Item
+          id={styles.dropdownItem}
           as={Link}
           className={styles.NavLink}
           to="/myevents/going"
@@ -83,6 +83,7 @@ const NavBar = () => {
           <i className="far fa-calendar-check"></i>Going
         </NavDropdown.Item>
         <NavDropdown.Item
+          id={styles.dropdownItem}
           className={styles.NavLink}
           as={Link}
           to="/myevents/interested"
@@ -111,6 +112,7 @@ const NavBar = () => {
   const loggedInDropdownIcons = (
     <>
       <NavDropdown.Item 
+        id={styles.dropdownItem}
         as={Link} 
         to={`/profiles/${currentUser?.profile_id}`}
         onClick={() => {
@@ -121,6 +123,7 @@ const NavBar = () => {
 
       </NavDropdown.Item>
       <NavDropdown.Item 
+        id={styles.dropdownItem}
         as={Link} 
         to="/" 
         onClick={handleSignOut}
@@ -139,6 +142,7 @@ const NavBar = () => {
   const loggedOutDropdownIcons = (
     <>
       <NavDropdown.Item 
+        id={styles.dropdownItem}
         as={Link} 
         to="/signin"
         onClick={() => {
@@ -148,6 +152,7 @@ const NavBar = () => {
         <i className="fas fa-sign-in-alt"></i>Sign in
       </NavDropdown.Item>
       <NavDropdown.Item 
+        id={styles.dropdownItem}
         as={Link} 
         to="/signup"
         onClick={() => {
