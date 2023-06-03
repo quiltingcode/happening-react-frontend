@@ -431,7 +431,7 @@ Happening was tested on the following browsers:
 - Microsoft Edge
 - Mozilla Firefox
 
-I do not have any Apple devices available to carry out testing on a Safari browser. Appearance and functionality appear to be consistent throughout all browsers.
+I do not have any Apple devices available to carry out testing on a Safari browser. Appearance and functionality appear to be consistent throughout all browsers. The site loads correctly on Firefox but it doesn't seem to be able to connect with the backend API and get the data. This is something I need to look at for the future to make sure that Firefox users can view my site.
 
 ## Lighthouse Testing
 

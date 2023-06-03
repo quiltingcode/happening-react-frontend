@@ -487,3 +487,60 @@ Please click [**_here_**](TESTING.md) to read more information about testing Hap
 [Back to top](<#contents>)
 
 # Deployment
+
+### Deployment to Heroku
+
+Once you have created a new gitpod workspace and set up the new project, you are ready to deploy to Heroku. 
+
+1. In your heroku account, select Create New App, and give it a unique name related to your project. 
+2. Select a region corresponding to where you live and click 'Create App'.
+3. Head into the 'Deploy' tab select GitHub as the 'deployment method', find your project repository and click 'Connect'.
+4. Click 'Deploy branch' to trigger Heroku to start building the application. 
+5. Once you see the message saying 'build succeeded' you can click 'Open App' to see your application in the browser. 
+
+### Connect React Frontend to the API backend
+
+Once you have set up the workspace and done a basic deploy to Heroku, you can connect the react workspace to your API, in order to send data to the API
+
+1. In the Heroku dashboard, go into the API application settings
+2. In 'Settings' add a new Config Var called 'CLIENT_ORIGIN' and set that to the URL for your deployed React application. In my case, this would be [https://happening-react.herokuapp.com](https://happening-react.herokuapp.com).
+3. Then add another Config Var called 'CLIENT_ORIGIN_DEV' and enter the URL of your Gitpod preview link, remembering to remove the trailing slash at the end. Gitpod occasionally changes this URL so keep an eye on it, as you are working on your project. 
+4. Go back into your frontend Gitpod workspace, and install the Axios library using the command 'npm install axios'.
+5. Create a folder called 'API' and inside it create a file called 'axiosDefaults'.
+6. import axios at the top of the file
+7. Define your baseURL which is the unique URL of your deployed API project. In my case this would be [https://happening-api-kelz.herokuapp.com/](https://happening-api-kelz.herokuapp.com/)
+8. Set the content-type header to multi-part/form-data as the API will need to deal with images as well as text in it's requests.
+9. In order to avoid any CORS issues, set withCredentials to True.
+10. Import this file into App.js to be used across all pages
+
+### Fork this Project Repository
+
+It is possible to make an independent copy of a GitHub Repository by forking the GitHub account. The copy can then be viewed and it is also possible to make changes in the copy without affecting the original repository. To fork the repository, follow these steps:
+
+1. After logging in to GitHub, locate the repository. On the top right side of the page there is a 'Fork' button. Click on the button to create a copy of the original repository.
+
+### Clone this Project Repository
+
+A Git clone creates a linked copy of the project that will continue to synchronize with the original repository. In order to create a clone, you can click on the 'Code' button inside the selected repository and then select the 'Clone' option from the dropdown list.
+
+![Clone](images/clone.jpg)
+
+[Back to top](<#contents>)
+
+# Credits
+
+* The image on the sign in and sign up page was taken from [Unsplash.com](https://unsplash.com/photos/ekvNI_03FLM)
+* The Upload image on the create event, and edit event and profile page is taken from [pngtree.com](https://pngtree.com/so/uploading)
+* The No Results found image is taken from [hajde/media](https://hajde.media/forum/60)
+* I used [freelogodesign.org](https://www.freelogodesign.org/manager) to design the Happening brand logo
+* I used [fotor.com](https://www.fotor.com/features/background-remover/upload) to make the image background transparent on the logo
+* I was passed this [article](https://christopher-dent.medium.com/adding-a-delete-confirmation-to-your-react-app-55221701daa6) by tutor support, in order to help me learn how to create a delete confirmation modal component.
+* Once I had the modal component functioning correctly, in order to refactor it into a re-usable component, I found this helpful [article](https://codemoto.io/coding/react/react-delete-confirmation-modal) to make the necessary changes.
+* I read this article on [Stack Overflow](https://stackoverflow.com/questions/53772417/react-how-to-filter-events-according-to-date) which helped me to create the date filter for the top upcoming events component
+* I then found another article on [Stack Overflow](https://stackoverflow.com/questions/19097631/missing-invoking-a-constructor) to fix the console warning about component brackets.
+* I used [reactgo.com](https://reactgo.com/react-get-current-date/) to learn how to make a variable for today's date
+* I looked at my Mentor, Gareth McGirr's [P5 Project](https://github.com/Gareth-McGirr/body-doodles) to help me get an understanding of how to implement the React-simple-star-rating package. 
+* I read this documentation on the [Star Rating System](https://www.npmjs.com/package/react-simple-star-rating) to help with the install and use of the external component
+
+
+[Back to top](<#contents>)
