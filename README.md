@@ -545,7 +545,7 @@ A Git clone creates a linked copy of the project that will continue to synchroni
 # Acknowledgements
 This fictional site was created for Portfolio Project #5 (Advanced Front End Specialisation) - Diploma in Full Stack Software Development at the [Code Institute](https://www.codeinstitute.net). I would like to thank my mentor Gareth McGirr for his support and feedback during the project. I would also like to thank everyone in my Slack class for their support, and on all the slack channels for answering my questions and concerns during this project and throughout the course. 
 
-*Kelly Hutchison, February 2023*
+*Kelly Hutchison, June 2023*
 
 [Back to top](<#table-of-contents>)
 

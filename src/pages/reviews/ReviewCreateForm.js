@@ -47,7 +47,6 @@ function ReviewCreateForm(props) {
     formData.append("review", review);
     try {
       const { data } = await axiosRes.post("/reviews/", formData);
-      history.push(`/reviews`);
       setReviewComments((prevComments) => ({
         ...prevComments,
         results: [data, ...prevComments.results],
@@ -62,6 +61,7 @@ function ReviewCreateForm(props) {
       }));
       setReview("");
       handleCloseCreateForm();
+      history.push(`/reviews`);
     } catch (err) {
       if (err.response?.status !== 401) {
         setErrors(err.response?.data);
