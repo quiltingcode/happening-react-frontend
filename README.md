@@ -414,7 +414,7 @@ For the time being, there is no alert system in place to send a notification to 
 
 ### Three Dots Edit Delete Dropdown Menu
 
-Based on the Moments walkthrough project 'MoreDropdown' component, I have utilised the same idea in my project but extended it's use even further to be accessed when editing or deleting events, comments and also reviews. In addition to this re-usable component which I learnt from the course tutorials, I also developed three more custom re-usable components specifically for my project.
+Based on the Moments walkthrough project 'MoreDropdown' component, I have utilised the same idea in my project but extended it's use even further to be accessed when editing or deleting events, comments and also reviews. In addition to this re-usable component which I learnt from the course tutorials, I also developed four more custom re-usable components specifically for my project.
 
 ### Delete Confirmation Component
 
@@ -436,6 +436,14 @@ When I tried requesting the event_date from the API in a formatted form, it came
 ### Alert Component
 
 As stated previously, there is no way for the user to check whether the message form has been submitted correctly or not, as the user doesn't have access to other user's inbox. I therefore wanted to set up a bootstrap success alert. Initially I created this as a single function inside the MessageCreateForm.js component. In a later sprint, when I was developing the reply feature, I decided to create a re-usable Alert component which could be used interchangeably between the send message and reply message forms. I refactored the code inside the MessageCreateForm component and imported the newly created AlertMessage component into the ReplyMessageForm.js component as well. In future development, I can extend this functionality to show user alerts in more areas of the site. 
+
+### Scroll to Top Component
+
+With the infinite scroll functionality in place, once there are a lot of events posted to the site, and the user scrolls a long way down looking at posts, once they want to return to the navbar options, it takes a long time to manually scroll all the way back up again, harming user experience.  For this reason, I have implemented a button which appears once the user has scrolled down more than 1000px ( appears after viewing the first post) and remains fixed to the bottom of the screen for when the user wants to return to the navbar menu at the top. 
+
+Initially I implemented a simple button at the bottom of the events pages screen which takes the user back to the top of the window. However, in this scenario the user has to scroll through all events to reach the button. Looking at an article from [W3Schools](https://www.w3schools.com/howto/howto_js_scroll_to_top.asp) I added CSS to fix the button to the bottom of the page, and a function to keep the button hidden until the user has scrolled down more than 1000px. I moved this function into a re-usable hook component, which I then imported into the Profile Page and the Reviews page as well. 
+
+![Back to the Top Button](images/scroll-button.jpg)
 
 [Back to top](<#table-of-contents>)
 
@@ -541,6 +549,8 @@ A Git clone creates a linked copy of the project that will continue to synchroni
 * I used [reactgo.com](https://reactgo.com/react-get-current-date/) to learn how to make a variable for today's date
 * I looked at my Mentor, Gareth McGirr's [P5 Project](https://github.com/Gareth-McGirr/body-doodles) to help me get an understanding of how to implement the React-simple-star-rating package. 
 * I read this documentation on the [Star Rating System](https://www.npmjs.com/package/react-simple-star-rating) to help with the install and use of the external component
+* I read an article by [gitconnected.com](https://levelup.gitconnected.com/how-to-create-a-scroll-to-top-button-in-reactjs-7b2f2563d6b0) to help me create a scroll to the top button
+* I read an article by [W3schools.com](https://www.w3schools.com/howto/howto_js_scroll_to_top.asp) which helped mt to turn the scroll to top element into a re-usable component
 
 # Acknowledgements
 This fictional site was created for Portfolio Project #5 (Advanced Front End Specialisation) - Diploma in Full Stack Software Development at the [Code Institute](https://www.codeinstitute.net). I would like to thank my mentor Gareth McGirr for his support and feedback during the project. I would also like to thank everyone in my Slack class for their support, and on all the slack channels for answering my questions and concerns during this project and throughout the course. 
