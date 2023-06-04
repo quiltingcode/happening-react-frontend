@@ -20,14 +20,17 @@ import { fetchMoreData } from "../../utils/Utils";
 import PopularProfiles from "../profiles/PopularProfiles";
 import PopularEvents from "./PopularEvents";
 import { useCurrentUser } from "../../contexts/CurrentUserContext";
+import ScrollToTop from "../../hooks/ScrollToTop";
 // Additional react component imports
 import InfiniteScroll from "react-infinite-scroll-component";
 
 function EventsPage({ message="", filter="" }) {
 
+  ScrollToTop()
+
   const handleScrollToTop = () => {
     window.scrollTo({ top: 0, behaviour: 'smooth' });
-  };
+  }
 
   const [events, setEvents] = useState({ results: [] });
   const [hasLoaded, setHasLoaded] = useState(false);
@@ -130,14 +133,18 @@ function EventsPage({ message="", filter="" }) {
           <PopularEvents />
         </Col>
       </Row>
+      
       <div>
         <Button
           className={`${btnStyles.Button} ${btnStyles.ScrollToTop} fixed-bottom-5 left-7 z-50 cursor-pointer`}
           onClick={handleScrollToTop}
+          title="Back to Top"
+          id="scrollBtn"
         >
           <i className="fa-solid fa-circle-arrow-up" alt="scroll to top"></i>
+          <br />
+          Back to Top
         </Button>
-        <span className="text-center">Back to Top</span>
       </div>
     </>
   );

@@ -189,10 +189,16 @@
   background-color: transparent;
   padding: 0;
   border-color: transparent;
+  display: none; 
+  position: fixed; 
+  bottom: 20px; 
+  right: 30px; 
+  z-index: 99; 
+  color: black;
 }
 
 .ScrollToTop i {
-  font-size: 3rem;
+  font-size: 2rem;
 }
 
 .ScrollToTop:hover {

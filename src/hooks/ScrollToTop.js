@@ -1,23 +1,19 @@
-import { useEffect, useState } from "react";
 
+const ScrollToTop = () => {
 
-export const ScrollToTop = () => {
+  const mybutton = document.getElementById("scrollBtn");
 
-  const [showButton, setShowButton] = useState(false);
+  // When the user scrolls down 20px from the top of the document, show the button
+  window.onscroll = function() {scrollFunction()};
 
-
-    useEffect(() => {
-        // 'to top' Button is displayed after user scrolls for 300 pixels
-        const handleScrollButtonVisibility = () => {
-          window.pageYOffset > 300 ? setShowButton(true) : setShowButton(false);
-        };
   
-        window.addEventListener('scroll', handleScrollButtonVisibility);
-  
-        return () => {
-          window.removeEventListener('scroll', handleScrollButtonVisibility);
-        };
-      }, []);
-
-
+  function scrollFunction() {
+    if (window.pageYOffset > 700) {
+      mybutton.style.display = "block";
+    } else {
+      mybutton.style.display = "none";
+    }
+  }
 };
+
+export default ScrollToTop
