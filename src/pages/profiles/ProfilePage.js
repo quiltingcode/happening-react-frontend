@@ -27,10 +27,17 @@ import ChangePasswordModal from "./ChangePasswordModal";
 import MessageCreateForm from "../messages/MessageCreateForm";
 import Message from "../messages/Message";
 import PopularEvents from "../events/PopularEvents";
+import ScrollToTop from "../../hooks/ScrollToTop";
 // Additional react component imports
 import InfiniteScroll from "react-infinite-scroll-component";
 
 function ProfilePage() {
+
+  // Scroll to top button appears after scrolling down 700px
+  ScrollToTop();
+  const handleScrollToTop = () => {
+    window.scrollTo({ top: 0, behaviour: 'smooth' });
+  }
 
   const [hasLoaded, setHasLoaded] = useState(false);
   const currentUser = useCurrentUser();
@@ -308,6 +315,19 @@ function ProfilePage() {
           handleClosePasswordModal={handleClosePasswordModal}
         />
       </Row>
+
+      <div>
+        <Button
+          className={`${btnStyles.Button} ${btnStyles.ScrollToTop} fixed-bottom-5 left-7 z-50 cursor-pointer`}
+          onClick={handleScrollToTop}
+          title="Back to Top"
+          id="scrollBtn"
+        >
+          <i className="fa-solid fa-circle-arrow-up" alt="scroll to top"></i>
+          <br />
+          Back to Top
+        </Button>
+      </div>
     </>
   );
 }
