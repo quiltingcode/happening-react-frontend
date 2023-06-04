@@ -7,7 +7,7 @@ const ScrollToTop = () => {
   window.onscroll = function() {scrollFunction()};
 
   
-  function scrollFunction() {
+  function scrollFunction () {
     if (window.pageYOffset > 1000) {
       mybutton.style.display = "block";
     } else {

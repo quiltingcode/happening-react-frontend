@@ -28,6 +28,7 @@ const ProfileEditForm = () => {
 
   const [profileData, setProfileData] = useState({
     name: "",
+    owner: "",
     bio: "",
     profile_pic: "",
     website: "",
