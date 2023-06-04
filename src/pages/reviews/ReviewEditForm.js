@@ -123,7 +123,7 @@ function ReviewEditForm(props) {
 
       <Button
         className={`${btnStyles.Button} ${btnStyles.Form}`}
-        onClick={() => history.goBack()}
+        onClick={handleCloseEditModal}
       >
         Cancel
       </Button>
