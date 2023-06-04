@@ -6,9 +6,11 @@ import Form from "react-bootstrap/Form";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 import Container from "react-bootstrap/Container";
+import Button from "react-bootstrap/Button";
 // CSS imports
 import appStyles from "../../App.module.css";
 import styles from "../../styles/EventsPage.module.css";
+import btnStyles from "../../styles/Button.module.css"
 // Component imports
 import NoResults from "../../assets/no-results.jpg"
 import { axiosReq } from "../../api/axiosDefaults";
@@ -18,10 +20,17 @@ import PopularProfiles from "../profiles/PopularProfiles";
 import PopularEvents from "../events/PopularEvents";
 import Review from "./Review";
 import { useRedirect } from "../../hooks/UseRedirect";
+import ScrollToTop from "../../hooks/ScrollToTop";
 // Additional react component imports
 import InfiniteScroll from "react-infinite-scroll-component";
 
 function ReviewsPage({ message="", filter="" }) {
+
+  // Scroll to top button appears after scrolling down 1000px
+  ScrollToTop();
+  const handleScrollToTop = () => {
+    window.scrollTo({ top: 0, behaviour: 'smooth' });
+  }
 
   useRedirect ('loggedOut')
   const [events, setEvents] = useState({ results: [] });
@@ -57,73 +66,90 @@ function ReviewsPage({ message="", filter="" }) {
   }, [filter, search, pathname, category, date]);
   
   return (
-    <Row className="h-100">
-      <Col className="py-2 p-0 p-lg-2" lg={8}>
-        <PopularProfiles />
+    <>
+      <Row className="h-100">
+        <Col className="py-2 p-0 p-lg-2" lg={8}>
+          <PopularProfiles />
 
-        <PopularEvents mobile />
+          <PopularEvents mobile />
 
-        <Container>
-          <i className={`fas fa-search ${styles.SearchIcon}`} />
-          <Form
-            className={styles.SearchBar}
-            onSubmit={(event) => event.preventDefault()}
-          >
-            <Form.Control
-              size="sm"
-              type="text"
-              className="mr-sm-2"
-              placeholder="Search events by title, profile, event date or tags"
-              value={search}
-              onChange={(event) => setSearch(event.target.value)}
-            />
-
-            <Form.Control 
-              size="sm" 
-              as="select" 
-              placeholder="Choose..."
-              value={category}
-              onChange={(event) => setCategory(event.target.value)}
+          <Container>
+            <i className={`fas fa-search ${styles.SearchIcon}`} />
+            <Form
+              className={styles.SearchBar}
+              onSubmit={(event) => event.preventDefault()}
             >
-              <option key = 'blankChoice' hidden value> Category </option>
-              <option>Sport</option>
-              <option>Music</option>
-              <option>Culture</option>
-              <option>Family</option>
-              <option>Kids</option>
-              <option>Education</option>
-            </Form.Control>
-          </Form>
-        </Container>
-
-        {hasLoaded ? (
-          <>
-            {events.results.length ? (
-              <InfiniteScroll
-                children={events.results.map((event) => (
-                  <Review key={event.id} {...event} setEvents={setEvents} />
-                ))}
-                dataLength={events.results.length}
-                loader={<Asset spinner />}
-                hasMore={!!events.next}
-                next={() => fetchMoreData(events, setEvents)}
+              <Form.Control
+                size="sm"
+                type="text"
+                className="mr-sm-2"
+                placeholder="Search events by title, profile, event date or tags"
+                value={search}
+                onChange={(event) => setSearch(event.target.value)}
               />
-            ) : (
-              <Container className={appStyles.Content}>
-                <Asset src={NoResults} message={message} />
-              </Container>
-            )}
-          </>
-        ) : (
-          <Container className={appStyles.Content}>
-            <Asset spinner />
+
+              <Form.Control
+                size="sm"
+                as="select"
+                placeholder="Choose..."
+                value={category}
+                onChange={(event) => setCategory(event.target.value)}
+              >
+                <option key="blankChoice" hidden value>
+                  {" "}
+                  Category{" "}
+                </option>
+                <option>Sport</option>
+                <option>Music</option>
+                <option>Culture</option>
+                <option>Family</option>
+                <option>Kids</option>
+                <option>Education</option>
+              </Form.Control>
+            </Form>
           </Container>
-        )}
-      </Col>
-      <Col md={4} className="d-none d-lg-block p-0 p-lg-2">
-        <PopularEvents />
-      </Col>
-    </Row>
+
+          {hasLoaded ? (
+            <>
+              {events.results.length ? (
+                <InfiniteScroll
+                  children={events.results.map((event) => (
+                    <Review key={event.id} {...event} setEvents={setEvents} />
+                  ))}
+                  dataLength={events.results.length}
+                  loader={<Asset spinner />}
+                  hasMore={!!events.next}
+                  next={() => fetchMoreData(events, setEvents)}
+                />
+              ) : (
+                <Container className={appStyles.Content}>
+                  <Asset src={NoResults} message={message} />
+                </Container>
+              )}
+            </>
+          ) : (
+            <Container className={appStyles.Content}>
+              <Asset spinner />
+            </Container>
+          )}
+        </Col>
+        <Col md={4} className="d-none d-lg-block p-0 p-lg-2">
+          <PopularEvents />
+        </Col>
+      </Row>
+      <div>
+        <Button
+          className={`${btnStyles.Button} ${btnStyles.ScrollToTop} fixed-bottom-5 left-7 z-50 cursor-pointer`}
+          onClick={handleScrollToTop}
+          title="Back to Top"
+          id="scrollBtn"
+        >
+          <i className="fa-solid fa-circle-arrow-up" alt="scroll to top"></i>
+          <br />
+          Back to Top
+        </Button>
+      </div>
+    </>
   );
 }
 

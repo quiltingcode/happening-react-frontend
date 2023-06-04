@@ -26,7 +26,7 @@ import InfiniteScroll from "react-infinite-scroll-component";
 
 function EventsPage({ message="", filter="" }) {
 
-  // Scroll to top button appears after scrolling down 700px
+  // Scroll to top button appears after scrolling down 1000px
   ScrollToTop();
   const handleScrollToTop = () => {
     window.scrollTo({ top: 0, behaviour: 'smooth' });
