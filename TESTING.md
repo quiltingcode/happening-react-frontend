@@ -519,4 +519,14 @@ Solution: I have removed to left-padding  for this form.control, and now you can
 
 2. When I set up the additional personal profile detail fields in the API Profile model, I set all the fields to be blank=True, as I do not want it to be obligatory for users to have to add extra bio and contact details if they don't want to. These fields are more aimed at users who are posting events and want people to be able to contact them regarding the events publicised. The phone number field is set up as an Integer Field with the arguments of blank=True and null=True, as it won't let me migrate the model without a null argument as well. However, when I go to edit a profile if I try to save the profile without something in the phone number field I get a user warning bootstrap alert, and the changes can't be saved. You have to enter an integer and then if you delete it, you can save the changes. I tried changing the backend arguments, but as I said, the rules seem quite strict on Integer Fields and I don't know why it's not reading the blank=True argument. This is something I will continue to look into for better user experience in the future, and to remove errors in the console of 'value' prop on 'input' should not be null. 
 
+3. Having added the Scroll to Top functionality, I did further tests on the events pages, profile page, and reviews page. I found that after editing an item such as a profile, or an event, on returning to the main events page or profile page, an error appeared in the console.
+
+![scroll to top error](https://res.cloudinary.com/dkolsfjkx/image/upload/v1685956643/scroll-errors_plou9k.jpg)
+
+I removed the functionality from the profile page, and continued testing and looking into articles online for possible solutions to this. From my initial research it appears to be a problem with calling the function before the DOM is fully mounted. However, before I had time to implement a fix for this or remove the functionality elsewhere, my access to the Code Institute Gitpod Group was cut due to an error message regarding lack of hours left on the Code Institute account. I have therefore been unable to access either the front end or backend workspace to complete my project before the submission deadline. I have manually added this Unresolved bug into the readme through committing to Github directly. 
+
+![CI Gitpod error](https://res.cloudinary.com/dkolsfjkx/image/upload/v1685956906/CI-errors_t9rgnw.jpg)
+
+I have reported this issue to Tutor Support, and requested help from Student Care, but since no-one has got back to me yet, I will have to now submit my project as it is, leaving this bug unresolved for now. 
+
 Please click [**_here_**](README.md) to return to the Happening README file.
